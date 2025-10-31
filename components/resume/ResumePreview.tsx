@@ -2,8 +2,9 @@
 
 import { useResumeStore } from '@/store/resumeStore';
 import Button from '@/components/ui/Button';
-import { Download, Eye, Share2, Save } from 'lucide-react';
+import { Download, Eye, Share2, Save, FileText } from 'lucide-react';
 import { generatePDF } from '@/utils/pdfGenerator';
+import { generateDOCX } from '@/utils/docxGenerator';
 import { saveResume, updateResume } from '@/utils/resumeService';
 import { useAuth } from '@/hooks/useAuth';
 import { useState } from 'react';
@@ -20,6 +21,17 @@ export default function ResumePreview() {
       await generatePDF(resumeData);
     } catch (error) {
       console.error('Error generating PDF:', error);
+      toast.error('Failed to generate PDF');
+    }
+  };
+
+  const handleDownloadDOCX = async () => {
+    try {
+      await generateDOCX(resumeData);
+      toast.success('DOCX downloaded successfully!');
+    } catch (error) {
+      console.error('Error generating DOCX:', error);
+      toast.error('Failed to generate DOCX');
     }
   };
 
@@ -91,7 +103,11 @@ export default function ResumePreview() {
           </Button>
           <Button size="sm" onClick={handleDownloadPDF} className="flex items-center">
             <Download className="w-4 h-4 mr-1" />
-            Download PDF
+            PDF
+          </Button>
+          <Button size="sm" variant="outline" onClick={handleDownloadDOCX} className="flex items-center">
+            <FileText className="w-4 h-4 mr-1" />
+            DOCX
           </Button>
         </div>
       </div>
