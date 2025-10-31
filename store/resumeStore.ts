@@ -76,7 +76,6 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
           user_id: user.id,
           title,
           content: resumeData,
-          template_id: '00000000-0000-0000-0000-000000000001', // Default template
           updated_at: new Date().toISOString()
         })
         .select()
