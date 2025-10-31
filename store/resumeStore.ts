@@ -63,56 +63,41 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   saveResume: async (title = 'My Resume') => {
     set({ isSaving: true });
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError || !user) {
+        console.error('Auth error:', authError);
         toast.error('Please sign in to save your resume');
         set({ isSaving: false });
         return;
       }
 
       const { resumeData } = get();
+      console.log('Saving resume for user:', user.id);
+      console.log('Resume data:', resumeData);
       
-      // First try to insert, then update if exists
       const { data, error } = await supabase
         .from('resumes')
-        .insert({
+        .upsert({
           user_id: user.id,
           title,
-          content: resumeData
+          content: resumeData,
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'user_id'
         })
-        .select()
-        .single();
+        .select();
 
       if (error) {
-        // If insert fails due to duplicate, try update
-        if (error.code === '23505') {
-          const { data: updateData, error: updateError } = await supabase
-            .from('resumes')
-            .update({
-              title,
-              content: resumeData,
-              updated_at: new Date().toISOString()
-            })
-            .eq('user_id', user.id)
-            .select()
-            .single();
-            
-          if (updateError) {
-            console.error('Update error:', updateError);
-            toast.error('Failed to save: ' + updateError.message);
-          } else {
-            toast.success('Resume updated successfully!');
-          }
-        } else {
-          console.error('Insert error:', error);
-          toast.error('Failed to save: ' + error.message);
-        }
+        console.error('Database error:', error);
+        toast.error('Database error: ' + error.message + '. Please check if tables exist.');
       } else {
+        console.log('Save successful:', data);
         toast.success('Resume saved successfully!');
       }
     } catch (error) {
-      console.error('Save error:', error);
-      toast.error('Failed to save resume');
+      console.error('Unexpected error:', error);
+      toast.error('Unexpected error: ' + error.message);
     } finally {
       set({ isSaving: false });
     }
