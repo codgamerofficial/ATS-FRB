@@ -47,6 +47,26 @@ export default function ResumePreview() {
     }
   };
 
+  const handleShareResume = async () => {
+    const shareData = {
+      title: `${personalInfo.fullName || 'My'} Resume`,
+      text: `Check out ${personalInfo.fullName || 'my'} professional resume created with ATS Resume Builder`,
+      url: window.location.href
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success('Resume link copied to clipboard!');
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+      toast.error('Failed to share resume');
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Action Buttons */}
@@ -65,7 +85,7 @@ export default function ResumePreview() {
               Save
             </Button>
           )}
-          <Button size="sm" variant="outline" className="flex items-center">
+          <Button size="sm" variant="outline" onClick={handleShareResume} className="flex items-center">
             <Share2 className="w-4 h-4 mr-1" />
             Share
           </Button>
