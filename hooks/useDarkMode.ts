@@ -1,24 +1,50 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export function useDarkMode() {
   const [isDark, setIsDark] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const toggleDark = useCallback(() => {
+    setIsDark(prev => !prev);
+  }, []);
 
   useEffect(() => {
     const stored = localStorage.getItem('darkMode');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDark(stored ? JSON.parse(stored) : prefersDark);
+    const initialDark = stored ? JSON.parse(stored) : prefersDark;
+    
+    setIsDark(initialDark);
+    setIsLoaded(true);
+
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('darkMode')) {
+        setIsDark(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('darkMode', JSON.stringify(isDark));
-  }, [isDark]);
+    if (!isLoaded) return;
 
-  return { isDark, setIsDark };
+    const root = document.documentElement;
+    
+    if (isDark) {
+      root.classList.add('dark');
+      root.style.colorScheme = 'dark';
+    } else {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+    
+    localStorage.setItem('darkMode', JSON.stringify(isDark));
+  }, [isDark, isLoaded]);
+
+  return { isDark, setIsDark, toggleDark, isLoaded };
 }
