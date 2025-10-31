@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useResumeStore } from '@/store/resumeStore';
@@ -24,7 +24,7 @@ const steps = [
   { id: 6, name: 'Additional', description: 'Certifications & more' },
 ];
 
-export default function BuilderPage() {
+function BuilderPageContent() {
   const searchParams = useSearchParams();
   const { currentStep, loadResumeData } = useResumeStore();
   const [isLoading, setIsLoading] = useState(true);
@@ -95,5 +95,22 @@ export default function BuilderPage() {
         </div>
       </div>
     </AuthGuard>
+  );
+}
+
+export default function BuilderPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="loading-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    }>
+      <BuilderPageContent />
+    </Suspense>
   );
 }

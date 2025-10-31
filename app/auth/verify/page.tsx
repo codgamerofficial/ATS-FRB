@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase/client';
@@ -10,7 +10,7 @@ import { CheckCircle, Mail, RefreshCw, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-export default function VerifyPage() {
+function VerifyPageContent() {
   const [verifying, setVerifying] = useState(true);
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState('');
@@ -215,5 +215,20 @@ export default function VerifyPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center max-w-md w-full">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+        </div>
+      </div>
+    }>
+      <VerifyPageContent />
+    </Suspense>
   );
 }
