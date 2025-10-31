@@ -1,12 +1,16 @@
 import { create } from 'zustand';
 import { ResumeData, PersonalInfo, Education, Experience, Project, Skill, Certification } from '@/types';
+import { supabase } from '@/lib/supabase/client';
+import toast from 'react-hot-toast';
 
 interface ResumeStore {
   resumeData: ResumeData;
   currentStep: number;
   isLoading: boolean;
+  isSaving: boolean;
   
   // Actions
+  saveResume: (title?: string) => Promise<void>;
   updatePersonalInfo: (info: Partial<PersonalInfo>) => void;
   updateSummary: (summary: string) => void;
   addEducation: (education: Education) => void;
@@ -54,6 +58,43 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
   resumeData: initialResumeData,
   currentStep: 0,
   isLoading: false,
+  isSaving: false,
+
+  saveResume: async (title = 'My Resume') => {
+    set({ isSaving: true });
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast.error('Please sign in to save your resume');
+        return;
+      }
+
+      const { resumeData } = get();
+      const { data, error } = await supabase
+        .from('resumes')
+        .upsert({
+          user_id: user.id,
+          title,
+          content: resumeData,
+          template_id: '00000000-0000-0000-0000-000000000001', // Default template
+          updated_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Save error:', error);
+        toast.error('Failed to save resume: ' + error.message);
+      } else {
+        toast.success('Resume saved successfully!');
+      }
+    } catch (error) {
+      console.error('Save error:', error);
+      toast.error('Failed to save resume');
+    } finally {
+      set({ isSaving: false });
+    }
+  },
 
   updatePersonalInfo: (info) =>
     set((state) => ({

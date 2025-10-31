@@ -9,7 +9,7 @@ import SkillsForm from './SkillsForm';
 import ProjectsForm from './ProjectsForm';
 import AdditionalForm from './AdditionalForm';
 import Button from '@/components/ui/Button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Save } from 'lucide-react';
 
 const formComponents = [
   PersonalInfoForm,
@@ -22,7 +22,7 @@ const formComponents = [
 ];
 
 export default function ResumeForm() {
-  const { currentStep, setCurrentStep } = useResumeStore();
+  const { currentStep, setCurrentStep, saveResume, isSaving } = useResumeStore();
   const CurrentFormComponent = formComponents[currentStep];
 
   const handleNext = () => {
@@ -63,14 +63,26 @@ export default function ResumeForm() {
           Previous
         </Button>
 
-        <Button
-          onClick={handleNext}
-          disabled={currentStep === formComponents.length - 1}
-          className="flex items-center"
-        >
-          Next
-          <ChevronRight className="w-4 h-4 ml-1" />
-        </Button>
+        <div className="flex space-x-3">
+          <Button
+            variant="outline"
+            onClick={() => saveResume()}
+            isLoading={isSaving}
+            className="flex items-center"
+          >
+            <Save className="w-4 h-4 mr-1" />
+            Save
+          </Button>
+          
+          <Button
+            onClick={handleNext}
+            disabled={currentStep === formComponents.length - 1}
+            className="flex items-center"
+          >
+            Next
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );
