@@ -2,9 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['localhost'],
-    unoptimized: true,
   },
-  trailingSlash: true,
   webpack: (config) => {
     config.externals.push({
       'utf-8-validate': 'commonjs utf-8-validate',

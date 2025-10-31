@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+
   },
   "dependencies": {
     "@react-pdf/renderer": "^3.1.14",
@@ -34,7 +34,6 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.41.3",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4"
   }
