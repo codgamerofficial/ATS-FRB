@@ -1,12 +1,17 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Text, Box, Sphere, Environment } from '@react-three/drei';
 import { motion } from 'framer-motion';
-import { useState, Suspense } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { Phone, Mail, Globe, MapPin, Download, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
+
+const Canvas = lazy(() => import('@react-three/fiber').then(mod => ({ default: mod.Canvas })));
+const OrbitControls = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.OrbitControls })));
+const Text = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Text })));
+const Box = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Box })));
+const Sphere = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Sphere })));
+const Environment = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Environment })));
 
 function Scene() {
   return (
