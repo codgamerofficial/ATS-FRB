@@ -97,7 +97,7 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
       }
     } catch (error) {
       console.error('Unexpected error:', error);
-      toast.error('Unexpected error: ' + error.message);
+      toast.error('Unexpected error: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       set({ isSaving: false });
     }
