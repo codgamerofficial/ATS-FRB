@@ -66,24 +66,47 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast.error('Please sign in to save your resume');
+        set({ isSaving: false });
         return;
       }
 
       const { resumeData } = get();
+      
+      // First try to insert, then update if exists
       const { data, error } = await supabase
         .from('resumes')
-        .upsert({
+        .insert({
           user_id: user.id,
           title,
-          content: resumeData,
-          updated_at: new Date().toISOString()
+          content: resumeData
         })
         .select()
         .single();
 
       if (error) {
-        console.error('Save error:', error);
-        toast.error('Failed to save resume: ' + error.message);
+        // If insert fails due to duplicate, try update
+        if (error.code === '23505') {
+          const { data: updateData, error: updateError } = await supabase
+            .from('resumes')
+            .update({
+              title,
+              content: resumeData,
+              updated_at: new Date().toISOString()
+            })
+            .eq('user_id', user.id)
+            .select()
+            .single();
+            
+          if (updateError) {
+            console.error('Update error:', updateError);
+            toast.error('Failed to save: ' + updateError.message);
+          } else {
+            toast.success('Resume updated successfully!');
+          }
+        } else {
+          console.error('Insert error:', error);
+          toast.error('Failed to save: ' + error.message);
+        }
       } else {
         toast.success('Resume saved successfully!');
       }
