@@ -323,7 +323,7 @@ export default function Page() {
             </div>
           </div>
           <div className="border-t border-cyan-500/30 mt-8 pt-8 text-center text-cyan-300">
-            <p>&copy; 2024 ResumeBuilder. All rights reserved.</p>
+            <p>&copy; 2025 ResumeBuilder(ATSFRB). All rights reserved.</p>
           </div>
         </div>
       </footer>
