@@ -79,6 +79,9 @@ export default function Page() {
               <Link href="/templates">
                 <Button variant="ghost">Templates</Button>
               </Link>
+              <Link href="/portfolio">
+                <Button variant="ghost">Portfolio</Button>
+              </Link>
               <DarkModeToggle />
               {!loading && (
                 user ? (
@@ -291,6 +294,7 @@ export default function Page() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="/templates" className="hover:text-white">Templates</Link></li>
                 <li><Link href="/builder" className="hover:text-white">Resume Builder</Link></li>
+                <li><Link href="/portfolio" className="hover:text-white">Portfolio</Link></li>
                 <li><Link href="/examples" className="hover:text-white">Examples</Link></li>
               </ul>
             </div>
