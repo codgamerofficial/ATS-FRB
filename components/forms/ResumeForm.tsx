@@ -39,11 +39,11 @@ export default function ResumeForm() {
 
   return (
     <div className="space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h2 className="text-xl font-semibold text-gray-900">
+      <div className="border-b border-cyan-500/30 pb-4">
+        <h2 className="text-xl font-semibold text-white">
           Step {currentStep + 1}: {getStepTitle(currentStep)}
         </h2>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-gray-300 mt-1">
           {getStepDescription(currentStep)}
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function ResumeForm() {
         <CurrentFormComponent />
       </div>
 
-      <div className="flex justify-between pt-6 border-t border-gray-200">
+      <div className="flex justify-between pt-6 border-t border-cyan-500/30">
         <Button
           variant="outline"
           onClick={handlePrevious}

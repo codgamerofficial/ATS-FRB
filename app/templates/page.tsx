@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UserMenu from '@/components/ui/UserMenu';
+import SciFiBackground from '@/components/ui/SciFiBackground';
+import SciFiCard from '@/components/ui/SciFiCard';
 import { useAuth } from '@/hooks/useAuth';
 import { FileText, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -43,14 +45,15 @@ export default function TemplatesPage() {
   const { user, loading } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
-      <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40 transition-colors duration-300">
+    <div className="min-h-screen relative">
+      <SciFiBackground />
+      <nav className="relative z-10 bg-gray-900/80 backdrop-blur-md border-b border-cyan-500/30 sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
-                <FileText className="h-8 w-8 text-primary-600" />
-                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">ResumeBuilder</span>
+                <FileText className="h-8 w-8 text-cyan-400" />
+                <span className="ml-2 text-xl font-bold text-white">ATSFRB</span>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
@@ -69,17 +72,17 @@ export default function TemplatesPage() {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/" className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-8 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        <Link href="/" className="inline-flex items-center text-cyan-400 hover:text-cyan-300 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Choose Your Template
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Select from our collection of professional, ATS-friendly resume templates
           </p>
         </div>
@@ -91,39 +94,40 @@ export default function TemplatesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
             >
-              <div className="aspect-[3/4] bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                <FileText className="w-16 h-16 text-gray-400" />
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-300">
-                    {template.name}
-                  </h3>
-                  {template.isPremium && (
-                    <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
-                      Premium
-                    </span>
-                  )}
+              <SciFiCard className="overflow-hidden hover:shadow-cyan-500/20 transition-all duration-300">
+                <div className="aspect-[3/4] bg-gray-800/50 flex items-center justify-center border-b border-cyan-500/20">
+                  <FileText className="w-16 h-16 text-cyan-400" />
                 </div>
                 
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 transition-colors duration-300">
-                  {template.description}
-                </p>
-                
-                <div className="flex space-x-2">
-                  <Button size="sm" variant="outline" className="flex-1">
-                    Preview
-                  </Button>
-                  <Link href={`/builder?template=${template.id}`} className="flex-1">
-                    <Button size="sm" className="w-full">
-                      Use Template
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-white">
+                      {template.name}
+                    </h3>
+                    {template.isPremium && (
+                      <span className="px-2 py-1 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full border border-yellow-500/30">
+                        Premium
+                      </span>
+                    )}
+                  </div>
+                  
+                  <p className="text-gray-300 text-sm mb-4">
+                    {template.description}
+                  </p>
+                  
+                  <div className="flex space-x-2">
+                    <Button size="sm" variant="outline" className="flex-1">
+                      Preview
                     </Button>
-                  </Link>
+                    <Link href={`/builder?template=${template.id}`} className="flex-1">
+                      <Button size="sm" className="w-full">
+                        Use Template
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </SciFiCard>
             </motion.div>
           ))}
         </div>

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Search } from 'lucide-react';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
+import SciFiBackground from '@/components/ui/SciFiBackground';
+import SciFiCard from '@/components/ui/SciFiCard';
 import Link from 'next/link';
 
 const faqs = [
@@ -51,31 +53,32 @@ export default function FAQ() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b">
+    <div className="min-h-screen relative">
+      <SciFiBackground />
+      <header className="relative z-10 bg-gray-900/80 backdrop-blur-md border-b border-cyan-500/30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-primary-600">ResumeBuilder</Link>
+          <Link href="/" className="text-2xl font-bold text-cyan-400">ATSFRB</Link>
           <DarkModeToggle />
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto py-12 px-6">
+      <div className="max-w-4xl mx-auto py-12 px-6 relative z-10">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-xl text-gray-300 mb-8">
             Find quick answers to common questions about our resume builder
           </p>
           
           <div className="relative max-w-md mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search FAQs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full pl-10 pr-4 py-3 border border-cyan-500/30 rounded-lg bg-gray-800/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none"
             />
           </div>
         </div>
@@ -87,63 +90,66 @@ export default function FAQ() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow"
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
-              >
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {faq.question}
-                </span>
-                <ChevronDown
-                  className={`w-5 h-5 text-gray-500 transition-transform ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-4">
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <SciFiCard>
+                <button
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-800/30 rounded-lg transition-colors"
+                >
+                  <span className="font-semibold text-white">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-cyan-400 transition-transform ${
+                      openIndex === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-4">
+                        <p className="text-gray-300 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </SciFiCard>
             </motion.div>
           ))}
         </div>
 
         {filteredFaqs.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-400">
               No FAQs found matching your search.
             </p>
           </div>
         )}
 
-        <div className="text-center mt-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            Still have questions?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Can't find the answer you're looking for? Please contact our support team.
-          </p>
-          <Link href="/contact">
-            <button className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors">
-              Contact Support
-            </button>
-          </Link>
+        <div className="mt-12">
+          <SciFiCard className="text-center p-6">
+            <h2 className="text-xl font-semibold text-white mb-2">
+              Still have questions?
+            </h2>
+            <p className="text-gray-300 mb-4">
+              Can't find the answer you're looking for? Please contact our support team.
+            </p>
+            <Link href="/contact">
+              <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-2 rounded-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300">
+                Contact Support
+              </button>
+            </Link>
+          </SciFiCard>
         </div>
       </div>
     </div>

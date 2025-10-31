@@ -11,6 +11,8 @@ import StepIndicator from '@/components/ui/StepIndicator';
 import AuthGuard from '@/components/ui/AuthGuard';
 import UserMenu from '@/components/ui/UserMenu';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
+import SciFiBackground from '@/components/ui/SciFiBackground';
+import SciFiCard from '@/components/ui/SciFiCard';
 import { FileText } from 'lucide-react';
 import Link from 'next/link';
 
@@ -52,16 +54,17 @@ function BuilderPageContent() {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+      <div className="min-h-screen relative">
+        <SciFiBackground />
+        <header className="relative z-10 bg-gray-900/80 backdrop-blur-md border-b border-cyan-500/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Link href="/" className="flex items-center mr-6">
-                  <FileText className="h-6 w-6 text-primary-600" />
-                  <span className="ml-2 text-lg font-bold text-gray-900">ResumeBuilder</span>
+                  <FileText className="h-6 w-6 text-cyan-400" />
+                  <span className="ml-2 text-lg font-bold text-white">ATSFRB</span>
                 </Link>
-                <h1 className="text-xl font-semibold text-gray-700">Resume Builder</h1>
+                <h1 className="text-xl font-semibold text-cyan-400">Resume Builder</h1>
               </div>
               <div className="flex items-center space-x-4">
                 <StepIndicator steps={steps} currentStep={currentStep} />
@@ -72,24 +75,26 @@ function BuilderPageContent() {
           </div>
         </header>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg shadow-lg p-6"
             >
-              <ResumeForm />
+              <SciFiCard className="p-6">
+                <ResumeForm />
+              </SciFiCard>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-lg shadow-lg p-6"
             >
-              <ResumePreview />
+              <SciFiCard className="p-6">
+                <ResumePreview />
+              </SciFiCard>
             </motion.div>
           </div>
         </div>

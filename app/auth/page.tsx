@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import SciFiBackground from '@/components/ui/SciFiBackground';
+import SciFiCard from '@/components/ui/SciFiCard';
 import { FileText, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -94,10 +96,11 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen relative flex items-center justify-center p-4">
+      <SciFiBackground />
+      <div className="w-full max-w-md relative z-10">
         {/* Back to Home */}
-        <Link href="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8">
+        <Link href="/" className="inline-flex items-center text-cyan-400 hover:text-cyan-300 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Link>
@@ -106,25 +109,25 @@ export default function AuthPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-2xl shadow-xl p-8"
         >
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-4">
-              <div className="bg-primary-100 p-3 rounded-full">
-                <FileText className="w-8 h-8 text-primary-600" />
+          <SciFiCard className="p-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="flex justify-center mb-4">
+                <div className="bg-cyan-500/20 p-3 rounded-full border border-cyan-500/30">
+                  <FileText className="w-8 h-8 text-cyan-400" />
+                </div>
               </div>
+              <h1 className="text-2xl font-bold text-white mb-2">
+                {isLogin ? 'Welcome Back' : 'Create Account'}
+              </h1>
+              <p className="text-gray-300">
+                {isLogin 
+                  ? 'Sign in to continue building your resume' 
+                  : 'Join thousands of professionals creating perfect resumes'
+                }
+              </p>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              {isLogin ? 'Welcome Back' : 'Create Account'}
-            </h1>
-            <p className="text-gray-600">
-              {isLogin 
-                ? 'Sign in to continue building your resume' 
-                : 'Join thousands of professionals creating perfect resumes'
-              }
-            </p>
-          </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -191,7 +194,7 @@ export default function AuthPage() {
               <div className="text-right">
                 <Link 
                   href="/auth/forgot-password" 
-                  className="text-sm text-primary-600 hover:text-primary-700"
+                  className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   Forgot your password?
                 </Link>
@@ -208,39 +211,39 @@ export default function AuthPage() {
             </Button>
           </form>
 
-          {/* Toggle Form */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
-              {isLogin ? "Don't have an account?" : 'Already have an account?'}
-              <button
-                type="button"
-                onClick={() => {
-                  setIsLogin(!isLogin);
-                  setErrors({});
-                  setFormData({
-                    email: '',
-                    password: '',
-                    fullName: '',
-                    confirmPassword: '',
-                  });
-                }}
-                className="ml-2 text-primary-600 hover:text-primary-700 font-medium"
-              >
-                {isLogin ? 'Sign up' : 'Sign in'}
-              </button>
-            </p>
-          </div>
-
-          {/* Social Login Placeholder */}
-          <div className="mt-8">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or continue with</span>
-              </div>
+            {/* Toggle Form */}
+            <div className="mt-8 text-center">
+              <p className="text-gray-300">
+                {isLogin ? "Don't have an account?" : 'Already have an account?'}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsLogin(!isLogin);
+                    setErrors({});
+                    setFormData({
+                      email: '',
+                      password: '',
+                      fullName: '',
+                      confirmPassword: '',
+                    });
+                  }}
+                  className="ml-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                >
+                  {isLogin ? 'Sign up' : 'Sign in'}
+                </button>
+              </p>
             </div>
+
+            {/* Social Login Placeholder */}
+            <div className="mt-8">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-600" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-gray-900/80 text-gray-400">Or continue with</span>
+                </div>
+              </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
               <Button variant="outline" className="w-full" disabled>
@@ -260,16 +263,17 @@ export default function AuthPage() {
               </Button>
             </div>
           </div>
+          </SciFiCard>
         </motion.div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-500 mt-8">
+        <p className="text-center text-sm text-gray-400 mt-8">
           By signing up, you agree to our{' '}
-          <Link href="/terms" className="text-primary-600 hover:text-primary-700">
+          <Link href="/terms" className="text-cyan-400 hover:text-cyan-300 transition-colors">
             Terms of Service
           </Link>{' '}
           and{' '}
-          <Link href="/privacy" className="text-primary-600 hover:text-primary-700">
+          <Link href="/privacy" className="text-cyan-400 hover:text-cyan-300 transition-colors">
             Privacy Policy
           </Link>
         </p>
