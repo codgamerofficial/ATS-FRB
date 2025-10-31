@@ -1,40 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, Suspense, lazy } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, Globe, MapPin, Download, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 
-const Canvas = lazy(() => import('@react-three/fiber').then(mod => ({ default: mod.Canvas })));
-const OrbitControls = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.OrbitControls })));
-const Text = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Text })));
-const Box = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Box })));
-const Sphere = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Sphere })));
-const Environment = lazy(() => import('@react-three/drei').then(mod => ({ default: mod.Environment })));
-
-function Scene() {
+function AnimatedBackground() {
   return (
-    <>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
-      <Box position={[-2, 0, 0]} args={[1, 1, 1]}>
-        <meshStandardMaterial color="hotpink" />
-      </Box>
-      <Sphere position={[2, 0, 0]} args={[0.5, 32, 32]}>
-        <meshStandardMaterial color="cyan" />
-      </Sphere>
-      <Text
-        position={[0, 2, 0]}
-        fontSize={0.5}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-      >
-        SASWATA DEY
-      </Text>
-      <Environment preset="sunset" />
-    </>
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-full blur-xl animate-pulse" />
+      <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl animate-bounce" />
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl animate-pulse" />
+      <div className="absolute bottom-40 right-10 w-28 h-28 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-full blur-xl animate-bounce" />
+    </div>
   );
 }
 
@@ -82,13 +61,42 @@ export default function Portfolio() {
       </header>
 
       <div className="pt-20 grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-        <div className="h-screen">
-          <Canvas camera={{ position: [0, 0, 5] }}>
-            <Suspense fallback={null}>
-              <Scene />
-              <OrbitControls enableZoom={false} />
-            </Suspense>
-          </Canvas>
+        <div className="relative h-screen flex items-center justify-center">
+          <AnimatedBackground />
+          <motion.div 
+            className="text-center z-10"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <motion.h1 
+              className="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4"
+              animate={{ 
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              SASWATA DEY
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-white/80 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Developer & Data Analyst
+            </motion.p>
+            <motion.div 
+              className="flex justify-center space-x-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg animate-spin" />
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce" />
+              <div className="w-20 h-8 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full animate-pulse" />
+            </motion.div>
+          </motion.div>
         </div>
 
         <div className="p-8 overflow-y-auto h-screen">
