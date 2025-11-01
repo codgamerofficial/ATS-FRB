@@ -94,7 +94,7 @@ export default function TemplateFilters() {
                 <Button
                   key={category.value}
                   size="sm"
-                  variant={filter.category === category.value ? 'default' : 'outline'}
+                  variant={filter.category === category.value ? 'primary' : 'outline'}
                   onClick={() => handleCategoryFilter(category.value)}
                   className="text-xs"
                 >
@@ -110,7 +110,7 @@ export default function TemplateFilters() {
             <div className="flex gap-2">
               <Button
                 size="sm"
-                variant={filter.isPremium === false ? 'default' : 'outline'}
+                variant={filter.isPremium === false ? 'primary' : 'outline'}
                 onClick={() => handlePremiumFilter(false)}
                 className="text-xs"
               >
@@ -118,7 +118,7 @@ export default function TemplateFilters() {
               </Button>
               <Button
                 size="sm"
-                variant={filter.isPremium === true ? 'default' : 'outline'}
+                variant={filter.isPremium === true ? 'primary' : 'outline'}
                 onClick={() => handlePremiumFilter(true)}
                 className="text-xs flex items-center"
               >

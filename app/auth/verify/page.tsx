@@ -87,7 +87,7 @@ function VerifyPageContent() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center max-w-md w-full"
+          
         >
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -107,7 +107,7 @@ function VerifyPageContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center max-w-md w-full"
+          
         >
           <div className="flex justify-center mb-6">
             <div className="bg-green-100 dark:bg-green-900 p-3 rounded-full">
@@ -139,7 +139,7 @@ function VerifyPageContent() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center max-w-md w-full"
+          
         >
           <div className="flex justify-center mb-6">
             <div className="bg-red-100 dark:bg-red-900 p-3 rounded-full">
@@ -172,7 +172,7 @@ function VerifyPageContent() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center max-w-md w-full"
+        
       >
         <div className="flex justify-center mb-6">
           <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">

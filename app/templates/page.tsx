@@ -190,7 +190,7 @@ export default function TemplatesPage() {
           <div className="flex items-center space-x-2">
             <Button
               size="sm"
-              variant={showFavorites ? 'default' : 'outline'}
+              variant={showFavorites ? 'primary' : 'outline'}
               onClick={() => setShowFavorites(!showFavorites)}
             >
               <Bookmark className="w-4 h-4 mr-1" />
@@ -205,7 +205,7 @@ export default function TemplatesPage() {
             
             <Button
               size="sm"
-              variant={viewMode === 'grid' ? 'default' : 'outline'}
+              variant={viewMode === 'grid' ? 'primary' : 'outline'}
               onClick={() => setViewMode('grid')}
               aria-label="Grid view"
             >
@@ -213,7 +213,7 @@ export default function TemplatesPage() {
             </Button>
             <Button
               size="sm"
-              variant={viewMode === 'list' ? 'default' : 'outline'}
+              variant={viewMode === 'list' ? 'primary' : 'outline'}
               onClick={() => setViewMode('list')}
               aria-label="List view"
             >

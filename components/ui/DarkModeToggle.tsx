@@ -16,7 +16,7 @@ export default function DarkModeToggle() {
   return (
     <motion.button
       onClick={toggleDark}
-      className="relative w-12 h-6 sm:w-16 sm:h-8 rounded-full p-0.5 sm:p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 active:scale-95"
+      
       style={{
         background: isDark 
           ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' 
@@ -27,7 +27,7 @@ export default function DarkModeToggle() {
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <motion.div
-        className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-lg flex items-center justify-center overflow-hidden"
+        
         style={{
           background: isDark
             ? 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)'
@@ -45,7 +45,7 @@ export default function DarkModeToggle() {
         }}
       >
         <motion.div
-          className="absolute inset-0 rounded-full"
+          
           animate={{
             boxShadow: isDark 
               ? '0 0 15px rgba(251, 191, 36, 0.5), inset 0 0 8px rgba(245, 158, 11, 0.2)'
@@ -62,7 +62,7 @@ export default function DarkModeToggle() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.5, rotate: 180 }}
               transition={{ duration: 0.3 }}
-              className="relative z-10"
+              
             >
               <Moon className="w-3 h-3 sm:w-4 sm:h-4 text-gray-800" />
               {/* Moon craters */}
@@ -77,7 +77,7 @@ export default function DarkModeToggle() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.5, rotate: -180 }}
               transition={{ duration: 0.3 }}
-              className="relative z-10"
+              
             >
               <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
             </motion.div>
@@ -87,7 +87,7 @@ export default function DarkModeToggle() {
         {/* Animated rays for sun */}
         {!isDark && (
           <motion.div
-            className="absolute inset-0 pointer-events-none"
+            
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -96,7 +96,7 @@ export default function DarkModeToggle() {
             {[...Array(8)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-0.5 h-1.5 sm:h-2 bg-gradient-to-t from-blue-400 to-purple-400 rounded-full"
+                
                 style={{
                   top: '-4px',
                   left: '50%',
@@ -123,7 +123,7 @@ export default function DarkModeToggle() {
       <AnimatePresence>
         {isDark && (
           <motion.div
-            className="absolute inset-0 rounded-full overflow-hidden pointer-events-none"
+            
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -132,7 +132,7 @@ export default function DarkModeToggle() {
             {[...Array(4)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-0.5 h-0.5 bg-white rounded-full"
+                
                 style={{
                   top: `${25 + (i * 15)}%`,
                   left: `${15 + (i * 20)}%`

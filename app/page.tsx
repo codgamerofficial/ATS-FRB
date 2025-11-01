@@ -115,7 +115,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl sm:text-6xl font-bold text-white mb-6 transition-colors duration-300 relative z-10"
+              
               style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}
             >
               Build Your Perfect{' '}
@@ -129,7 +129,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-cyan-100 mb-8 max-w-3xl mx-auto transition-colors duration-300 relative z-10"
+              
             >
               Create professional resumes that get noticed by both hiring managers and 
               Applicant Tracking Systems. Stand out from the crowd with our modern templates.
@@ -139,7 +139,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              
             >
               <Link href={user ? "/builder" : "/auth"}>
                 <Button size="lg" className="w-full sm:w-auto">
@@ -157,7 +157,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 flex items-center justify-center space-x-6 text-sm text-cyan-300 transition-colors duration-300 relative z-10"
+              
             >
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-1" />

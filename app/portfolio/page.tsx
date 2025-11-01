@@ -33,7 +33,7 @@ export default function Portfolio() {
       <header className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <motion.h1 
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+            
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
@@ -64,13 +64,13 @@ export default function Portfolio() {
         <div className="relative h-screen flex items-center justify-center">
           <AnimatedBackground />
           <motion.div 
-            className="text-center z-10"
+            
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
           >
             <motion.h1 
-              className="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4"
+              
               animate={{ 
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
               }}
@@ -79,7 +79,7 @@ export default function Portfolio() {
               SASWATA DEY
             </motion.h1>
             <motion.p 
-              className="text-xl text-white/80 mb-8"
+              
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -87,7 +87,7 @@ export default function Portfolio() {
               Developer & Data Analyst
             </motion.p>
             <motion.div 
-              className="flex justify-center space-x-4"
+              
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -104,7 +104,7 @@ export default function Portfolio() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
+              
             >
               <div className="space-y-4">
                 <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
@@ -165,7 +165,7 @@ export default function Portfolio() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
+              
             >
               <h2 className="text-3xl font-bold text-cyan-400">Experience</h2>
               
@@ -207,7 +207,7 @@ export default function Portfolio() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
+              
             >
               <h2 className="text-3xl font-bold text-cyan-400">Projects</h2>
               
@@ -247,7 +247,7 @@ export default function Portfolio() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
+              
             >
               <h2 className="text-3xl font-bold text-cyan-400">Skills</h2>
               
@@ -303,7 +303,7 @@ export default function Portfolio() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="space-y-6"
+              
             >
               <h2 className="text-3xl font-bold text-cyan-400">Get In Touch</h2>
               

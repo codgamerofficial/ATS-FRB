@@ -111,7 +111,7 @@ export default function Logo({ size = 40, className = '', animated = true }: Log
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="cursor-pointer"
+      
     >
       <LogoSVG />
     </motion.div>

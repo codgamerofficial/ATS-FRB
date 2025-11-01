@@ -54,12 +54,12 @@ export default function ForgotPasswordPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl shadow-xl p-8 text-center"
-          >
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
             <div className="flex justify-center mb-6">
               <div className="bg-green-100 p-3 rounded-full">
                 <CheckCircle className="w-8 h-8 text-green-600" />
@@ -96,7 +96,8 @@ export default function ForgotPasswordPage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     );
@@ -110,12 +111,12 @@ export default function ForgotPasswordPage() {
           Back to Sign In
         </Link>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white rounded-2xl shadow-xl p-8"
-        >
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <div className="bg-primary-100 p-3 rounded-full">
@@ -169,7 +170,8 @@ export default function ForgotPasswordPage() {
               </Link>
             </p>
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

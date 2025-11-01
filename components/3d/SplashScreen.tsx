@@ -48,7 +48,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 1.1 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+        
         style={{
           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%)'
         }}
@@ -69,7 +69,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+            
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
@@ -105,12 +105,12 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               stiffness: 80,
               rotateZ: { duration: 4, repeat: Infinity, ease: "easeInOut" }
             }}
-            className="mb-8 perspective-1000"
+            
           >
             <div className="relative transform-gpu">
               {/* Outer Glow Ring */}
               <motion.div 
-                className="absolute inset-0 rounded-full"
+                
                 animate={{
                   boxShadow: [
                     '0 0 40px rgba(0, 255, 255, 0.3)',
@@ -147,7 +147,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             initial={{ opacity: 0, y: 30, rotateX: 90 }}
             animate={showLogo ? { opacity: 1, y: 0, rotateX: 0 } : {}}
             transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
-            className="text-5xl font-bold text-white mb-3"
+            
             style={{
               textShadow: '0 0 20px rgba(0, 255, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.4)'
             }}
@@ -160,7 +160,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={showLogo ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="text-cyan-300 mb-8 text-lg tracking-wider"
+            
           >
             Advanced Resume Builder
           </motion.p>
@@ -170,7 +170,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             initial={{ opacity: 0 }}
             animate={showLogo ? { opacity: 1 } : {}}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="text-cyan-100 mb-8 text-sm"
+            
           >
             Initializing quantum resume algorithms...
           </motion.p>
@@ -179,7 +179,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           <div className="w-80 mx-auto">
             <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-full h-3 overflow-hidden border border-cyan-500/30">
               <motion.div
-                className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full relative"
+                
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.3 }}
@@ -195,7 +195,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}
-              className="flex justify-between items-center mt-3"
+              
             >
               <span className="text-cyan-300 text-sm font-mono">{progress.toFixed(0)}%</span>
               <span className="text-cyan-300 text-sm">Loading...</span>
