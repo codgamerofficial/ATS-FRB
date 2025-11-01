@@ -24,7 +24,7 @@ export const metadata = {
     description: 'Create professional, ATS-friendly resumes that get you hired',
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.svg',
     apple: '/logo.svg',
   },
 };
