@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Metadata } from 'next';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UserMenu from '@/components/ui/UserMenu';
@@ -126,11 +125,15 @@ export default function TemplatesPage() {
 
         {/* Templates Grid */}
         {filteredTemplates.length > 0 ? (
-          <div className={`grid gap-6 ${
-            viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-              : 'grid-cols-1 lg:grid-cols-2'
-          }`}>
+          <main 
+            className={`grid gap-6 ${
+              viewMode === 'grid' 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                : 'grid-cols-1 lg:grid-cols-2'
+            }`}
+            role="main"
+            aria-label="Resume templates"
+          >
             {filteredTemplates.map((template, index) => (
               <motion.div
                 key={template.id}
@@ -144,9 +147,9 @@ export default function TemplatesPage() {
                 />
               </motion.div>
             ))}
-          </div>
+          </main>
         ) : (
-          <div className="text-center py-12">
+          <main className="text-center py-12" role="main">
             <div className="text-gray-400 mb-4">
               <Grid className="w-16 h-16 mx-auto mb-4 opacity-50" />
               <h3 className="text-xl font-semibold mb-2">No templates found</h3>
@@ -155,7 +158,7 @@ export default function TemplatesPage() {
             <Button onClick={handleClearFilters} variant="outline">
               Clear Filters
             </Button>
-          </div>
+          </main>
         )}
       </div>
 
