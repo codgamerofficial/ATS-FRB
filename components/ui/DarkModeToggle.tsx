@@ -14,18 +14,20 @@ export default function DarkModeToggle() {
   }
 
   return (
-    <motion.button
-      onClick={toggleDark}
-      
-      style={{
-        background: isDark 
-          ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' 
-          : 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)'
-      }}
+    <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
+      <button
+        onClick={toggleDark}
+        className="w-12 h-6 sm:w-16 sm:h-8 rounded-full p-1 relative overflow-hidden transition-all duration-300 border border-gray-300/20 shadow-lg"
+        style={{
+          background: isDark 
+            ? 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' 
+            : 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)'
+        }}
+        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
       <motion.div
         
         style={{
@@ -152,6 +154,7 @@ export default function DarkModeToggle() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.button>
+      </button>
+    </motion.div>
   );
 }
