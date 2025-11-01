@@ -10,19 +10,57 @@ import Logo from '@/components/ui/Logo';
 import TemplateCard from '@/components/templates/TemplateCard';
 import TemplateFilters from '@/components/templates/TemplateFilters';
 import TemplatePreviewModal from '@/components/templates/TemplatePreviewModal';
+import TemplateSorting, { SortOption, SortOrder } from '@/components/templates/TemplateSorting';
+import TemplateComparison from '@/components/templates/TemplateComparison';
+import TemplateRecommendations from '@/components/templates/TemplateRecommendations';
 import { useAuth } from '@/hooks/useAuth';
 import { useTemplateStore } from '@/store/templateStore';
 import { TemplateStyle } from '@/types/templates';
-import { ArrowLeft, Grid, List } from 'lucide-react';
+import { ArrowLeft, Grid, List, Compare, Bookmark, Shuffle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function TemplatesPage() {
   const { user, loading } = useAuth();
-  const { getFilteredTemplates, resetFilters } = useTemplateStore();
+  const { getFilteredTemplates, resetFilters, templates } = useTemplateStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [previewTemplate, setPreviewTemplate] = useState<TemplateStyle | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>('name');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+  const [compareTemplates, setCompareTemplates] = useState<TemplateStyle[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
   
-  const filteredTemplates = useMemo(() => getFilteredTemplates(), [getFilteredTemplates]);
+  const filteredTemplates = useMemo(() => {
+    let templates = getFilteredTemplates();
+    
+    // Apply favorites filter
+    if (showFavorites) {
+      const favorites = JSON.parse(localStorage.getItem('templateFavorites') || '[]');
+      templates = templates.filter(t => favorites.includes(t.id));
+    }
+    
+    // Apply sorting
+    templates.sort((a, b) => {
+      let comparison = 0;
+      switch (sortBy) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case 'category':
+          comparison = a.category.localeCompare(b.category);
+          break;
+        case 'premium':
+          comparison = Number(a.isPremium) - Number(b.isPremium);
+          break;
+        case 'newest':
+          comparison = a.id.localeCompare(b.id);
+          break;
+      }
+      return sortOrder === 'asc' ? comparison : -comparison;
+    });
+    
+    return templates;
+  }, [getFilteredTemplates, sortBy, sortOrder, showFavorites]);
   const templateStats = useMemo(() => ({
     total: filteredTemplates.length,
     free: filteredTemplates.filter(t => !t.isPremium).length,
@@ -40,6 +78,28 @@ export default function TemplatesPage() {
   const handleClearFilters = useCallback(() => {
     resetFilters();
   }, [resetFilters]);
+
+  const handleSortChange = useCallback((newSortBy: SortOption, newSortOrder: SortOrder) => {
+    setSortBy(newSortBy);
+    setSortOrder(newSortOrder);
+  }, []);
+
+  const handleCompareToggle = useCallback((template: TemplateStyle) => {
+    setCompareTemplates(prev => {
+      const exists = prev.find(t => t.id === template.id);
+      if (exists) {
+        return prev.filter(t => t.id !== template.id);
+      } else if (prev.length < 3) {
+        return [...prev, template];
+      }
+      return prev;
+    });
+  }, []);
+
+  const getRandomTemplates = useCallback(() => {
+    const shuffled = [...templates].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 6);
+  }, [templates]);
 
   return (
     <div className="min-h-screen relative">
@@ -96,18 +156,58 @@ export default function TemplatesPage() {
           <TemplateFilters />
         </div>
 
-        {/* View Mode Toggle */}
-        <div className="flex justify-between items-center mb-6" role="toolbar" aria-label="Template view options">
-          <h2 className="text-xl font-semibold text-white">
-            Templates ({templateStats.total})
-          </h2>
+        {/* Recommendations */}
+        {!showFavorites && (
+          <TemplateRecommendations
+            templates={templates}
+            userPreferences={{
+              industry: 'tech',
+              experience: 'mid',
+              style: 'modern'
+            }}
+            onPreview={handlePreviewTemplate}
+          />
+        )}
+
+        {/* Controls */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+          <div className="flex items-center space-x-4">
+            <h2 className="text-xl font-semibold text-white">
+              {showFavorites ? 'Favorite Templates' : 'Templates'} ({templateStats.total})
+            </h2>
+            {compareTemplates.length > 0 && (
+              <Button
+                size="sm"
+                onClick={() => setShowComparison(true)}
+                className="flex items-center space-x-2"
+              >
+                <Compare className="w-4 h-4" />
+                <span>Compare ({compareTemplates.length})</span>
+              </Button>
+            )}
+          </div>
+          
           <div className="flex items-center space-x-2">
+            <Button
+              size="sm"
+              variant={showFavorites ? 'default' : 'outline'}
+              onClick={() => setShowFavorites(!showFavorites)}
+            >
+              <Bookmark className="w-4 h-4 mr-1" />
+              Favorites
+            </Button>
+            
+            <TemplateSorting
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+              onSortChange={handleSortChange}
+            />
+            
             <Button
               size="sm"
               variant={viewMode === 'grid' ? 'default' : 'outline'}
               onClick={() => setViewMode('grid')}
               aria-label="Grid view"
-              aria-pressed={viewMode === 'grid'}
             >
               <Grid className="w-4 h-4" />
             </Button>
@@ -116,7 +216,6 @@ export default function TemplatesPage() {
               variant={viewMode === 'list' ? 'default' : 'outline'}
               onClick={() => setViewMode('list')}
               aria-label="List view"
-              aria-pressed={viewMode === 'list'}
             >
               <List className="w-4 h-4" />
             </Button>
@@ -144,6 +243,8 @@ export default function TemplatesPage() {
                 <TemplateCard 
                   template={template} 
                   onPreview={handlePreviewTemplate}
+                  onCompareToggle={handleCompareToggle}
+                  isInComparison={compareTemplates.some(t => t.id === template.id)}
                 />
               </motion.div>
             ))}
@@ -167,6 +268,13 @@ export default function TemplatesPage() {
         template={previewTemplate}
         isOpen={!!previewTemplate}
         onClose={handleClosePreview}
+      />
+      
+      {/* Comparison Modal */}
+      <TemplateComparison
+        templates={compareTemplates}
+        isOpen={showComparison}
+        onClose={() => setShowComparison(false)}
       />
     </div>
   );

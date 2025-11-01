@@ -3,15 +3,18 @@
 import { TemplateStyle } from '@/types/templates';
 import Button from '@/components/ui/Button';
 import SciFiCard from '@/components/ui/SciFiCard';
-import { FileText, Crown, Eye, Palette } from 'lucide-react';
+import TemplateFavorites from './TemplateFavorites';
+import { FileText, Crown, Eye, Palette, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 interface TemplateCardProps {
   template: TemplateStyle;
   onPreview?: (template: TemplateStyle) => void;
+  onCompareToggle?: (template: TemplateStyle) => void;
+  isInComparison?: boolean;
 }
 
-export default function TemplateCard({ template, onPreview }: TemplateCardProps) {
+export default function TemplateCard({ template, onPreview, onCompareToggle, isInComparison }: TemplateCardProps) {
   const categoryColors = {
     modern: 'from-blue-500 to-cyan-500',
     classic: 'from-gray-600 to-gray-800',
@@ -80,6 +83,7 @@ export default function TemplateCard({ template, onPreview }: TemplateCardProps)
         </div>
 
         <div className="flex space-x-2">
+          <TemplateFavorites templateId={template.id} />
           <Button size="sm" variant="outline" onClick={() => onPreview?.(template)} className="flex-1">
             <Eye className="w-4 h-4 mr-1" />
             Preview
