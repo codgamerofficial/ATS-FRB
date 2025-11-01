@@ -49,12 +49,12 @@ export default function About() {
       </header>
 
       <div className="max-w-6xl mx-auto py-12 px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
           <h1 className="text-4xl font-bold text-white mb-6">
             About ATSFRB
           </h1>
@@ -63,14 +63,16 @@ export default function About() {
             that get noticed by hiring managers and land interviews. Our platform combines 
             cutting-edge technology with proven resume writing principles.
           </p>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="contents"
+          >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-3xl font-bold text-cyan-400 mb-2">
@@ -81,7 +83,8 @@ export default function About() {
               </div>
             </div>
           ))}
-        </motion.div>
+          </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <motion.div

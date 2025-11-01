@@ -16,7 +16,7 @@ import TemplateRecommendations from '@/components/templates/TemplateRecommendati
 import { useAuth } from '@/hooks/useAuth';
 import { useTemplateStore } from '@/store/templateStore';
 import { TemplateStyle } from '@/types/templates';
-import { ArrowLeft, Grid, List, Compare, Bookmark, Shuffle } from 'lucide-react';
+import { ArrowLeft, Grid, List, GitCompare, Bookmark, Shuffle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function TemplatesPage() {
@@ -181,7 +181,7 @@ export default function TemplatesPage() {
                 onClick={() => setShowComparison(true)}
                 className="flex items-center space-x-2"
               >
-                <Compare className="w-4 h-4" />
+                <GitCompare className="w-4 h-4" />
                 <span>Compare ({compareTemplates.length})</span>
               </Button>
             )}

@@ -5,7 +5,7 @@ import { TemplateStyle } from '@/types/templates';
 import Button from '@/components/ui/Button';
 import TemplateRenderer from './TemplateRenderer';
 import { useResumeStore } from '@/store/resumeStore';
-import { X, Compare, Palette, Crown } from 'lucide-react';
+import { X, GitCompare, Palette, Crown } from 'lucide-react';
 
 interface TemplateComparisonProps {
   templates: TemplateStyle[];
@@ -48,7 +48,7 @@ export default function TemplateComparison({ templates, isOpen, onClose }: Templ
         <div className="min-h-full bg-gray-900 p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <Compare className="w-6 h-6 text-cyan-400" />
+              <GitCompare className="w-6 h-6 text-cyan-400" />
               <h2 className="text-2xl font-bold text-white">Compare Templates</h2>
             </div>
             <Button variant="outline" onClick={onClose}>
