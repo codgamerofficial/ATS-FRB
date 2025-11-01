@@ -71,7 +71,6 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="contents"
           >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
