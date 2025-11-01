@@ -90,3 +90,24 @@ export interface User {
   full_name?: string;
   avatar_url?: string;
 }
+
+export interface TemplatePreferences {
+  selectedTemplateId?: string;
+  customizations?: {
+    colors?: Partial<TemplateColors>;
+    fonts?: Partial<TemplateFonts>;
+  };
+}
+
+export interface TemplateColors {
+  primary: string;
+  secondary: string;
+  accent: string;
+  text: string;
+  background: string;
+}
+
+export interface TemplateFonts {
+  heading: string;
+  body: string;
+}

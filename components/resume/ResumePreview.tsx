@@ -1,20 +1,38 @@
 'use client';
 
 import { useResumeStore } from '@/store/resumeStore';
+import { useTemplateStore } from '@/store/templateStore';
 import Button from '@/components/ui/Button';
-import { Download, Eye, Share2, Save, FileText } from 'lucide-react';
+import TemplateRenderer from '@/components/templates/TemplateRenderer';
+import { Download, Eye, Share2, Save, FileText, Palette } from 'lucide-react';
 import { generatePDF } from '@/utils/pdfGenerator';
 import { generateDOCX } from '@/utils/docxGenerator';
 import { saveResume, updateResume } from '@/utils/resumeService';
 import { useAuth } from '@/hooks/useAuth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useSearchParams } from 'next/navigation';
 
 export default function ResumePreview() {
   const { resumeData } = useResumeStore();
+  const { selectedTemplate, getTemplateById } = useTemplateStore();
   const { user } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
-  const { personalInfo, summary, experience, education, skills, projects, certifications, languages, hobbies } = resumeData;
+  const [currentTemplate, setCurrentTemplate] = useState(selectedTemplate);
+  const searchParams = useSearchParams();
+  const { personalInfo } = resumeData;
+
+  useEffect(() => {
+    const templateId = searchParams?.get('template');
+    if (templateId) {
+      const template = getTemplateById(templateId);
+      if (template) {
+        setCurrentTemplate(template);
+      }
+    }
+  }, [searchParams, getTemplateById]);
+
+  const activeTemplate = currentTemplate || selectedTemplate || getTemplateById('modern-1');
 
   const handleDownloadPDF = async () => {
     try {
@@ -109,191 +127,51 @@ export default function ResumePreview() {
             <FileText className="w-4 h-4 mr-1" />
             DOCX
           </Button>
+          <Button size="sm" variant="outline" onClick={() => window.open('/templates', '_blank')} className="flex items-center">
+            <Palette className="w-4 h-4 mr-1" />
+            Change Template
+          </Button>
         </div>
       </div>
 
-      {/* Resume Preview */}
-      <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm max-h-[800px] overflow-y-auto">
-        <div className="max-w-2xl mx-auto space-y-6">
-          {/* Header */}
-          <div className="text-center border-b border-gray-200 pb-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {personalInfo.fullName || 'Your Name'}
-            </h1>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
-              {personalInfo.email && (
-                <span>{personalInfo.email}</span>
-              )}
-              {personalInfo.phone && (
-                <span>{personalInfo.phone}</span>
-              )}
-              {personalInfo.location && (
-                <span>{personalInfo.location}</span>
-              )}
-            </div>
-            {(personalInfo.website || personalInfo.linkedin || personalInfo.github) && (
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-blue-600 mt-2">
-                {personalInfo.website && (
-                  <a href={personalInfo.website} className="hover:underline">Website</a>
-                )}
-                {personalInfo.linkedin && (
-                  <a href={personalInfo.linkedin} className="hover:underline">LinkedIn</a>
-                )}
-                {personalInfo.github && (
-                  <a href={personalInfo.github} className="hover:underline">GitHub</a>
-                )}
+      {/* Template Info */}
+      {activeTemplate && (
+        <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-600/30 rounded-lg p-4 mb-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Palette className="w-5 h-5 text-cyan-400" />
+              <div>
+                <h3 className="font-medium text-white">{activeTemplate.name}</h3>
+                <p className="text-sm text-gray-300">{activeTemplate.description}</p>
               </div>
-            )}
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                activeTemplate.isPremium ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'
+              }`}>
+                {activeTemplate.isPremium ? 'Premium' : 'Free'}
+              </span>
+              <span className="px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-400 rounded-full">
+                {activeTemplate.category}
+              </span>
+            </div>
           </div>
-
-          {/* Professional Summary */}
-          {summary && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                PROFESSIONAL SUMMARY
-              </h2>
-              <p className="text-gray-700 leading-relaxed">{summary}</p>
-            </div>
-          )}
-
-          {/* Experience */}
-          {experience.length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                EXPERIENCE
-              </h2>
-              <div className="space-y-4">
-                {experience.map((exp) => (
-                  <div key={exp.id}>
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="font-semibold text-gray-900">{exp.position}</h3>
-                        <p className="text-gray-700">{exp.company} | {exp.location}</p>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        {exp.startDate} – {exp.current ? 'Present' : exp.endDate}
-                      </p>
-                    </div>
-                    {exp.description.length > 0 && (
-                      <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
-                        {exp.description.map((desc, index) => (
-                          <li key={index}>{desc}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Education */}
-          {education.length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                EDUCATION
-              </h2>
-              <div className="space-y-3">
-                {education.map((edu) => (
-                  <div key={edu.id}>
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-semibold text-gray-900">
-                          {edu.degree} in {edu.field}
-                        </h3>
-                        <p className="text-gray-700">{edu.institution}</p>
-                        {edu.gpa && (
-                          <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        {edu.startDate} – {edu.endDate}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Projects */}
-          {projects.length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                PROJECTS
-              </h2>
-              <div className="space-y-4">
-                {projects.map((project) => (
-                  <div key={project.id}>
-                    <h3 className="font-semibold text-gray-900">{project.name}</h3>
-                    <p className="text-gray-700 mb-2">{project.description}</p>
-                    {project.technologies.length > 0 && (
-                      <p className="text-sm text-gray-600">
-                        <span className="font-medium">Technologies:</span> {project.technologies.join(', ')}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Skills */}
-          {skills.length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                SKILLS
-              </h2>
-              <div className="space-y-2">
-                {skills.map((skillCategory, index) => (
-                  <div key={index}>
-                    <span className="font-medium text-gray-900">{skillCategory.category}:</span>{' '}
-                    <span className="text-gray-700">{skillCategory.items.join(', ')}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Certifications */}
-          {certifications.length > 0 && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                CERTIFICATIONS
-              </h2>
-              <div className="space-y-2">
-                {certifications.map((cert) => (
-                  <div key={cert.id}>
-                    <span className="font-medium text-gray-900">{cert.name}</span> — {cert.issuer} ({cert.date})
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Additional Information */}
-          {(languages?.length || hobbies?.length) && (
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                ADDITIONAL INFORMATION
-              </h2>
-              <div className="space-y-2">
-                {languages && languages.length > 0 && (
-                  <div>
-                    <span className="font-medium text-gray-900">Languages:</span>{' '}
-                    <span className="text-gray-700">{languages.join(', ')}</span>
-                  </div>
-                )}
-                {hobbies && hobbies.length > 0 && (
-                  <div>
-                    <span className="font-medium text-gray-900">Hobbies & Interests:</span>{' '}
-                    <span className="text-gray-700">{hobbies.join(', ')}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
+      )}
+
+      {/* Resume Preview */}
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm max-h-[800px] overflow-y-auto">
+        {activeTemplate ? (
+          <TemplateRenderer 
+            template={activeTemplate} 
+            resumeData={resumeData} 
+            className="p-8"
+          />
+        ) : (
+          <div className="p-8 text-center text-gray-500">
+            <p>No template selected. Please choose a template to preview your resume.</p>
+          </div>
+        )}
       </div>
     </div>
   );

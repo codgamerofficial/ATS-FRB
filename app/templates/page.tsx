@@ -1,49 +1,28 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UserMenu from '@/components/ui/UserMenu';
 import SciFiBackground from '@/components/ui/SciFiBackground';
-import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
+import TemplateCard from '@/components/templates/TemplateCard';
+import TemplateFilters from '@/components/templates/TemplateFilters';
+import TemplatePreviewModal from '@/components/templates/TemplatePreviewModal';
 import { useAuth } from '@/hooks/useAuth';
-import { FileText, ArrowLeft } from 'lucide-react';
+import { useTemplateStore } from '@/store/templateStore';
+import { TemplateStyle } from '@/types/templates';
+import { ArrowLeft, Grid, List } from 'lucide-react';
 import Link from 'next/link';
-
-const templates = [
-  {
-    id: 'modern',
-    name: 'Modern Professional',
-    description: 'Clean and modern design perfect for tech professionals',
-    preview: '/api/placeholder/300/400',
-    isPremium: false
-  },
-  {
-    id: 'classic',
-    name: 'Classic Executive',
-    description: 'Traditional format ideal for corporate positions',
-    preview: '/api/placeholder/300/400',
-    isPremium: false
-  },
-  {
-    id: 'creative',
-    name: 'Creative Designer',
-    description: 'Stylish template for creative professionals',
-    preview: '/api/placeholder/300/400',
-    isPremium: true
-  },
-  {
-    id: 'ats',
-    name: 'ATS Optimized',
-    description: 'Specifically designed to pass Applicant Tracking Systems',
-    preview: '/api/placeholder/300/400',
-    isPremium: false
-  }
-];
 
 export default function TemplatesPage() {
   const { user, loading } = useAuth();
+  const { getFilteredTemplates } = useTemplateStore();
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [previewTemplate, setPreviewTemplate] = useState<TemplateStyle | null>(null);
+  
+  const filteredTemplates = getFilteredTemplates();
 
   return (
     <div className="min-h-screen relative">
@@ -79,60 +58,91 @@ export default function TemplatesPage() {
           Back to Home
         </Link>
 
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">
             Choose Your Template
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Select from our collection of professional, ATS-friendly resume templates
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+            Select from our collection of 100+ professional, ATS-friendly resume templates
           </p>
+          <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
+            <span>{filteredTemplates.length} templates available</span>
+            <span>•</span>
+            <span>{filteredTemplates.filter(t => !t.isPremium).length} free templates</span>
+            <span>•</span>
+            <span>{filteredTemplates.filter(t => t.isPremium).length} premium templates</span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {templates.map((template, index) => (
-            <motion.div
-              key={template.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <SciFiCard className="overflow-hidden hover:shadow-cyan-500/20 transition-all duration-300">
-                <div className="aspect-[3/4] bg-gray-800/50 flex items-center justify-center border-b border-cyan-500/20">
-                  <FileText className="w-16 h-16 text-cyan-400" />
-                </div>
-                
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-white">
-                      {template.name}
-                    </h3>
-                    {template.isPremium && (
-                      <span className="px-2 py-1 text-xs font-medium bg-yellow-500/20 text-yellow-400 rounded-full border border-yellow-500/30">
-                        Premium
-                      </span>
-                    )}
-                  </div>
-                  
-                  <p className="text-gray-300 text-sm mb-4">
-                    {template.description}
-                  </p>
-                  
-                  <div className="flex space-x-2">
-                    <Button size="sm" variant="outline" className="flex-1">
-                      Preview
-                    </Button>
-                    <Link href={`/builder?template=${template.id}`} className="flex-1">
-                      <Button size="sm" className="w-full">
-                        Use Template
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </SciFiCard>
-            </motion.div>
-          ))}
+        {/* Filters */}
+        <div className="mb-8">
+          <TemplateFilters />
         </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-semibold text-white">
+            Templates ({filteredTemplates.length})
+          </h2>
+          <div className="flex items-center space-x-2">
+            <Button
+              size="sm"
+              variant={viewMode === 'grid' ? 'default' : 'outline'}
+              onClick={() => setViewMode('grid')}
+            >
+              <Grid className="w-4 h-4" />
+            </Button>
+            <Button
+              size="sm"
+              variant={viewMode === 'list' ? 'default' : 'outline'}
+              onClick={() => setViewMode('list')}
+            >
+              <List className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Templates Grid */}
+        {filteredTemplates.length > 0 ? (
+          <div className={`grid gap-6 ${
+            viewMode === 'grid' 
+              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+              : 'grid-cols-1 lg:grid-cols-2'
+          }`}>
+            {filteredTemplates.map((template, index) => (
+              <motion.div
+                key={template.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+              >
+                <TemplateCard 
+                  template={template} 
+                  onPreview={setPreviewTemplate}
+                />
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-gray-400 mb-4">
+              <Grid className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <h3 className="text-xl font-semibold mb-2">No templates found</h3>
+              <p>Try adjusting your filters or search terms</p>
+            </div>
+            <Button onClick={() => useTemplateStore.getState().resetFilters()} variant="outline">
+              Clear Filters
+            </Button>
+          </div>
+        )}
       </div>
+
+      {/* Preview Modal */}
+      <TemplatePreviewModal 
+        template={previewTemplate}
+        isOpen={!!previewTemplate}
+        onClose={() => setPreviewTemplate(null)}
+      />
     </div>
   );
 }
