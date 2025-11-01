@@ -5,6 +5,9 @@ import { FileText, Zap, Download, Shield, Star, Users } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import UserMenu from '@/components/ui/UserMenu';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
+import RealtimeWidget from '@/components/realtime/RealtimeWidget';
+import NewsWidget from '@/components/realtime/NewsWidget';
+import LocationMap from '@/components/realtime/LocationMap';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 
@@ -153,6 +156,25 @@ export default function HomePage() {
                 100% secure
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Realtime Widget Section */}
+      <section className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Stay Connected with the World
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Real-time updates on news, weather, and your location - all in one place
+            </p>
+          </div>
+          <RealtimeWidget />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+            <NewsWidget />
+            <LocationMap />
           </div>
         </div>
       </section>
