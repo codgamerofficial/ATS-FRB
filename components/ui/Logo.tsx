@@ -30,16 +30,29 @@ export default function Logo({ size = 40, className = '', animated = true }: Log
   const LogoSVG = () => (
     <svg width={size} height={size} viewBox="0 0 200 200" className={className}>
       <defs>
-        <linearGradient id={`bgGradient-${size}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{stopColor:'#1e293b', stopOpacity:1}} />
+        <linearGradient id={`shieldGradient-${size}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{stopColor:'#0f4c75', stopOpacity:1}} />
+          <stop offset="50%" style={{stopColor:'#1e3a8a', stopOpacity:1}} />
           <stop offset="100%" style={{stopColor:'#0f172a', stopOpacity:1}} />
         </linearGradient>
+        <linearGradient id={`goldGradient-${size}`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{stopColor:'#fbbf24', stopOpacity:1}} />
+          <stop offset="50%" style={{stopColor:'#f59e0b', stopOpacity:1}} />
+          <stop offset="100%" style={{stopColor:'#d97706', stopOpacity:1}} />
+        </linearGradient>
         <linearGradient id={`circuitGradient-${size}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{stopColor:'#06b6d4', stopOpacity:0.8}} />
-          <stop offset="100%" style={{stopColor:'#0891b2', stopOpacity:0.6}} />
+          <stop offset="0%" style={{stopColor:'#06b6d4', stopOpacity:0.9}} />
+          <stop offset="100%" style={{stopColor:'#0891b2', stopOpacity:0.7}} />
         </linearGradient>
         <filter id={`glow-${size}`}>
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge> 
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id={`textGlow-${size}`}>
+          <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
           <feMerge> 
             <feMergeNode in="coloredBlur"/>
             <feMergeNode in="SourceGraphic"/>
@@ -47,57 +60,81 @@ export default function Logo({ size = 40, className = '', animated = true }: Log
         </filter>
       </defs>
       
-      {/* Outer Shield */}
-      <path d="M100 20 L160 40 L180 100 L160 160 L100 180 L40 160 L20 100 L40 40 Z" 
-            fill={`url(#bgGradient-${size})`}
-            stroke="#d4af37" 
-            strokeWidth="3" 
+      {/* Main Shield Shape */}
+      <path d="M100 15 L170 35 L185 100 L170 165 L100 185 L30 165 L15 100 L30 35 Z" 
+            fill={`url(#shieldGradient-${size})`}
+            stroke={`url(#goldGradient-${size})`}
+            strokeWidth="4" 
             filter={`url(#glow-${size})`}/>
       
-      {/* Inner Shield */}
-      <path d="M100 35 L145 50 L160 100 L145 150 L100 165 L55 150 L40 100 L55 50 Z" 
-            fill="#0f172a" 
-            stroke="#06b6d4" 
-            strokeWidth="2"/>
+      {/* Inner Shield Border */}
+      <path d="M100 25 L160 42 L172 100 L160 158 L100 175 L40 158 L28 100 L40 42 Z" 
+            fill="none" 
+            stroke={`url(#goldGradient-${size})`}
+            strokeWidth="2" 
+            opacity="0.6"/>
       
-      {/* Circuit Pattern */}
-      <g stroke={`url(#circuitGradient-${size})`} strokeWidth="1.5" fill="none" opacity="0.7">
-        {/* Horizontal lines */}
-        <line x1="60" y1="80" x2="140" y2="80"/>
-        <line x1="60" y1="100" x2="140" y2="100"/>
-        <line x1="60" y1="120" x2="140" y2="120"/>
+      {/* Advanced Circuit Pattern */}
+      <g stroke={`url(#circuitGradient-${size})`} strokeWidth="1.5" fill="none" opacity="0.8">
+        {/* Main circuit lines */}
+        <line x1="50" y1="70" x2="85" y2="70"/>
+        <line x1="115" y1="70" x2="150" y2="70"/>
+        <line x1="50" y1="100" x2="85" y2="100"/>
+        <line x1="115" y1="100" x2="150" y2="100"/>
+        <line x1="50" y1="130" x2="85" y2="130"/>
+        <line x1="115" y1="130" x2="150" y2="130"/>
         
-        {/* Vertical lines */}
-        <line x1="80" y1="60" x2="80" y2="140"/>
-        <line x1="100" y1="60" x2="100" y2="140"/>
-        <line x1="120" y1="60" x2="120" y2="140"/>
+        {/* Vertical connections */}
+        <line x1="70" y1="50" x2="70" y2="85"/>
+        <line x1="100" y1="50" x2="100" y2="65"/>
+        <line x1="130" y1="50" x2="130" y2="85"/>
+        <line x1="70" y1="115" x2="70" y2="150"/>
+        <line x1="100" y1="135" x2="100" y2="150"/>
+        <line x1="130" y1="115" x2="130" y2="150"/>
         
         {/* Circuit nodes */}
-        <circle cx="80" cy="80" r="2" fill="#06b6d4"/>
-        <circle cx="120" cy="80" r="2" fill="#06b6d4"/>
-        <circle cx="80" cy="120" r="2" fill="#06b6d4"/>
-        <circle cx="120" cy="120" r="2" fill="#06b6d4"/>
+        <circle cx="70" cy="70" r="2.5" fill="#06b6d4"/>
+        <circle cx="130" cy="70" r="2.5" fill="#06b6d4"/>
+        <circle cx="70" cy="130" r="2.5" fill="#06b6d4"/>
+        <circle cx="130" cy="130" r="2.5" fill="#06b6d4"/>
+        <circle cx="50" cy="100" r="2" fill="#f59e0b"/>
+        <circle cx="150" cy="100" r="2" fill="#f59e0b"/>
       </g>
       
-      {/* User Icon Circle */}
-      <circle cx="100" cy="85" r="20" fill="#06b6d4" stroke="#d4af37" strokeWidth="2"/>
+      {/* Central Professional Icon Circle */}
+      <circle cx="100" cy="100" r="25" 
+              fill={`url(#goldGradient-${size})`}
+              stroke="#0f172a" 
+              strokeWidth="2" 
+              filter={`url(#glow-${size})`}/>
       
-      {/* User Icon */}
+      {/* Professional User Icon */}
       <g fill="#0f172a">
         {/* Head */}
-        <circle cx="100" cy="80" r="6"/>
-        {/* Body */}
-        <path d="M88 95 Q100 90 112 95 L110 100 L90 100 Z"/>
+        <circle cx="100" cy="92" r="7"/>
+        {/* Suit/Body */}
+        <path d="M85 110 Q100 105 115 110 L113 118 L87 118 Z"/>
+        {/* Tie */}
+        <path d="M98 105 L102 105 L101 115 L99 115 Z" fill="#1e40af"/>
       </g>
       
-      {/* ATSFRB Text */}
-      <text x="100" y="135" 
-            fontFamily="Arial, sans-serif" 
-            fontSize="16" 
-            fontWeight="bold" 
-            fill="#d4af37" 
+      {/* Brand Text */}
+      <text x="100" y="155" 
+            fontFamily="'Segoe UI', Arial, sans-serif" 
+            fontSize="18" 
+            fontWeight="900" 
+            fill={`url(#goldGradient-${size})`}
             textAnchor="middle"
-            filter={`url(#glow-${size})`}>ATSFRB</text>
+            filter={`url(#textGlow-${size})`}>ATSFRB</text>
+      
+      {/* Subtitle */}
+      <text x="100" y="170" 
+            fontFamily="'Segoe UI', Arial, sans-serif" 
+            fontSize="8" 
+            fontWeight="600" 
+            fill="#06b6d4" 
+            textAnchor="middle"
+            opacity="0.9">AI RESUME BUILDER</text>
     </svg>
   );
 
@@ -106,14 +143,15 @@ export default function Logo({ size = 40, className = '', animated = true }: Log
   }
 
   return (
-    <motion.div
-      variants={logoVariants}
-      initial="initial"
-      animate="animate"
-      whileHover="hover"
-      
-    >
-      <LogoSVG />
-    </motion.div>
+    <div className="cursor-pointer">
+      <motion.div
+        variants={logoVariants}
+        initial="initial"
+        animate="animate"
+        whileHover="hover"
+      >
+        <LogoSVG />
+      </motion.div>
+    </div>
   );
 }
