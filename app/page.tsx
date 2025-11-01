@@ -10,6 +10,9 @@ import SplashScreen from '@/components/3d/SplashScreen';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
+import RealtimeWidget from '@/components/realtime/RealtimeWidget';
+import NewsWidget from '@/components/realtime/NewsWidget';
+import LocationMap from '@/components/realtime/LocationMap';
 import { useAuth } from '@/hooks/useAuth';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
@@ -172,6 +175,25 @@ export default function Page() {
                 100% secure
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Realtime Widget Section */}
+      <section className="py-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+              Stay Connected with the World
+            </h2>
+            <p className="text-xl text-cyan-100 max-w-2xl mx-auto">
+              Real-time updates on news, weather, and your location - all in one place
+            </p>
+          </div>
+          <RealtimeWidget />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+            <NewsWidget />
+            <LocationMap />
           </div>
         </div>
       </section>
