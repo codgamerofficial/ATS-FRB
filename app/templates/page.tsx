@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Metadata } from 'next';
 import Button from '@/components/ui/Button';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UserMenu from '@/components/ui/UserMenu';
@@ -18,11 +19,28 @@ import Link from 'next/link';
 
 export default function TemplatesPage() {
   const { user, loading } = useAuth();
-  const { getFilteredTemplates } = useTemplateStore();
+  const { getFilteredTemplates, resetFilters } = useTemplateStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [previewTemplate, setPreviewTemplate] = useState<TemplateStyle | null>(null);
   
-  const filteredTemplates = getFilteredTemplates();
+  const filteredTemplates = useMemo(() => getFilteredTemplates(), [getFilteredTemplates]);
+  const templateStats = useMemo(() => ({
+    total: filteredTemplates.length,
+    free: filteredTemplates.filter(t => !t.isPremium).length,
+    premium: filteredTemplates.filter(t => t.isPremium).length
+  }), [filteredTemplates]);
+
+  const handlePreviewTemplate = useCallback((template: TemplateStyle) => {
+    setPreviewTemplate(template);
+  }, []);
+
+  const handleClosePreview = useCallback(() => {
+    setPreviewTemplate(null);
+  }, []);
+
+  const handleClearFilters = useCallback(() => {
+    resetFilters();
+  }, [resetFilters]);
 
   return (
     <div className="min-h-screen relative">
@@ -58,7 +76,7 @@ export default function TemplatesPage() {
           Back to Home
         </Link>
 
-        <div className="text-center mb-8">
+        <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">
             Choose Your Template
           </h1>
@@ -66,13 +84,13 @@ export default function TemplatesPage() {
             Select from our collection of 100+ professional, ATS-friendly resume templates
           </p>
           <div className="flex items-center justify-center space-x-4 text-sm text-gray-400">
-            <span>{filteredTemplates.length} templates available</span>
+            <span>{templateStats.total} templates available</span>
             <span>•</span>
-            <span>{filteredTemplates.filter(t => !t.isPremium).length} free templates</span>
+            <span>{templateStats.free} free templates</span>
             <span>•</span>
-            <span>{filteredTemplates.filter(t => t.isPremium).length} premium templates</span>
+            <span>{templateStats.premium} premium templates</span>
           </div>
-        </div>
+        </header>
 
         {/* Filters */}
         <div className="mb-8">
@@ -80,15 +98,17 @@ export default function TemplatesPage() {
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6" role="toolbar" aria-label="Template view options">
           <h2 className="text-xl font-semibold text-white">
-            Templates ({filteredTemplates.length})
+            Templates ({templateStats.total})
           </h2>
           <div className="flex items-center space-x-2">
             <Button
               size="sm"
               variant={viewMode === 'grid' ? 'default' : 'outline'}
               onClick={() => setViewMode('grid')}
+              aria-label="Grid view"
+              aria-pressed={viewMode === 'grid'}
             >
               <Grid className="w-4 h-4" />
             </Button>
@@ -96,6 +116,8 @@ export default function TemplatesPage() {
               size="sm"
               variant={viewMode === 'list' ? 'default' : 'outline'}
               onClick={() => setViewMode('list')}
+              aria-label="List view"
+              aria-pressed={viewMode === 'list'}
             >
               <List className="w-4 h-4" />
             </Button>
@@ -118,7 +140,7 @@ export default function TemplatesPage() {
               >
                 <TemplateCard 
                   template={template} 
-                  onPreview={setPreviewTemplate}
+                  onPreview={handlePreviewTemplate}
                 />
               </motion.div>
             ))}
@@ -130,7 +152,7 @@ export default function TemplatesPage() {
               <h3 className="text-xl font-semibold mb-2">No templates found</h3>
               <p>Try adjusting your filters or search terms</p>
             </div>
-            <Button onClick={() => useTemplateStore.getState().resetFilters()} variant="outline">
+            <Button onClick={handleClearFilters} variant="outline">
               Clear Filters
             </Button>
           </div>
@@ -141,7 +163,7 @@ export default function TemplatesPage() {
       <TemplatePreviewModal 
         template={previewTemplate}
         isOpen={!!previewTemplate}
-        onClose={() => setPreviewTemplate(null)}
+        onClose={handleClosePreview}
       />
     </div>
   );
