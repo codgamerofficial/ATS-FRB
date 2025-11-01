@@ -2,7 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function SciFiBackground() {
+interface SciFiBackgroundProps {
+  isDark?: boolean;
+}
+
+export default function SciFiBackground({ isDark = true }: SciFiBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,7 +46,8 @@ export default function SciFiBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Draw grid
-      ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
+      const gridColor = isDark ? 'rgba(0, 255, 255, 0.1)' : 'rgba(59, 130, 246, 0.15)';
+      ctx.strokeStyle = gridColor;
       ctx.lineWidth = 1;
       
       for (let i = 0; i < canvas.width; i += 50) {
@@ -69,7 +74,8 @@ export default function SciFiBackground() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 255, ${particle.opacity})`;
+        const particleColor = isDark ? `rgba(0, 255, 255, ${particle.opacity})` : `rgba(59, 130, 246, ${particle.opacity})`;
+        ctx.fillStyle = particleColor;
         ctx.fill();
       });
 
@@ -91,7 +97,11 @@ export default function SciFiBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)' }}
+      style={{ 
+        background: isDark 
+          ? 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)'
+          : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)'
+      }}
     />
   );
 }

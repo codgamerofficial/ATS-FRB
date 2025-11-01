@@ -12,22 +12,14 @@ export function useDarkMode() {
 
   useEffect(() => {
     const stored = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialDark = stored ? JSON.parse(stored) : prefersDark;
+    // Default to dark mode for SCI-FI theme
+    const initialDark = stored ? JSON.parse(stored) : true;
     
     setIsDark(initialDark);
     setIsLoaded(true);
 
     // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('darkMode')) {
-        setIsDark(e.matches);
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    // Remove system theme listener since we default to dark
   }, []);
 
   useEffect(() => {

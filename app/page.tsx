@@ -11,6 +11,7 @@ import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
 import { useAuth } from '@/hooks/useAuth';
+import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
 
 const features = [
@@ -60,6 +61,7 @@ const testimonials = [
 export default function Page() {
   const [showSplash, setShowSplash] = useState(true);
   const { user, loading } = useAuth();
+  const { isDark } = useDarkMode();
 
   const handleSplashComplete = () => {
     setShowSplash(false);
@@ -71,7 +73,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SciFiBackground />
+      <SciFiBackground isDark={isDark} />
       <nav className="bg-gray-900/20 backdrop-blur-md border-b border-cyan-500/30 sticky top-0 z-40 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -193,7 +195,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard className="text-center h-full">
+                <SciFiCard className="text-center h-full" isDark={isDark}>
                   <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
                     {feature.icon}
                   </div>
@@ -212,7 +214,7 @@ export default function Page() {
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard>
+          <SciFiCard isDark={isDark}>
             <div className="text-center">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
                 See a Sample Resume
@@ -249,7 +251,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard>
+                <SciFiCard isDark={isDark}>
                   <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
@@ -269,7 +271,7 @@ export default function Page() {
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard className="text-center">
+          <SciFiCard className="text-center" isDark={isDark}>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               Ready to Build Your Resume?
             </h2>
