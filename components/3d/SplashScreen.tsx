@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -126,10 +126,11 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
                 <motion.div
                   animate={{ rotateY: 360 }}
                   transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                >
-                  <FileText className="h-20 w-20 text-cyan-400" style={{
+                  style={{
                     filter: 'drop-shadow(0 0 10px rgba(0, 255, 255, 0.8))'
-                  }} />
+                  }}
+                >
+                  <Logo size={80} animated={false} />
                 </motion.div>
               </div>
               

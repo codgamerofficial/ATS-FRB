@@ -9,6 +9,7 @@ import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import SplashScreen from '@/components/3d/SplashScreen';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
+import Logo from '@/components/ui/Logo';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 
@@ -75,8 +76,8 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <FileText className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-bold text-cyan-400">ResumeBuilder</span>
+              <Logo size={32} />
+              <span className="ml-2 text-xl font-bold text-cyan-400">ATSFRB</span>
             </div>
             <div className="flex items-center space-x-4">
               <Link href="/templates">
@@ -289,8 +290,8 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <FileText className="h-6 w-6 text-cyan-400" />
-                <span className="ml-2 text-lg font-bold text-cyan-400">ResumeBuilder</span>
+                <Logo size={24} animated={false} />
+                <span className="ml-2 text-lg font-bold text-cyan-400">ATSFRB</span>
               </div>
               <p className="text-cyan-100">
                 Create professional, ATS-friendly resumes that get you hired.
@@ -323,7 +324,7 @@ export default function Page() {
             </div>
           </div>
           <div className="border-t border-cyan-500/30 mt-8 pt-8 text-center text-cyan-300">
-            <p>&copy; 2025 ResumeBuilder(ATSFRB). All rights reserved.</p>
+            <p>&copy; 2025 ATSFRB - AI Resume Builder. All rights reserved.</p>
           </div>
         </div>
       </footer>

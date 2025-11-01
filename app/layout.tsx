@@ -5,9 +5,28 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'ATS Resume Builder - Create Professional Resumes',
-  description: 'Build ATS-friendly resumes with our modern, professional resume builder. Create, customize, and download your resume in minutes.',
-  keywords: 'resume builder, ATS resume, professional resume, CV builder, job application',
+  title: 'ATSFRB - AI-Powered Resume Builder | Create ATS-Friendly Resumes',
+  description: 'Build professional, ATS-optimized resumes with ATSFRB. Our AI-powered resume builder helps you create stunning resumes that get you hired. Free templates, instant PDF download.',
+  keywords: 'ATSFRB, ATS resume builder, AI resume builder, professional resume, CV builder, job application, resume templates',
+  authors: [{ name: 'Saswata Dey' }],
+  creator: 'Saswata Dey',
+  publisher: 'ATSFRB',
+  robots: 'index, follow',
+  openGraph: {
+    title: 'ATSFRB - AI-Powered Resume Builder',
+    description: 'Create professional, ATS-friendly resumes that get you hired',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ATSFRB - AI-Powered Resume Builder',
+    description: 'Create professional, ATS-friendly resumes that get you hired',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.svg',
+  },
 };
 
 export default function RootLayout({

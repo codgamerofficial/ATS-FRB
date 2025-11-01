@@ -6,6 +6,7 @@ import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UserMenu from '@/components/ui/UserMenu';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
+import Logo from '@/components/ui/Logo';
 import { useAuth } from '@/hooks/useAuth';
 import { FileText, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -52,7 +53,7 @@ export default function TemplatesPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
-                <FileText className="h-8 w-8 text-cyan-400" />
+                <Logo size={32} animated={false} />
                 <span className="ml-2 text-xl font-bold text-white">ATSFRB</span>
               </Link>
             </div>

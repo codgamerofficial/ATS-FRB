@@ -1,0 +1,71 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.6" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer Shield -->
+  <path d="M100 20 L160 40 L180 100 L160 160 L100 180 L40 160 L20 100 L40 40 Z" 
+        fill="url(#bgGradient)" 
+        stroke="#d4af37" 
+        stroke-width="3" 
+        filter="url(#glow)"/>
+  
+  <!-- Inner Shield -->
+  <path d="M100 35 L145 50 L160 100 L145 150 L100 165 L55 150 L40 100 L55 50 Z" 
+        fill="#0f172a" 
+        stroke="#06b6d4" 
+        stroke-width="2"/>
+  
+  <!-- Circuit Pattern -->
+  <g stroke="url(#circuitGradient)" stroke-width="1.5" fill="none" opacity="0.7">
+    <!-- Horizontal lines -->
+    <line x1="60" y1="80" x2="140" y2="80"/>
+    <line x1="60" y1="100" x2="140" y2="100"/>
+    <line x1="60" y1="120" x2="140" y2="120"/>
+    
+    <!-- Vertical lines -->
+    <line x1="80" y1="60" x2="80" y2="140"/>
+    <line x1="100" y1="60" x2="100" y2="140"/>
+    <line x1="120" y1="60" x2="120" y2="140"/>
+    
+    <!-- Circuit nodes -->
+    <circle cx="80" cy="80" r="2" fill="#06b6d4"/>
+    <circle cx="120" cy="80" r="2" fill="#06b6d4"/>
+    <circle cx="80" cy="120" r="2" fill="#06b6d4"/>
+    <circle cx="120" cy="120" r="2" fill="#06b6d4"/>
+  </g>
+  
+  <!-- User Icon Circle -->
+  <circle cx="100" cy="85" r="20" fill="#06b6d4" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- User Icon -->
+  <g fill="#0f172a">
+    <!-- Head -->
+    <circle cx="100" cy="80" r="6"/>
+    <!-- Body -->
+    <path d="M88 95 Q100 90 112 95 L110 100 L90 100 Z"/>
+  </g>
+  
+  <!-- ATSFRB Text -->
+  <text x="100" y="135" 
+        font-family="Arial, sans-serif" 
+        font-size="16" 
+        font-weight="bold" 
+        fill="#d4af37" 
+        text-anchor="middle"
+        filter="url(#glow)">ATSFRB</text>
+</svg>

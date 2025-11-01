@@ -9,6 +9,7 @@ import Input from '@/components/ui/Input';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import { FileText, Mail, Lock, User, ArrowLeft } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -114,9 +115,7 @@ export default function AuthPage() {
             {/* Header */}
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
-                <div className="bg-cyan-500/20 p-3 rounded-full border border-cyan-500/30">
-                  <FileText className="w-8 h-8 text-cyan-400" />
-                </div>
+                <Logo size={64} />
               </div>
               <h1 className="text-2xl font-bold text-white mb-2">
                 {isLogin ? 'Welcome Back' : 'Create Account'}
