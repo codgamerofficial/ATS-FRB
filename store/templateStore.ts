@@ -19,7 +19,7 @@ interface TemplateStore {
 }
 
 export const useTemplateStore = create<TemplateStore>((set, get) => ({
-  templates: completeTemplateCollection,
+  templates: completeTemplateCollection || [],
   selectedTemplate: null,
   filter: {},
   searchTerm: '',
