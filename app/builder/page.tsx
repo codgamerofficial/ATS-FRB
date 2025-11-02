@@ -4,6 +4,8 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useResumeStore } from '@/store/resumeStore';
+import { useAuth } from '@/hooks/useAuth';
+import { useAutoSave } from '@/hooks/useAutoSave';
 import { saswataResumeData } from '@/utils/sampleData';
 import ResumeForm from '@/components/forms/ResumeForm';
 import ResumePreview from '@/components/resume/ResumePreview';
@@ -14,6 +16,9 @@ import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
+import CollaborationPanel from '@/components/collaboration/CollaborationPanel';
+import ResumeAnalytics from '@/components/analytics/ResumeAnalytics';
+import ExportOptions from '@/components/export/ExportOptions';
 import { FileText } from 'lucide-react';
 import Link from 'next/link';
 
@@ -29,8 +34,17 @@ const steps = [
 
 function BuilderPageContent() {
   const searchParams = useSearchParams();
-  const { currentStep, loadResumeData } = useResumeStore();
+  const { user } = useAuth();
+  const { currentStep, loadResumeData, resumeData } = useResumeStore();
   const [isLoading, setIsLoading] = useState(true);
+  
+  useAutoSave(resumeData, {
+    onSave: async (data) => {
+      // Auto-save to Supabase
+      console.log('Auto-saving resume data:', data);
+    },
+    enabled: !!user
+  });
 
   useEffect(() => {
     const sample = searchParams.get('sample');
@@ -77,26 +91,66 @@ function BuilderPageContent() {
         </header>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <SciFiCard className="p-6">
-                <ResumeForm />
-              </SciFiCard>
-            </motion.div>
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+            {/* Main Content */}
+            <div className="xl:col-span-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <SciFiCard className="p-6">
+                    <ResumeForm />
+                  </SciFiCard>
+                </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <SciFiCard className="p-6">
-                <ResumePreview />
-              </SciFiCard>
-            </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <SciFiCard className="p-6">
+                    <ResumePreview />
+                  </SciFiCard>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="xl:col-span-4 space-y-6">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <CollaborationPanel 
+                  resumeId={searchParams.get('resume') || 'new'}
+                  currentUser={user}
+                  isOwner={true}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <ResumeAnalytics 
+                  resume={resumeData}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <ExportOptions 
+                  resume={resumeData}
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

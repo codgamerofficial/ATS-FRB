@@ -4,14 +4,40 @@ A modern, professional resume builder with 3D splash screen, Supabase backend in
 
 ## Features
 
-- 🎨 **3D Splash Screen** - Interactive Three.js powered loading experience
-- 📝 **Multi-Step Resume Builder** - Intuitive form-based resume creation
-- 🤖 **ATS Optimized** - Templates designed to pass Applicant Tracking Systems
-- 💾 **Supabase Backend** - Secure data storage and user authentication
-- 📱 **Responsive Design** - Works perfectly on all devices
-- 📄 **PDF Export** - Download professional PDF resumes instantly
-- 🎯 **Sample Resume** - Includes Saswata Dey's resume as an example
-- 🔒 **Secure & Private** - Your data is encrypted and protected
+### 🎨 Resume Features
+- **Multiple Resume Templates** - Choose from 100+ professional templates with different themes
+- **Real-time Collaboration** - Work together with others in real-time with live cursors and changes
+- **ATS Compatibility Checker** - Get instant feedback on how ATS-friendly your resume is with scoring
+- **Custom Sections** - Add publications, awards, certifications, and other custom sections
+- **Template Themes** - Professional, Creative, Modern, Classic, and Minimal themes
+
+### 🚀 User Experience
+- **Dark/Light Mode Toggle** - Switch between themes with smooth animations
+- **Resume Analytics Dashboard** - Track views, downloads, and performance insights
+- **Template Preview Gallery** - Browse and compare templates before selecting
+- **Drag-and-Drop Sections** - Reorder resume sections by dragging and dropping
+- **Auto-save Functionality** - Never lose your work with automatic saving
+- **3D Splash Screen** - Interactive Three.js powered loading experience
+- **Responsive Design** - Works perfectly on all devices
+
+### 📤 Export & Sharing
+- **Multiple Export Formats** - Export to PDF, Word (DOCX), and HTML formats
+- **QR Code Generation** - Generate QR codes for contact info, portfolio, and social links
+- **Public Resume Links** - Share your resume with a public URL
+- **Social Media Sharing** - Share on LinkedIn, Twitter, and other platforms
+
+### 🔧 Backend & Data
+- **Supabase Backend** - Secure data storage and user authentication
+- **Resume Version History** - Track changes and revert to previous versions
+- **User Feedback System** - Collect and manage user feedback
+- **Template Marketplace** - Browse and purchase premium templates
+- **Bulk Operations** - Manage multiple resumes efficiently
+
+### 🎯 Additional Features
+- **Sample Resume** - Includes Saswata Dey's resume as an example
+- **Multi-Step Builder** - Intuitive form-based resume creation
+- **ATS Optimized** - Templates designed to pass Applicant Tracking Systems
+- **Secure & Private** - Your data is encrypted and protected
 
 ## Tech Stack
 

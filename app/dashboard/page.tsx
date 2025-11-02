@@ -10,7 +10,9 @@ import Button from '@/components/ui/Button';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
-import { FileText, Plus, Edit, Trash2, Download, Eye } from 'lucide-react';
+import DarkModeToggle from '@/components/ui/DarkModeToggle';
+import FeatureShowcase from '@/components/features/FeatureShowcase';
+import { FileText, Plus, Edit, Trash2, Download, Eye, BarChart3, Users, Zap } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -20,6 +22,12 @@ interface Resume {
   created_at: string;
   updated_at: string;
   is_public: boolean;
+  analytics?: {
+    views: number;
+    downloads: number;
+    shares: number;
+  };
+  collaborators?: any[];
 }
 
 export default function DashboardPage() {
@@ -37,7 +45,7 @@ export default function DashboardPage() {
     try {
       const { data, error } = await supabase
         .from('resumes')
-        .select('id, title, created_at, updated_at, is_public')
+        .select('id, title, created_at, updated_at, is_public, analytics, collaborators')
         .eq('user_id', user?.id)
         .order('updated_at', { ascending: false });
 
@@ -92,7 +100,10 @@ export default function DashboardPage() {
                 </Link>
                 <h1 className="text-xl font-semibold text-cyan-400">My Resumes</h1>
               </div>
-              <UserMenu />
+              <div className="flex items-center space-x-4">
+                <DarkModeToggle />
+                <UserMenu />
+              </div>
             </div>
           </div>
         </header>
@@ -155,12 +166,38 @@ export default function DashboardPage() {
                         <p className="text-sm text-gray-400">
                           Updated {formatDate(resume.updated_at)}
                         </p>
+                        {resume.analytics && (
+                          <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                            <span className="flex items-center">
+                              <Eye className="w-3 h-3 mr-1" />
+                              {resume.analytics.views || 0}
+                            </span>
+                            <span className="flex items-center">
+                              <Download className="w-3 h-3 mr-1" />
+                              {resume.analytics.downloads || 0}
+                            </span>
+                            {resume.collaborators && resume.collaborators.length > 0 && (
+                              <span className="flex items-center">
+                                <Users className="w-3 h-3 mr-1" />
+                                {resume.collaborators.length}
+                              </span>
+                            )}
+                          </div>
+                        )}
                       </div>
-                      {resume.is_public && (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                          Public
-                        </span>
-                      )}
+                      <div className="flex flex-col items-end space-y-2">
+                        {resume.is_public && (
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                            Public
+                          </span>
+                        )}
+                        {resume.collaborators && resume.collaborators.length > 0 && (
+                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                            <Users className="w-3 h-3 mr-1" />
+                            Shared
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -172,8 +209,8 @@ export default function DashboardPage() {
                           </Button>
                         </Link>
                         <Button size="sm" variant="outline" className="flex items-center">
-                          <Download className="w-3 h-3 mr-1" />
-                          PDF
+                          <BarChart3 className="w-3 h-3 mr-1" />
+                          Analytics
                         </Button>
                       </div>
                       <Button
@@ -190,6 +227,11 @@ export default function DashboardPage() {
               ))}
             </div>
           )}
+          
+          {/* Feature Showcase */}
+          <div className="mt-16">
+            <FeatureShowcase />
+          </div>
         </div>
       </div>
     </AuthGuard>
