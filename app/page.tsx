@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Zap, Download, Shield, Star, Users, Github } from 'lucide-react';
+import { FileText, Zap, Download, Shield, Star, Users, Github, ExternalLink, Phone, Mail, MapPin } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import UserMenu from '@/components/ui/UserMenu';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
@@ -58,6 +58,141 @@ const testimonials = [
     role: 'Lead Data Scientist @ Amazon',
     content: 'Beautiful templates + smart AI = dream job at Amazon. Worth every penny. Simply amazing!',
     rating: 5
+  }
+];
+
+const topColleges = [
+  {
+    name: 'Indian Institute of Technology Delhi',
+    location: 'New Delhi',
+    ranking: 1,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://home.iitd.ac.in/',
+    phone: '+91-11-2659-1000',
+    email: 'registrar@admin.iitd.ac.in',
+    established: 1961,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Indian Institute of Science Bangalore',
+    location: 'Bangalore, Karnataka',
+    ranking: 2,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://www.iisc.ac.in/',
+    phone: '+91-80-2293-2001',
+    email: 'registrar@iisc.ac.in',
+    established: 1909,
+    type: 'Science & Research'
+  },
+  {
+    name: 'Indian Institute of Technology Bombay',
+    location: 'Mumbai, Maharashtra',
+    ranking: 3,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'https://www.iitb.ac.in/',
+    phone: '+91-22-2572-2545',
+    email: 'registrar@iitb.ac.in',
+    established: 1958,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'All India Institute of Medical Sciences Delhi',
+    location: 'New Delhi',
+    ranking: 4,
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop',
+    website: 'https://www.aiims.edu/',
+    phone: '+91-11-2658-8500',
+    email: 'director@aiims.ac.in',
+    established: 1956,
+    type: 'Medical Sciences'
+  },
+  {
+    name: 'Indian Institute of Technology Madras',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 5,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.iitm.ac.in/',
+    phone: '+91-44-2257-4802',
+    email: 'registrar@iitm.ac.in',
+    established: 1959,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Indian Institute of Technology Kanpur',
+    location: 'Kanpur, Uttar Pradesh',
+    ranking: 6,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitk.ac.in/',
+    phone: '+91-512-259-7000',
+    email: 'registrar@iitk.ac.in',
+    established: 1959,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Jawaharlal Nehru University',
+    location: 'New Delhi',
+    ranking: 7,
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400&h=300&fit=crop',
+    website: 'https://www.jnu.ac.in/',
+    phone: '+91-11-2670-4000',
+    email: 'registrar@mail.jnu.ac.in',
+    established: 1969,
+    type: 'Liberal Arts & Sciences'
+  },
+  {
+    name: 'University of Delhi',
+    location: 'New Delhi',
+    ranking: 8,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'http://www.du.ac.in/',
+    phone: '+91-11-2766-7049',
+    email: 'registrar@du.ac.in',
+    established: 1922,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Kharagpur',
+    location: 'Kharagpur, West Bengal',
+    ranking: 9,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'http://www.iitkgp.ac.in/',
+    phone: '+91-3222-255-221',
+    email: 'registrar@adm.iitkgp.ac.in',
+    established: 1951,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Banaras Hindu University',
+    location: 'Varanasi, Uttar Pradesh',
+    ranking: 10,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://www.bhu.ac.in/',
+    phone: '+91-542-230-7000',
+    email: 'registrar@bhu.ac.in',
+    established: 1916,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Roorkee',
+    location: 'Roorkee, Uttarakhand',
+    ranking: 11,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.iitr.ac.in/',
+    phone: '+91-1332-285-311',
+    email: 'registrar@iitr.ac.in',
+    established: 1847,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Jadavpur University',
+    location: 'Kolkata, West Bengal',
+    ranking: 12,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'http://www.jaduniv.edu.in/',
+    phone: '+91-33-2414-6666',
+    email: 'registrar@jaduniv.edu.in',
+    established: 1955,
+    type: 'Engineering & Arts'
   }
 ];
 
@@ -332,6 +467,96 @@ export default function Page() {
                 </SciFiCard>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* India's The Best Colleges Section */}
+      <section className="py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(255, 153, 51, 0.5)' }}>
+              🇮🇳 India's The Best Colleges
+            </h2>
+            <p className="text-xl text-orange-100 max-w-2xl mx-auto">
+              Discover India's top-ranked institutions. Connect directly with premier colleges and universities.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {topColleges.map((college, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <SciFiCard className="h-full overflow-hidden" isDark={isDark}>
+                  <div className="relative">
+                    <img 
+                      src={college.image} 
+                      alt={college.name}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                    <div className="absolute top-2 right-2 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                      #{college.ranking}
+                    </div>
+                  </div>
+                  
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{college.name}</h3>
+                    <div className="flex items-center text-cyan-300 text-sm mb-2">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      {college.location}
+                    </div>
+                    <div className="text-orange-300 text-sm mb-3">
+                      Est. {college.established} • {college.type}
+                    </div>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-cyan-200 text-sm">
+                        <Phone className="h-3 w-3 mr-2" />
+                        <a href={`tel:${college.phone}`} className="hover:text-cyan-400">
+                          {college.phone}
+                        </a>
+                      </div>
+                      <div className="flex items-center text-cyan-200 text-sm">
+                        <Mail className="h-3 w-3 mr-2" />
+                        <a href={`mailto:${college.email}`} className="hover:text-cyan-400 truncate">
+                          {college.email}
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <a 
+                        href={college.website} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex-1"
+                      >
+                        <Button size="sm" className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-xs">
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          Visit Website
+                        </Button>
+                      </a>
+                      <a href={`tel:${college.phone}`}>
+                        <Button size="sm" variant="outline" className="border-cyan-400 text-cyan-400 hover:bg-cyan-400/10">
+                          <Phone className="h-3 w-3" />
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </SciFiCard>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-cyan-200 mb-4">Want to see more colleges? We have 50+ institutions listed!</p>
+            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
+              View All Colleges
+            </Button>
           </div>
         </div>
       </section>

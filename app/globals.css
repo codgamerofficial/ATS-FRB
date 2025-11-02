@@ -264,6 +264,14 @@ a {
   box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5);
 }
 
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* Print styles for resume */
 @media print {
   body {
