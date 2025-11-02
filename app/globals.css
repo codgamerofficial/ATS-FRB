@@ -264,6 +264,79 @@ a {
   box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.5);
 }
 
+/* Modern interactive elements */
+.interactive-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Neon glow effects */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.neon-glow:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3);
+}
+
+/* Holographic effects */
+.holographic {
+  background: linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6, #06b6d4);
+  background-size: 400% 400%;
+  animation: holographic-shift 4s ease infinite;
+}
+
+@keyframes holographic-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 3D card effects */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+/* Particle effects */
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(120deg); }
+  66% { transform: translateY(5px) rotate(240deg); }
+}
+
+.particle {
+  animation: particle-float 6s ease-in-out infinite;
+}
+
+/* Advanced shadows */
+.shadow-neon {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 0 40px rgba(6, 182, 212, 0.2), 0 0 80px rgba(6, 182, 212, 0.1);
+}
+
+.shadow-deep {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Morphing animations */
+@keyframes morph {
+  0%, 100% { border-radius: 20px; }
+  25% { border-radius: 50px 20px; }
+  50% { border-radius: 20px 50px; }
+  75% { border-radius: 50px; }
+}
+
+.morph {
+  animation: morph 8s ease-in-out infinite;
+}
+
 /* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;

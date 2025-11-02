@@ -269,7 +269,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard className="text-center h-full" isDark={isDark}>
+                <SciFiCard className="text-center h-full interactive-hover shadow-deep" isDark={isDark} variant="glow">
                   <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
                     {feature.icon}
                   </div>
@@ -288,7 +288,7 @@ export default function Page() {
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard isDark={isDark}>
+          <SciFiCard isDark={isDark} className="shadow-deep neon-glow" variant="glow">
             <div className="text-center">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
                 🌟 See Real Success Stories
@@ -325,7 +325,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard isDark={isDark}>
+                <SciFiCard isDark={isDark} className="interactive-hover shadow-neon" variant="premium">
                   <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
@@ -402,16 +402,17 @@ export default function Page() {
             ].map((template, index) => (
               <div
                 key={index}
-                className="group cursor-pointer hover:-translate-y-2 hover:scale-105 transition-all duration-300"
+                className="group cursor-pointer hover:-translate-y-4 hover:scale-110 transition-all duration-500 hover:rotate-1"
               >
-                <SciFiCard className="overflow-hidden h-full" isDark={isDark}>
+                <SciFiCard className="overflow-hidden h-full shadow-neon" isDark={isDark} variant="premium" interactive={true}>
                   <div className="relative overflow-hidden">
                     <img 
                       src={template.image}
                       alt={template.name}
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-64 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2 filter group-hover:brightness-110"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${template.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                    <div className={`absolute inset-0 bg-gradient-to-t ${template.color} opacity-20 group-hover:opacity-40 transition-all duration-500`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <div className="absolute top-4 right-4">
                       <span className="bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-bold">
                         {template.category}
@@ -437,9 +438,9 @@ export default function Page() {
                       </div>
                       <Button 
                         size="sm" 
-                        className={`bg-gradient-to-r ${template.color} hover:shadow-lg transition-all duration-300`}
+                        className={`bg-gradient-to-r ${template.color} hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-500 neon-glow`}
                       >
-                        Use Template
+                        ✨ Use Template
                       </Button>
                     </div>
                   </div>
@@ -473,14 +474,19 @@ export default function Page() {
           </div>
         </div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-purple-500/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-xl animate-pulse"></div>
+        {/* Enhanced Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-purple-500/20 rounded-full blur-xl animate-pulse particle"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-xl animate-pulse particle" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-cyan-500/15 rounded-full blur-lg animate-ping particle" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-blue-500/15 rounded-full blur-lg animate-ping particle" style={{ animationDelay: '6s' }}></div>
+        
+        {/* Holographic overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent opacity-50 holographic"></div>
       </section>
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard className="text-center" isDark={isDark}>
+          <SciFiCard className="text-center shadow-neon morph" isDark={isDark} variant="premium">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               🎯 Ready to Transform Your Career?
             </h2>

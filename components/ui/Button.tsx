@@ -10,13 +10,13 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyo
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = '', variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
-    const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group';
+    const baseClasses = 'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group transform hover:scale-105 active:scale-95';
     
     const variants = {
-      primary: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 focus:ring-cyan-500 shadow-lg shadow-cyan-500/25 border border-cyan-400/30',
-      secondary: 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:from-purple-400 hover:to-pink-500 focus:ring-purple-500 shadow-lg shadow-purple-500/25 border border-purple-400/30',
-      outline: 'border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 focus:ring-cyan-500 backdrop-blur-sm bg-cyan-400/5 shadow-lg shadow-cyan-400/10',
-      ghost: 'text-cyan-400 hover:bg-cyan-400/10 focus:ring-cyan-500 backdrop-blur-sm',
+      primary: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 focus:ring-cyan-500 shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 border border-cyan-400/40',
+      secondary: 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:from-purple-400 hover:to-pink-500 focus:ring-purple-500 shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 border border-purple-400/40',
+      outline: 'border-2 border-cyan-400/70 text-cyan-400 hover:border-cyan-300 hover:bg-cyan-400/15 hover:text-cyan-300 focus:ring-cyan-500 backdrop-blur-md bg-cyan-400/5 shadow-lg shadow-cyan-400/20',
+      ghost: 'text-cyan-400 hover:bg-cyan-400/15 hover:text-cyan-300 focus:ring-cyan-500 backdrop-blur-sm',
     };
 
     const sizes = {
@@ -28,38 +28,48 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
 
     return (
-      <motion.button
+      <button
         ref={ref}
         className={classes}
-        whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(0, 255, 255, 0.4)' }}
-        whileTap={{ scale: 0.95 }}
         disabled={isLoading || props.disabled}
-        {...(props as any)}
+        {...props}
       >
-        {isLoading && (
-          <svg
-            className="animate-spin -ml-1 mr-2 h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-        )}
-        {children}
-      </motion.button>
+        {/* Shimmer effect */}
+        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+        
+        {/* Glow effect */}
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+        
+        <span className="relative z-10 flex items-center">
+          {isLoading && (
+            <svg
+              className="animate-spin -ml-1 mr-2 h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+          )}
+          {children}
+        </span>
+        
+        {/* Corner accents */}
+        <div className="absolute top-1 left-1 w-2 h-2 border-t border-l border-white/40 rounded-tl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute bottom-1 right-1 w-2 h-2 border-b border-r border-white/40 rounded-br opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </button>
     );
   }
 );
