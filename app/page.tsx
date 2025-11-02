@@ -14,18 +14,17 @@ import RealtimeWidget from '@/components/realtime/RealtimeWidget';
 import NewsWidget from '@/components/realtime/NewsWidget';
 import LocationMap from '@/components/realtime/LocationMap';
 import PartnershipsSection from '@/components/partnerships/PartnershipsSection';
-import dynamic from 'next/dynamic';
-
-const ScrollProgress = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollProgress })), { ssr: false });
-const ScrollReveal = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollReveal })), { ssr: false });
-const ScrollSlide = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollSlide })), { ssr: false });
-const ScrollScale = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollScale })), { ssr: false });
-const ScrollStagger = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollStagger })), { ssr: false });
-const ScrollItem = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollItem })), { ssr: false });
-const FloatingElements = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.FloatingElements })), { ssr: false });
-const ScrollMouseTracker = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollMouseTracker })), { ssr: false });
-const ScrollWaveEffect = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ScrollWaveEffect })), { ssr: false });
-const ParallaxContainer = dynamic(() => import('@/components/animations/ScrollAnimations').then(mod => ({ default: mod.ParallaxContainer })), { ssr: false });
+// Scroll animations temporarily disabled for deployment
+const ScrollProgress = () => null;
+const ScrollReveal = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+const ScrollSlide = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+const ScrollScale = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+const ScrollStagger = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+const ScrollItem = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+const FloatingElements = () => null;
+const ScrollMouseTracker = () => null;
+const ScrollWaveEffect = () => null;
+const ParallaxContainer = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 import { useAuth } from '@/hooks/useAuth';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
@@ -91,10 +90,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <ScrollProgress />
-      <ScrollMouseTracker />
-      <FloatingElements />
-      <ScrollWaveEffect />
+
       <SciFiBackground isDark={isDark} />
       {/* Futuristic Navigation Bar */}
       <nav className="relative bg-black/40 backdrop-blur-xl border-b border-cyan-400/50 sticky top-0 z-50 transition-all duration-500 hover:bg-black/60">
