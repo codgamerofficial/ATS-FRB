@@ -109,6 +109,7 @@ export default function Page() {
               {[
                 { href: '/templates', label: 'Templates', icon: '📋', glow: 'cyan' },
                 { href: '/portfolio', label: 'Portfolio', icon: '💼', glow: 'purple' },
+                { href: '/news', label: 'Live News', icon: '📰', glow: 'green' },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
                   <div className="relative group px-4 py-2 rounded-xl transition-all duration-500 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-purple-500/10 border border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5">
@@ -206,6 +207,7 @@ export default function Page() {
             <div className="flex flex-wrap gap-2 justify-center">
               {[
                 { href: '/templates', label: 'Templates', icon: '📋' },
+                { href: '/news', label: 'Live News', icon: '📰' },
                 { href: '/colleges', label: 'Colleges', icon: '🇮🇳', special: true },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
