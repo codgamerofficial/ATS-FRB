@@ -14,7 +14,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 origin-left z-50"
-      style={{ scaleX }}
+      style={{ scaleX } as any}
     />
   );
 }
@@ -24,7 +24,7 @@ export function ParallaxContainer({ children, speed = 0.5 }: { children: React.R
   const y = useTransform(scrollY, [0, 1000], [0, 1000 * speed]);
 
   return (
-    <motion.div style={{ y }}>
+    <motion.div style={{ y } as any}>
       {children}
     </motion.div>
   );
@@ -236,7 +236,7 @@ export function ScrollMouseTracker() {
       animate={{
         x: mousePosition.x - 12,
         y: mousePosition.y - 12,
-      }}
+      } as any}
       transition={{
         type: "spring",
         stiffness: 500,
@@ -256,15 +256,15 @@ export function ScrollWaveEffect() {
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5"
-        style={{ y: y1 }}
+        style={{ y: y1 } as any}
       />
       <motion.div
         className="absolute inset-0 bg-gradient-to-tl from-purple-500/3 to-pink-500/3"
-        style={{ y: y2 }}
+        style={{ y: y2 } as any}
       />
       <motion.div
         className="absolute inset-0 bg-gradient-to-tr from-pink-500/2 to-cyan-500/2"
-        style={{ y: y3 }}
+        style={{ y: y3 } as any}
       />
     </div>
   );
