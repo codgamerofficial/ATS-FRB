@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Zap, Download, Shield, Star, Users } from 'lucide-react';
+import { FileText, Zap, Download, Shield, Star, Users, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import UserMenu from '@/components/ui/UserMenu';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
@@ -91,6 +91,15 @@ export default function Page() {
               <Link href="/portfolio">
                 <Button variant="ghost">Portfolio</Button>
               </Link>
+              <a 
+                href="https://github.com/codgamerofficial/ATS-FRB" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-cyan-300 hover:text-cyan-100 hover:bg-cyan-500/10 transition-colors duration-200"
+              >
+                <Github className="h-5 w-5" />
+                <span className="hidden sm:inline">GitHub</span>
+              </a>
               <DarkModeToggle />
               {!loading && (
                 user ? (
