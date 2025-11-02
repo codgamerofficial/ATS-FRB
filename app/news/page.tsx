@@ -5,14 +5,11 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import NewsSystem from '@/components/news/NewsSystem';
-import { useDarkMode } from '@/hooks/useDarkMode';
-
 export default function NewsPage() {
-  const { isDark } = useDarkMode();
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SciFiBackground isDark={isDark} />
+      <SciFiBackground isDark={false} />
       
       <div className="relative z-10 pt-8 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

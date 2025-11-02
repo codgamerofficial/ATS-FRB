@@ -6,8 +6,6 @@ import { ArrowLeft, Star, Download, Eye } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import SciFiCard from '@/components/ui/SciFiCard';
 import SciFiBackground from '@/components/ui/SciFiBackground';
-import { useDarkMode } from '@/hooks/useDarkMode';
-
 const templates = [
   {
     id: 'executive-pro',
@@ -81,7 +79,6 @@ const categories = ['All', 'Professional', 'Creative', 'Technology', 'Simple', '
 
 export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const { isDark } = useDarkMode();
 
   const filteredTemplates = selectedCategory === 'All' 
     ? templates 
@@ -89,7 +86,7 @@ export default function TemplatesPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SciFiBackground isDark={isDark} />
+      <SciFiBackground isDark={false} />
       
       {/* Header */}
       <div className="relative z-10 pt-8 pb-12">
@@ -134,7 +131,7 @@ export default function TemplatesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTemplates.map((template) => (
               <div key={template.id} className="group">
-                <SciFiCard className="overflow-hidden h-full" isDark={isDark} variant="premium">
+                <SciFiCard className="overflow-hidden h-full" isDark={false} variant="premium">
                   <div className="relative overflow-hidden">
                     <img 
                       src={template.image}
@@ -199,7 +196,7 @@ export default function TemplatesPage() {
 
           {/* Call to Action */}
           <div className="text-center mt-16">
-            <SciFiCard className="inline-block" isDark={isDark}>
+            <SciFiCard className="inline-block" isDark={false}>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-white mb-4">🚀 Ready to Build Your Resume?</h3>
                 <p className="text-cyan-200 mb-6 max-w-md">
