@@ -193,6 +193,556 @@ const topColleges = [
     email: 'registrar@jaduniv.edu.in',
     established: 1955,
     type: 'Engineering & Arts'
+  },
+  {
+    name: 'Indian Institute of Technology Guwahati',
+    location: 'Guwahati, Assam',
+    ranking: 13,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.iitg.ac.in/',
+    phone: '+91-361-258-2000',
+    email: 'registrar@iitg.ac.in',
+    established: 1994,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Anna University',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 14,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.annauniv.edu/',
+    phone: '+91-44-2235-7000',
+    email: 'registrar@annauniv.edu',
+    established: 1978,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Indian Institute of Technology Hyderabad',
+    location: 'Hyderabad, Telangana',
+    ranking: 15,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iith.ac.in/',
+    phone: '+91-40-2301-6000',
+    email: 'registrar@iith.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Aligarh Muslim University',
+    location: 'Aligarh, Uttar Pradesh',
+    ranking: 16,
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400&h=300&fit=crop',
+    website: 'https://www.amu.ac.in/',
+    phone: '+91-571-270-0920',
+    email: 'registrar@amu.ac.in',
+    established: 1875,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Calcutta University',
+    location: 'Kolkata, West Bengal',
+    ranking: 17,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'http://www.caluniv.ac.in/',
+    phone: '+91-33-2241-3800',
+    email: 'registrar@caluniv.ac.in',
+    established: 1857,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Indore',
+    location: 'Indore, Madhya Pradesh',
+    ranking: 18,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iiti.ac.in/',
+    phone: '+91-731-660-3000',
+    email: 'registrar@iiti.ac.in',
+    established: 2009,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Manipal Academy of Higher Education',
+    location: 'Manipal, Karnataka',
+    ranking: 19,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://manipal.edu/',
+    phone: '+91-820-292-3000',
+    email: 'registrar@manipal.edu',
+    established: 1953,
+    type: 'Medical & Engineering'
+  },
+  {
+    name: 'Vellore Institute of Technology',
+    location: 'Vellore, Tamil Nadu',
+    ranking: 20,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'https://vit.ac.in/',
+    phone: '+91-416-220-2000',
+    email: 'registrar@vit.ac.in',
+    established: 1984,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Birla Institute of Technology and Science',
+    location: 'Pilani, Rajasthan',
+    ranking: 21,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.bits-pilani.ac.in/',
+    phone: '+91-1596-242-204',
+    email: 'registrar@pilani.bits-pilani.ac.in',
+    established: 1964,
+    type: 'Engineering & Sciences'
+  },
+  {
+    name: 'Indian Institute of Technology Bhubaneswar',
+    location: 'Bhubaneswar, Odisha',
+    ranking: 22,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitbbs.ac.in/',
+    phone: '+91-674-713-5000',
+    email: 'registrar@iitbbs.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Jamia Millia Islamia',
+    location: 'New Delhi',
+    ranking: 23,
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400&h=300&fit=crop',
+    website: 'https://www.jmi.ac.in/',
+    phone: '+91-11-2698-1717',
+    email: 'registrar@jmi.ac.in',
+    established: 1920,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Gandhinagar',
+    location: 'Gandhinagar, Gujarat',
+    ranking: 24,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iitgn.ac.in/',
+    phone: '+91-79-2395-2000',
+    email: 'registrar@iitgn.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Amrita Vishwa Vidyapeetham',
+    location: 'Coimbatore, Tamil Nadu',
+    ranking: 25,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.amrita.edu/',
+    phone: '+91-422-268-5000',
+    email: 'registrar@amrita.edu',
+    established: 2003,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Thapar Institute of Engineering and Technology',
+    location: 'Patiala, Punjab',
+    ranking: 26,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.thapar.edu/',
+    phone: '+91-175-239-3021',
+    email: 'registrar@thapar.edu',
+    established: 1956,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Indian Institute of Technology Patna',
+    location: 'Patna, Bihar',
+    ranking: 27,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitp.ac.in/',
+    phone: '+91-612-302-8000',
+    email: 'registrar@iitp.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Osmania University',
+    location: 'Hyderabad, Telangana',
+    ranking: 28,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'https://www.osmania.ac.in/',
+    phone: '+91-40-2709-8000',
+    email: 'registrar@osmania.ac.in',
+    established: 1918,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Mandi',
+    location: 'Mandi, Himachal Pradesh',
+    ranking: 29,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iitmandi.ac.in/',
+    phone: '+91-1905-267-000',
+    email: 'registrar@iitmandi.ac.in',
+    established: 2009,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Saveetha Institute of Medical and Technical Sciences',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 30,
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop',
+    website: 'https://www.saveetha.ac.in/',
+    phone: '+91-44-6681-1000',
+    email: 'registrar@saveetha.ac.in',
+    established: 2005,
+    type: 'Medical & Technical'
+  },
+  {
+    name: 'Indian Institute of Technology Ropar',
+    location: 'Rupnagar, Punjab',
+    ranking: 31,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.iitrpr.ac.in/',
+    phone: '+91-1881-242-000',
+    email: 'registrar@iitrpr.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Panjab University',
+    location: 'Chandigarh',
+    ranking: 32,
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400&h=300&fit=crop',
+    website: 'https://puchd.ac.in/',
+    phone: '+91-172-253-4000',
+    email: 'registrar@pu.ac.in',
+    established: 1882,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Varanasi',
+    location: 'Varanasi, Uttar Pradesh',
+    ranking: 33,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitbhu.ac.in/',
+    phone: '+91-542-716-5000',
+    email: 'registrar@iitbhu.ac.in',
+    established: 2012,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Lovely Professional University',
+    location: 'Phagwara, Punjab',
+    ranking: 34,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'https://www.lpu.in/',
+    phone: '+91-1824-517-000',
+    email: 'registrar@lpu.co.in',
+    established: 2005,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Jodhpur',
+    location: 'Jodhpur, Rajasthan',
+    ranking: 35,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iitj.ac.in/',
+    phone: '+91-291-280-1000',
+    email: 'registrar@iitj.ac.in',
+    established: 2008,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Cochin University of Science and Technology',
+    location: 'Kochi, Kerala',
+    ranking: 36,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://cusat.ac.in/',
+    phone: '+91-484-286-0000',
+    email: 'registrar@cusat.ac.in',
+    established: 1971,
+    type: 'Science & Technology'
+  },
+  {
+    name: 'Indian Institute of Technology Tirupati',
+    location: 'Tirupati, Andhra Pradesh',
+    ranking: 37,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iittp.ac.in/',
+    phone: '+91-877-250-3000',
+    email: 'registrar@iittp.ac.in',
+    established: 2015,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'SRM Institute of Science and Technology',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 38,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.srmist.edu.in/',
+    phone: '+91-44-2741-7000',
+    email: 'registrar@srmist.edu.in',
+    established: 1985,
+    type: 'Science & Technology'
+  },
+  {
+    name: 'Indian Institute of Technology Bhilai',
+    location: 'Bhilai, Chhattisgarh',
+    ranking: 39,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iitbhilai.ac.in/',
+    phone: '+91-788-244-2000',
+    email: 'registrar@iitbhilai.ac.in',
+    established: 2016,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Kalinga Institute of Industrial Technology',
+    location: 'Bhubaneswar, Odisha',
+    ranking: 40,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://kiit.ac.in/',
+    phone: '+91-674-272-5000',
+    email: 'registrar@kiit.ac.in',
+    established: 1992,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Goa',
+    location: 'Goa',
+    ranking: 41,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitgoa.ac.in/',
+    phone: '+91-832-240-0000',
+    email: 'registrar@iitgoa.ac.in',
+    established: 2016,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Bharathiar University',
+    location: 'Coimbatore, Tamil Nadu',
+    ranking: 42,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.b-u.ac.in/',
+    phone: '+91-422-242-2222',
+    email: 'registrar@b-u.ac.in',
+    established: 1982,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Palakkad',
+    location: 'Palakkad, Kerala',
+    ranking: 43,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://iitpkd.ac.in/',
+    phone: '+91-491-256-2000',
+    email: 'registrar@iitpkd.ac.in',
+    established: 2015,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Shiv Nadar University',
+    location: 'Greater Noida, Uttar Pradesh',
+    ranking: 44,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'https://snu.edu.in/',
+    phone: '+91-120-266-7000',
+    email: 'registrar@snu.edu.in',
+    established: 2011,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Jammu',
+    location: 'Jammu, Jammu and Kashmir',
+    ranking: 45,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.iitjammu.ac.in/',
+    phone: '+91-191-269-4000',
+    email: 'registrar@iitjammu.ac.in',
+    established: 2016,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Chandigarh University',
+    location: 'Mohali, Punjab',
+    ranking: 46,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'https://www.cuchd.in/',
+    phone: '+91-160-300-5000',
+    email: 'registrar@cuchd.in',
+    established: 2012,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Indian Institute of Technology Dharwad',
+    location: 'Dharwad, Karnataka',
+    ranking: 47,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.iitdh.ac.in/',
+    phone: '+91-836-277-1000',
+    email: 'registrar@iitdh.ac.in',
+    established: 2016,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Guru Gobind Singh Indraprastha University',
+    location: 'New Delhi',
+    ranking: 48,
+    image: 'https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400&h=300&fit=crop',
+    website: 'http://www.ipu.ac.in/',
+    phone: '+91-11-2338-4200',
+    email: 'registrar@ipu.ac.in',
+    established: 1998,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Netaji Subhas University of Technology',
+    location: 'New Delhi',
+    ranking: 49,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'http://www.nsut.ac.in/',
+    phone: '+91-11-2500-1000',
+    email: 'registrar@nsut.ac.in',
+    established: 1983,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Symbiosis International University',
+    location: 'Pune, Maharashtra',
+    ranking: 50,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://www.siu.edu.in/',
+    phone: '+91-20-2528-1000',
+    email: 'registrar@siu.edu.in',
+    established: 2002,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Banasthali Vidyapith',
+    location: 'Banasthali, Rajasthan',
+    ranking: 51,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.banasthali.ac.in/',
+    phone: '+91-1438-228-341',
+    email: 'registrar@banasthali.ac.in',
+    established: 1935,
+    type: 'Women University'
+  },
+  {
+    name: 'Siksha O Anusandhan University',
+    location: 'Bhubaneswar, Odisha',
+    ranking: 52,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://www.soa.ac.in/',
+    phone: '+91-674-235-8999',
+    email: 'registrar@soa.ac.in',
+    established: 2007,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Bharati Vidyapeeth University',
+    location: 'Pune, Maharashtra',
+    ranking: 53,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'http://www.bharatividyapeeth.edu/',
+    phone: '+91-20-2407-2100',
+    email: 'registrar@bharatividyapeeth.edu',
+    established: 1964,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Hindustan Institute of Technology and Science',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 54,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.hindustanuniv.ac.in/',
+    phone: '+91-44-2247-2555',
+    email: 'registrar@hindustanuniv.ac.in',
+    established: 1985,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Chitkara University',
+    location: 'Rajpura, Punjab',
+    ranking: 55,
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+    website: 'https://www.chitkara.edu.in/',
+    phone: '+91-1762-507-000',
+    email: 'registrar@chitkara.edu.in',
+    established: 2010,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Graphic Era University',
+    location: 'Dehradun, Uttarakhand',
+    ranking: 56,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.geu.ac.in/',
+    phone: '+91-135-280-8000',
+    email: 'registrar@geu.ac.in',
+    established: 2011,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Bennett University',
+    location: 'Greater Noida, Uttar Pradesh',
+    ranking: 57,
+    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
+    website: 'https://www.bennett.edu.in/',
+    phone: '+91-120-266-9100',
+    email: 'registrar@bennett.edu.in',
+    established: 2016,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Karunya Institute of Technology and Sciences',
+    location: 'Coimbatore, Tamil Nadu',
+    ranking: 58,
+    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop',
+    website: 'https://www.karunya.edu/',
+    phone: '+91-422-261-4000',
+    email: 'registrar@karunya.edu',
+    established: 1986,
+    type: 'Engineering & Sciences'
+  },
+  {
+    name: 'Vel Tech Rangarajan Dr. Sagunthala R&D Institute',
+    location: 'Chennai, Tamil Nadu',
+    ranking: 59,
+    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+    website: 'https://www.veltech.edu.in/',
+    phone: '+91-44-2262-5000',
+    email: 'registrar@veltech.edu.in',
+    established: 1997,
+    type: 'Engineering & Technology'
+  },
+  {
+    name: 'Centurion University of Technology and Management',
+    location: 'Bhubaneswar, Odisha',
+    ranking: 60,
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop',
+    website: 'https://cutm.ac.in/',
+    phone: '+91-674-230-8000',
+    email: 'registrar@cutm.ac.in',
+    established: 2010,
+    type: 'Technology & Management'
+  },
+  {
+    name: 'Dayananda Sagar University',
+    location: 'Bangalore, Karnataka',
+    ranking: 61,
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+    website: 'https://www.dsu.edu.in/',
+    phone: '+91-80-2843-3700',
+    email: 'registrar@dsu.edu.in',
+    established: 2014,
+    type: 'Multidisciplinary'
+  },
+  {
+    name: 'Jain University',
+    location: 'Bangalore, Karnataka',
+    ranking: 62,
+    image: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+    website: 'https://www.jainuniversity.ac.in/',
+    phone: '+91-80-4343-0700',
+    email: 'registrar@jainuniversity.ac.in',
+    established: 2009,
+    type: 'Multidisciplinary'
   }
 ];
 
@@ -553,9 +1103,9 @@ export default function Page() {
           </div>
           
           <div className="text-center mt-12">
-            <p className="text-cyan-200 mb-4">Want to see more colleges? We have 50+ institutions listed!</p>
+            <p className="text-cyan-200 mb-4">Showing {topColleges.length} of India's top institutions!</p>
             <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600">
-              View All Colleges
+              🎓 Explore More Colleges
             </Button>
           </div>
         </div>
