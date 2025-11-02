@@ -12,6 +12,7 @@ import ResumePreview from '@/components/resume/ResumePreview';
 import StepIndicator from '@/components/ui/StepIndicator';
 import AuthGuard from '@/components/ui/AuthGuard';
 import UserMenu from '@/components/ui/UserMenu';
+import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Logo from '@/components/ui/Logo';
@@ -217,7 +218,7 @@ function BuilderPageContent() {
   return (
     <AuthGuard>
       <div className="min-h-screen relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-        <SciFiBackground isDark={false} />
+        <SciFiBackground isDark={true} />
         
         {/* Enhanced Header */}
         <header className="relative z-20 bg-gray-900/95 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl">
@@ -250,6 +251,7 @@ function BuilderPageContent() {
               </div>
               
               <div className="flex items-center space-x-4">
+                <DarkModeToggle />
                 <button
                   onClick={() => setPreviewMode(!previewMode)}
                   className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 transition-all duration-300"

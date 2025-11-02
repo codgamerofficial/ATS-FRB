@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FileText, Zap, Download, Shield, Star, Users, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import UserMenu from '@/components/ui/UserMenu';
+import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import SplashScreen from '@/components/3d/SplashScreen';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
@@ -14,6 +15,7 @@ import NewsWidget from '@/components/realtime/NewsWidget';
 import LocationMap from '@/components/realtime/LocationMap';
 import PartnershipsSection from '@/components/partnerships/PartnershipsSection';
 import { useAuth } from '@/hooks/useAuth';
+import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
 
 const features = [
@@ -65,6 +67,7 @@ const testimonials = [
 export default function Page() {
   const [showSplash, setShowSplash] = useState(true);
   const { user, loading } = useAuth();
+  const { isDark } = useDarkMode();
 
   const handleSplashComplete = () => {
     setShowSplash(false);
@@ -76,7 +79,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SciFiBackground isDark={false} />
+      <SciFiBackground isDark={isDark} />
       {/* Futuristic Navigation Bar */}
       <nav className="relative bg-black/40 backdrop-blur-xl border-b border-cyan-400/50 sticky top-0 z-50 transition-all duration-500 hover:bg-black/60">
         {/* Holographic Grid Overlay */}
@@ -327,7 +330,7 @@ export default function Page() {
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
               <div className="relative z-10">
-                <SciFiCard isDark={false} className="p-8">
+                <SciFiCard isDark={isDark} className="p-8">
                   <div className="text-center">
                     <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
                       <FileText className="h-8 w-8 text-white" />
@@ -387,7 +390,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard className="text-center h-full interactive-hover shadow-deep" isDark={false} variant="glow">
+                <SciFiCard className="text-center h-full interactive-hover shadow-deep" isDark={isDark} variant="glow">
                   <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
                     {feature.icon}
                   </div>
@@ -406,7 +409,7 @@ export default function Page() {
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard isDark={false} className="shadow-deep neon-glow" variant="glow">
+          <SciFiCard isDark={isDark} className="shadow-deep neon-glow" variant="glow">
             <div className="text-center">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
                 🌟 See Real Success Stories
@@ -443,7 +446,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <SciFiCard isDark={false} className="interactive-hover shadow-neon" variant="premium">
+                <SciFiCard isDark={isDark} className="interactive-hover shadow-neon" variant="premium">
                   <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
@@ -522,7 +525,7 @@ export default function Page() {
                 key={index}
                 className="group cursor-pointer hover:-translate-y-4 hover:scale-110 transition-all duration-500 hover:rotate-1"
               >
-                <SciFiCard className="overflow-hidden h-full shadow-neon" isDark={false} variant="premium" interactive={true}>
+                <SciFiCard className="overflow-hidden h-full shadow-neon" isDark={isDark} variant="premium" interactive={true}>
                   <div className="relative overflow-hidden">
                     <img 
                       src={template.image}
@@ -571,7 +574,7 @@ export default function Page() {
 
           {/* Call to Action */}
           <div className="text-center">
-            <SciFiCard className="inline-block" isDark={false}>
+            <SciFiCard className="inline-block" isDark={isDark}>
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-white mb-4">🎨 100+ More Templates Available</h3>
                 <p className="text-purple-200 mb-6 max-w-md">
@@ -621,7 +624,7 @@ export default function Page() {
 
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SciFiCard className="text-center shadow-neon morph" isDark={false} variant="premium">
+          <SciFiCard className="text-center shadow-neon morph" isDark={isDark} variant="premium">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               🎯 Ready to Transform Your Career?
             </h2>
@@ -680,6 +683,24 @@ export default function Page() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Dark Mode Toggle */}
+      <div className="fixed top-20 right-6 z-50">
+        <div className="relative group">
+          <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+          <div className="relative bg-gray-900/80 backdrop-blur-xl border border-cyan-400/30 rounded-full p-3 hover:bg-gray-800/90 transition-all duration-300 hover:scale-110 hover:border-cyan-300/50">
+            <DarkModeToggle />
+          </div>
+          
+          {/* Tooltip */}
+          <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="bg-gray-900/95 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg border border-cyan-400/30 whitespace-nowrap">
+              {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
+              <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

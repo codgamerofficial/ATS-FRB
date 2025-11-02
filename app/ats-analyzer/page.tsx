@@ -5,11 +5,14 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import ATSAnalyzer from '@/components/ats/ATSAnalyzer';
+import { useDarkMode } from '@/hooks/useDarkMode';
+
 export default function ATSAnalyzerPage() {
+  const { isDark } = useDarkMode();
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <SciFiBackground isDark={false} />
+      <SciFiBackground isDark={isDark} />
       
       <div className="relative z-10 pt-8 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
