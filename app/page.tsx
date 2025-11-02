@@ -80,32 +80,34 @@ export default function Page() {
     <div className="min-h-screen relative overflow-hidden">
       <SciFiBackground isDark={isDark} />
       <nav className="bg-gray-900/20 backdrop-blur-md border-b border-cyan-500/30 sticky top-0 z-40 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center">
-              <Logo size={32} />
-              <span className="ml-2 text-xl font-bold text-cyan-400">ATSFRB</span>
+              <Logo size={24} className="sm:w-8 sm:h-8" />
+              <span className="ml-2 text-lg sm:text-xl font-bold text-cyan-400">ATSFRB</span>
             </div>
-            <div className="flex items-center space-x-4">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
               <Link href="/templates">
-                <Button variant="ghost">Templates</Button>
+                <Button variant="ghost" size="sm">Templates</Button>
               </Link>
               <Link href="/portfolio">
-                <Button variant="ghost">Portfolio</Button>
+                <Button variant="ghost" size="sm">Portfolio</Button>
               </Link>
               <Link href="/colleges">
-                <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
-                  🇮🇳 India's The Best
+                <Button size="sm" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
+                  🇮🇳 India's Best
                 </Button>
               </Link>
               <a 
                 href="https://github.com/codgamerofficial/ATS-FRB" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-cyan-300 hover:text-cyan-100 hover:bg-cyan-500/10 transition-colors duration-200"
+                className="flex items-center space-x-2 px-2 py-1 rounded-lg text-cyan-300 hover:text-cyan-100 hover:bg-cyan-500/10 transition-colors duration-200"
               >
-                <Github className="h-5 w-5" />
-                <span className="hidden sm:inline">GitHub</span>
+                <Github className="h-4 w-4" />
+                <span className="hidden xl:inline text-sm">GitHub</span>
               </a>
               <DarkModeToggle />
               {!loading && (
@@ -114,22 +116,54 @@ export default function Page() {
                 ) : (
                   <>
                     <Link href="/auth">
-                      <Button variant="outline">Sign In</Button>
+                      <Button variant="outline" size="sm">Sign In</Button>
                     </Link>
                     <Link href="/builder">
-                      <Button>Get Started</Button>
+                      <Button size="sm">Get Started</Button>
                     </Link>
                   </>
                 )
+              )}
+            </div>
+            
+            {/* Mobile Navigation */}
+            <div className="flex lg:hidden items-center space-x-2">
+              <DarkModeToggle />
+              <Link href="/builder">
+                <Button size="sm" className="px-3 py-1 text-xs">
+                  {user ? "Build" : "Start"}
+                </Button>
+              </Link>
+            </div>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div className="lg:hidden border-t border-cyan-500/20 py-2">
+            <div className="flex flex-wrap gap-2 justify-center">
+              <Link href="/templates">
+                <Button variant="ghost" size="sm" className="text-xs px-2 py-1">Templates</Button>
+              </Link>
+              <Link href="/colleges">
+                <Button size="sm" className="text-xs px-2 py-1 bg-gradient-to-r from-orange-500 to-red-500">🇮🇳 Colleges</Button>
+              </Link>
+              <a href="https://github.com/codgamerofficial/ATS-FRB" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="sm" className="text-xs px-2 py-1">
+                  <Github className="h-3 w-3 mr-1" />GitHub
+                </Button>
+              </a>
+              {!loading && !user && (
+                <Link href="/auth">
+                  <Button variant="outline" size="sm" className="text-xs px-2 py-1">Sign In</Button>
+                </Link>
               )}
             </div>
           </div>
         </div>
       </nav>
 
-      <section className="relative overflow-hidden py-16 sm:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden py-8 sm:py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div className="text-left">
               <div className="mb-6">
                 <motion.div
@@ -140,7 +174,7 @@ export default function Page() {
                 <span className="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 text-sm font-medium rounded-full border border-cyan-500/30 mb-4">
                   🚀 AI-Powered Resume Builder
                 </span>
-                <h1 className="text-4xl sm:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
                   Craft Your
                   <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
                     Dream Career
@@ -150,7 +184,7 @@ export default function Page() {
                 </motion.div>
               </div>
               
-              <div className="text-lg text-cyan-100 mb-8 leading-relaxed">
+              <div className="text-sm sm:text-base lg:text-lg text-cyan-100 mb-6 sm:mb-8 leading-relaxed">
                 <motion.p
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -161,7 +195,7 @@ export default function Page() {
                 </motion.p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -180,7 +214,7 @@ export default function Page() {
                 </motion.div>
               </div>
 
-              <div className="flex flex-wrap gap-6 text-sm text-cyan-200">
+              <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-cyan-200">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -232,36 +266,36 @@ export default function Page() {
       </section>
 
       {/* Realtime Widget Section */}
-      <section className="py-12 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+      <section className="py-8 sm:py-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               🌍 Stay Globally Connected
             </h2>
-            <p className="text-xl text-cyan-100 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto px-4">
               Live world updates, real-time location tracking, and daily news - all while building your career
             </p>
           </div>
           <RealtimeWidget />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mt-6 sm:mt-8">
             <NewsWidget />
             <LocationMap />
           </div>
         </div>
       </section>
 
-      <section className="py-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               🎯 Why Top Professionals Choose Us
             </h2>
-            <p className="text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300">
+            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300 px-4">
               Advanced AI technology meets professional design. Get hired faster with resumes that actually work.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -273,10 +307,10 @@ export default function Page() {
                   <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2 transition-colors duration-300">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-cyan-100 transition-colors duration-300">
+                  <p className="text-sm sm:text-base text-cyan-100 transition-colors duration-300">
                     {feature.description}
                   </p>
                 </SciFiCard>
@@ -306,18 +340,18 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-20 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
               💬 Success Stories from Real Users
             </h2>
-            <p className="text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300">
+            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300 px-4">
               Join 50,000+ professionals who transformed their careers and landed dream jobs at top companies.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -331,10 +365,10 @@ export default function Page() {
                       <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-cyan-100 mb-4 italic transition-colors duration-300">"{testimonial.content}"</p>
+                  <p className="text-sm sm:text-base text-cyan-100 mb-4 italic transition-colors duration-300">"{testimonial.content}"</p>
                   <div>
-                    <p className="font-semibold text-white transition-colors duration-300">{testimonial.name}</p>
-                    <p className="text-sm text-cyan-300 transition-colors duration-300">{testimonial.role}</p>
+                    <p className="text-sm sm:text-base font-semibold text-white transition-colors duration-300">{testimonial.name}</p>
+                    <p className="text-xs sm:text-sm text-cyan-300 transition-colors duration-300">{testimonial.role}</p>
                   </div>
                 </SciFiCard>
               </motion.div>
@@ -344,18 +378,18 @@ export default function Page() {
       </section>
 
       {/* Resume Templates Advertisement */}
-      <section className="py-20 relative z-10 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4" style={{ textShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}>
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 sm:mb-4" style={{ textShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}>
               ✨ Premium Resume Templates
             </h2>
-            <p className="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
+            <p className="text-sm sm:text-lg lg:text-xl text-purple-100 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
               Choose from our collection of professionally designed, ATS-optimized templates. Stand out from the crowd with stunning designs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
             {[
               {
                 name: 'Executive Pro',
@@ -409,7 +443,7 @@ export default function Page() {
                     <img 
                       src={template.image}
                       alt={template.name}
-                      className="w-full h-64 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2 filter group-hover:brightness-110"
+                      className="w-full h-48 sm:h-56 lg:h-64 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2 filter group-hover:brightness-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${template.color} opacity-20 group-hover:opacity-40 transition-all duration-500`}></div>
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -418,11 +452,11 @@ export default function Page() {
                         {template.category}
                       </span>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{template.name}</h3>
+                    <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2 drop-shadow-lg">{template.name}</h3>
                       <div className="flex flex-wrap gap-1">
-                        {template.features.map((feature, i) => (
-                          <span key={i} className="bg-black/50 text-white px-2 py-1 rounded text-xs">
+                        {template.features.slice(0, 2).map((feature, i) => (
+                          <span key={i} className="bg-black/50 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs">
                             {feature}
                           </span>
                         ))}
@@ -430,15 +464,15 @@ export default function Page() {
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-cyan-400 text-sm font-medium mb-1">Premium Template</div>
-                        <div className="text-white font-bold">Free with Pro</div>
+                  <div className="p-3 sm:p-4 lg:p-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+                      <div className="flex-1">
+                        <div className="text-cyan-400 text-xs sm:text-sm font-medium mb-1">Premium Template</div>
+                        <div className="text-white text-sm sm:text-base font-bold">Free with Pro</div>
                       </div>
                       <Button 
                         size="sm" 
-                        className={`bg-gradient-to-r ${template.color} hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-500 neon-glow`}
+                        className={`bg-gradient-to-r ${template.color} hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-500 neon-glow text-xs sm:text-sm w-full sm:w-auto`}
                       >
                         ✨ Use Template
                       </Button>

@@ -43,17 +43,17 @@ export default function SciFiCard({
       <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
       {/* Content */}
-      <div className="relative z-10 p-6">
+      <div className="relative z-10 p-3 sm:p-4 lg:p-6">
         {children}
       </div>
       
       {/* Enhanced corner accents */}
       <div className="absolute top-0 left-0 w-12 h-12">
-        <div className={`absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 ${isDark ? 'border-cyan-400/70' : 'border-blue-500/70'} rounded-tl-xl group-hover:border-cyan-300 transition-colors duration-300`} />
+        <div className={`absolute top-2 sm:top-3 left-2 sm:left-3 w-4 sm:w-6 h-4 sm:h-6 border-t-2 border-l-2 ${isDark ? 'border-cyan-400/70' : 'border-blue-500/70'} rounded-tl-xl group-hover:border-cyan-300 transition-colors duration-300`} />
         <div className={`absolute top-1 left-1 w-2 h-2 ${isDark ? 'bg-cyan-400/50' : 'bg-blue-500/50'} rounded-full animate-pulse`} />
       </div>
       <div className="absolute bottom-0 right-0 w-12 h-12">
-        <div className={`absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 ${isDark ? 'border-cyan-400/70' : 'border-blue-500/70'} rounded-br-xl group-hover:border-cyan-300 transition-colors duration-300`} />
+        <div className={`absolute bottom-2 sm:bottom-3 right-2 sm:right-3 w-4 sm:w-6 h-4 sm:h-6 border-b-2 border-r-2 ${isDark ? 'border-cyan-400/70' : 'border-blue-500/70'} rounded-br-xl group-hover:border-cyan-300 transition-colors duration-300`} />
         <div className={`absolute bottom-1 right-1 w-2 h-2 ${isDark ? 'bg-cyan-400/50' : 'bg-blue-500/50'} rounded-full animate-pulse`} />
       </div>
       
