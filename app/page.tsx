@@ -343,6 +343,141 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Resume Templates Advertisement */}
+      <section className="py-20 relative z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4" style={{ textShadow: '0 0 30px rgba(139, 92, 246, 0.5)' }}>
+              ✨ Premium Resume Templates
+            </h2>
+            <p className="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
+              Choose from our collection of professionally designed, ATS-optimized templates. Stand out from the crowd with stunning designs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                name: 'Executive Pro',
+                category: 'Professional',
+                image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=500&fit=crop',
+                color: 'from-blue-500 to-purple-600',
+                features: ['ATS Optimized', 'Clean Layout', 'Professional']
+              },
+              {
+                name: 'Creative Edge',
+                category: 'Creative',
+                image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=500&fit=crop',
+                color: 'from-pink-500 to-rose-600',
+                features: ['Modern Design', 'Eye-catching', 'Creative Fields']
+              },
+              {
+                name: 'Tech Innovator',
+                category: 'Technology',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
+                color: 'from-green-500 to-teal-600',
+                features: ['Tech-focused', 'Skills Highlight', 'Modern']
+              },
+              {
+                name: 'Minimalist',
+                category: 'Simple',
+                image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=500&fit=crop',
+                color: 'from-gray-500 to-slate-600',
+                features: ['Clean & Simple', 'Easy to Read', 'Versatile']
+              },
+              {
+                name: 'Corporate Elite',
+                category: 'Business',
+                image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=500&fit=crop',
+                color: 'from-indigo-500 to-blue-600',
+                features: ['Executive Level', 'Sophisticated', 'Premium']
+              },
+              {
+                name: 'Startup Founder',
+                category: 'Entrepreneurial',
+                image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=500&fit=crop',
+                color: 'from-orange-500 to-red-600',
+                features: ['Dynamic', 'Leadership Focus', 'Bold']
+              }
+            ].map((template, index) => (
+              <div
+                key={index}
+                className="group cursor-pointer hover:-translate-y-2 hover:scale-105 transition-all duration-300"
+              >
+                <SciFiCard className="overflow-hidden h-full" isDark={isDark}>
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={template.image}
+                      alt={template.name}
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${template.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-bold">
+                        {template.category}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{template.name}</h3>
+                      <div className="flex flex-wrap gap-1">
+                        {template.features.map((feature, i) => (
+                          <span key={i} className="bg-black/50 text-white px-2 py-1 rounded text-xs">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="text-cyan-400 text-sm font-medium mb-1">Premium Template</div>
+                        <div className="text-white font-bold">Free with Pro</div>
+                      </div>
+                      <Button 
+                        size="sm" 
+                        className={`bg-gradient-to-r ${template.color} hover:shadow-lg transition-all duration-300`}
+                      >
+                        Use Template
+                      </Button>
+                    </div>
+                  </div>
+                </SciFiCard>
+              </div>
+            ))}
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center">
+            <SciFiCard className="inline-block" isDark={isDark}>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-white mb-4">🎨 100+ More Templates Available</h3>
+                <p className="text-purple-200 mb-6 max-w-md">
+                  Unlock our entire collection of professional resume templates. Perfect for every industry and career level.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/templates">
+                    <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-8 py-3">
+                      🚀 Browse All Templates
+                    </Button>
+                  </Link>
+                  <Link href={user ? "/builder" : "/auth"}>
+                    <Button variant="outline" className="border-purple-400 text-purple-400 hover:bg-purple-400/10 px-8 py-3">
+                      ⚡ Start Building Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </SciFiCard>
+          </div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-purple-500/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-xl animate-pulse"></div>
+      </section>
+
       <section className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SciFiCard className="text-center" isDark={isDark}>
