@@ -14,6 +14,7 @@ import RealtimeWidget from '@/components/realtime/RealtimeWidget';
 import NewsWidget from '@/components/realtime/NewsWidget';
 import LocationMap from '@/components/realtime/LocationMap';
 import PartnershipsSection from '@/components/partnerships/PartnershipsSection';
+import { ScrollProgress, ScrollReveal, ScrollSlide, ScrollScale, ScrollStagger, ScrollItem, FloatingElements, ScrollMouseTracker, ScrollWaveEffect, ParallaxContainer } from '@/components/animations/ScrollAnimations';
 import { useAuth } from '@/hooks/useAuth';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
@@ -79,6 +80,10 @@ export default function Page() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      <ScrollProgress />
+      <ScrollMouseTracker />
+      <FloatingElements />
+      <ScrollWaveEffect />
       <SciFiBackground isDark={isDark} />
       {/* Futuristic Navigation Bar */}
       <nav className="relative bg-black/40 backdrop-blur-xl border-b border-cyan-400/50 sticky top-0 z-50 transition-all duration-500 hover:bg-black/60">
@@ -253,100 +258,98 @@ export default function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div className="text-left">
               <div className="mb-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                <span className="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 text-sm font-medium rounded-full border border-cyan-500/30 mb-4">
-                  🚀 AI-Powered Resume Builder
-                </span>
-                <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
-                  Craft Your
-                  <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-                    Dream Career
+                <ScrollReveal>
+                  <span className="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 text-sm font-medium rounded-full border border-cyan-500/30 mb-4">
+                    🚀 AI-Powered Resume Builder
                   </span>
-                  in Minutes
-                </h1>
-                </motion.div>
+                </ScrollReveal>
+                <ScrollSlide direction="left" delay={0.2}>
+                  <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
+                    Craft Your
+                    <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
+                      Dream Career
+                    </span>
+                    in Minutes
+                  </h1>
+                </ScrollSlide>
               </div>
               
-              <div className="text-sm sm:text-base lg:text-lg text-cyan-100 mb-6 sm:mb-8 leading-relaxed">
-                <motion.p
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                Transform your career with our advanced AI resume builder. Create stunning, 
-                ATS-optimized resumes that land interviews at top companies worldwide.
-                </motion.p>
-              </div>
+              <ScrollSlide direction="left" delay={0.4}>
+                <div className="text-sm sm:text-base lg:text-lg text-cyan-100 mb-6 sm:mb-8 leading-relaxed">
+                  <p>
+                    Transform your career with our advanced AI resume builder. Create stunning, 
+                    ATS-optimized resumes that land interviews at top companies worldwide.
+                  </p>
+                </div>
+              </ScrollSlide>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                <Link href={user ? "/builder" : "/auth"}>
-                  <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600">
-                    {user ? "Continue Building" : "🎯 Start Building Free"}
-                  </Button>
-                </Link>
-                <Link href="/templates">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-cyan-400 text-cyan-400 hover:bg-cyan-400/10">
-                    📋 Browse Templates
-                  </Button>
-                </Link>
-                </motion.div>
-              </div>
+              <ScrollScale delay={0.6}>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  <Link href={user ? "/builder" : "/auth"}>
+                    <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600">
+                      {user ? "Continue Building" : "🎯 Start Building Free"}
+                    </Button>
+                  </Link>
+                  <Link href="/templates">
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto border-cyan-400 text-cyan-400 hover:bg-cyan-400/10">
+                      📋 Browse Templates
+                    </Button>
+                  </Link>
+                </div>
+              </ScrollScale>
 
-              <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-cyan-200">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                >
-                <div className="flex items-center">
-                  <Users className="h-4 w-4 mr-2 text-cyan-400" />
-                  50,000+ Happy Users
+              <ScrollStagger staggerDelay={0.2}>
+                <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-cyan-200">
+                  <ScrollItem>
+                    <div className="flex items-center">
+                      <Users className="h-4 w-4 mr-2 text-cyan-400" />
+                      50,000+ Happy Users
+                    </div>
+                  </ScrollItem>
+                  <ScrollItem>
+                    <div className="flex items-center">
+                      <Star className="h-4 w-4 mr-2 text-yellow-400" />
+                      4.9★ Rating
+                    </div>
+                  </ScrollItem>
+                  <ScrollItem>
+                    <div className="flex items-center">
+                      <Shield className="h-4 w-4 mr-2 text-green-400" />
+                      Bank-Level Security
+                    </div>
+                  </ScrollItem>
                 </div>
-                <div className="flex items-center">
-                  <Star className="h-4 w-4 mr-2 text-yellow-400" />
-                  4.9★ Rating
-                </div>
-                <div className="flex items-center">
-                  <Shield className="h-4 w-4 mr-2 text-green-400" />
-                  Bank-Level Security
-                </div>
-                </motion.div>
-              </div>
+              </ScrollStagger>
             </div>
             
             <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-              <div className="relative z-10">
-                <SciFiCard isDark={isDark} className="p-8">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <FileText className="h-8 w-8 text-white" />
+              <ScrollSlide direction="right" delay={0.3}>
+                <div className="relative z-10">
+                  <SciFiCard isDark={isDark} className="p-8">
+                    <div className="text-center">
+                      <ScrollScale delay={0.5}>
+                        <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <FileText className="h-8 w-8 text-white" />
+                        </div>
+                      </ScrollScale>
+                      <ScrollReveal delay={0.7}>
+                        <h3 className="text-xl font-bold text-white mb-2">Ready in 5 Minutes</h3>
+                        <p className="text-cyan-100 text-sm mb-4">Professional resume with AI optimization</p>
+                      </ScrollReveal>
+                      <ScrollScale delay={0.9}>
+                        <div className="bg-cyan-500/20 rounded-lg p-4">
+                          <div className="text-2xl font-bold text-cyan-400">95%</div>
+                          <div className="text-xs text-cyan-200">ATS Pass Rate</div>
+                        </div>
+                      </ScrollScale>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Ready in 5 Minutes</h3>
-                    <p className="text-cyan-100 text-sm mb-4">Professional resume with AI optimization</p>
-                    <div className="bg-cyan-500/20 rounded-lg p-4">
-                      <div className="text-2xl font-bold text-cyan-400">95%</div>
-                      <div className="text-xs text-cyan-200">ATS Pass Rate</div>
-                    </div>
-                  </div>
-                </SciFiCard>
-              </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full opacity-10 animate-pulse"></div>
-              </motion.div>
+                  </SciFiCard>
+                </div>
+                <ParallaxContainer speed={0.3}>
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full opacity-10 animate-pulse"></div>
+                </ParallaxContainer>
+              </ScrollSlide>
             </div>
           </div>
         </div>
@@ -373,37 +376,40 @@ export default function Page() {
 
       <section className="py-12 sm:py-16 lg:py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
-              🎯 Why Top Professionals Choose Us
-            </h2>
-            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300 px-4">
-              Advanced AI technology meets professional design. Get hired faster with resumes that actually work.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 transition-colors duration-300" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+                🎯 Why Top Professionals Choose Us
+              </h2>
+              <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto transition-colors duration-300 px-4">
+                Advanced AI technology meets professional design. Get hired faster with resumes that actually work.
+              </p>
+            </div>
+          </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <SciFiCard className="text-center h-full interactive-hover shadow-deep" isDark={isDark} variant="glow">
-                  <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-cyan-100 transition-colors duration-300">
-                    {feature.description}
-                  </p>
-                </SciFiCard>
-              </motion.div>
-            ))}
-          </div>
+          <ScrollStagger staggerDelay={0.15}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {features.map((feature, index) => (
+                <ScrollItem key={index}>
+                  <SciFiCard className="text-center h-full interactive-hover shadow-deep" isDark={isDark} variant="glow">
+                    <ScrollScale delay={0.2}>
+                      <div className="text-cyan-400 mb-4 flex justify-center transition-colors duration-300">
+                        {feature.icon}
+                      </div>
+                    </ScrollScale>
+                    <ScrollSlide direction="up" delay={0.3}>
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-cyan-100 transition-colors duration-300">
+                        {feature.description}
+                      </p>
+                    </ScrollSlide>
+                  </SciFiCard>
+                </ScrollItem>
+              ))}
+            </div>
+          </ScrollStagger>
         </div>
       </section>
 
@@ -438,29 +444,30 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <SciFiCard isDark={isDark} className="interactive-hover shadow-neon" variant="premium">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm sm:text-base text-cyan-100 mb-4 italic transition-colors duration-300">"{testimonial.content}"</p>
-                  <div>
-                    <p className="text-sm sm:text-base font-semibold text-white transition-colors duration-300">{testimonial.name}</p>
-                    <p className="text-xs sm:text-sm text-cyan-300 transition-colors duration-300">{testimonial.role}</p>
-                  </div>
-                </SciFiCard>
-              </motion.div>
-            ))}
-          </div>
+          <ScrollStagger staggerDelay={0.2}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              {testimonials.map((testimonial, index) => (
+                <ScrollItem key={index}>
+                  <SciFiCard isDark={isDark} className="interactive-hover shadow-neon" variant="premium">
+                    <ScrollScale delay={0.1}>
+                      <div className="flex items-center mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                    </ScrollScale>
+                    <ScrollSlide direction="up" delay={0.2}>
+                      <p className="text-sm sm:text-base text-cyan-100 mb-4 italic transition-colors duration-300">"{testimonial.content}"</p>
+                      <div>
+                        <p className="text-sm sm:text-base font-semibold text-white transition-colors duration-300">{testimonial.name}</p>
+                        <p className="text-xs sm:text-sm text-cyan-300 transition-colors duration-300">{testimonial.role}</p>
+                      </div>
+                    </ScrollSlide>
+                  </SciFiCard>
+                </ScrollItem>
+              ))}
+            </div>
+          </ScrollStagger>
         </div>
       </section>
 
@@ -476,15 +483,16 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
-            {[
-              {
-                name: 'Executive Pro',
-                category: 'Professional',
-                image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=500&fit=crop',
-                color: 'from-blue-500 to-purple-600',
-                features: ['ATS Optimized', 'Clean Layout', 'Professional']
-              },
+          <ScrollStagger staggerDelay={0.1}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
+              {[
+                {
+                  name: 'Executive Pro',
+                  category: 'Professional',
+                  image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=500&fit=crop',
+                  color: 'from-blue-500 to-purple-600',
+                  features: ['ATS Optimized', 'Clean Layout', 'Professional']
+                },
               {
                 name: 'Creative Edge',
                 category: 'Creative',
@@ -520,12 +528,10 @@ export default function Page() {
                 color: 'from-orange-500 to-red-600',
                 features: ['Dynamic', 'Leadership Focus', 'Bold']
               }
-            ].map((template, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer hover:-translate-y-4 hover:scale-110 transition-all duration-500 hover:rotate-1"
-              >
-                <SciFiCard className="overflow-hidden h-full shadow-neon" isDark={isDark} variant="premium" interactive={true}>
+              ].map((template, index) => (
+                <ScrollItem key={index}>
+                  <div className="group cursor-pointer hover:-translate-y-4 hover:scale-110 transition-all duration-500 hover:rotate-1">
+                    <SciFiCard className="overflow-hidden h-full shadow-neon" isDark={isDark} variant="premium" interactive={true}>
                   <div className="relative overflow-hidden">
                     <img 
                       src={template.image}
@@ -567,10 +573,12 @@ export default function Page() {
                       </Link>
                     </div>
                   </div>
-                </SciFiCard>
-              </div>
-            ))}
-          </div>
+                    </SciFiCard>
+                  </div>
+                </ScrollItem>
+              ))}
+            </div>
+          </ScrollStagger>
 
           {/* Call to Action */}
           <div className="text-center">
