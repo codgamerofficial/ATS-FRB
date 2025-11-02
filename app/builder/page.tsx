@@ -50,11 +50,157 @@ function BuilderPageContent() {
 
   useEffect(() => {
     const sample = searchParams.get('sample');
+    const template = searchParams.get('template');
+    
     if (sample === 'saswata') {
       loadResumeData(saswataResumeData);
+    } else if (template) {
+      // Load template-specific data
+      const templateData = getTemplateData(template);
+      if (templateData) {
+        loadResumeData(templateData);
+      }
     }
     setIsLoading(false);
   }, [searchParams, loadResumeData]);
+
+  const getTemplateData = (templateId: string) => {
+    const templates: Record<string, any> = {
+      'executive-pro': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Executive professional with proven track record in leadership and strategic planning.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['Leadership', 'Strategic Planning', 'Team Management'],
+          soft: ['Communication', 'Problem Solving', 'Decision Making']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'executive-pro'
+      },
+      'creative-edge': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Creative professional with expertise in design and visual communication.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['Adobe Creative Suite', 'UI/UX Design', 'Branding'],
+          soft: ['Creativity', 'Attention to Detail', 'Collaboration']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'creative-edge'
+      },
+      'tech-innovator': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Technology professional with expertise in software development and innovation.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['JavaScript', 'React', 'Node.js', 'Python', 'AWS'],
+          soft: ['Problem Solving', 'Team Collaboration', 'Continuous Learning']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'tech-innovator'
+      },
+      'minimalist': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Professional with clean and focused approach to work and communication.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['Microsoft Office', 'Project Management', 'Data Analysis'],
+          soft: ['Organization', 'Time Management', 'Efficiency']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'minimalist'
+      },
+      'corporate-elite': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Corporate executive with extensive experience in business strategy and operations.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['Business Strategy', 'Financial Analysis', 'Operations Management'],
+          soft: ['Leadership', 'Negotiation', 'Strategic Thinking']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'corporate-elite'
+      },
+      'startup-founder': {
+        personalInfo: {
+          fullName: '',
+          email: '',
+          phone: '',
+          location: '',
+          website: '',
+          linkedin: ''
+        },
+        summary: 'Entrepreneurial leader with experience in building and scaling innovative businesses.',
+        experience: [],
+        education: [],
+        skills: {
+          technical: ['Business Development', 'Product Management', 'Fundraising'],
+          soft: ['Innovation', 'Risk Taking', 'Vision']
+        },
+        projects: [],
+        certifications: [],
+        languages: [],
+        hobbies: [],
+        template: 'startup-founder'
+      }
+    };
+    return templates[templateId];
+  };
 
   if (isLoading) {
     return (
@@ -88,9 +234,19 @@ function BuilderPageContent() {
                   </span>
                 </Link>
                 <div className="h-6 w-px bg-cyan-500/30"></div>
-                <div className="flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 text-cyan-400" />
-                  <h1 className="text-xl font-semibold text-white">Resume Builder</h1>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="w-5 h-5 text-cyan-400" />
+                    <h1 className="text-xl font-semibold text-white">Resume Builder</h1>
+                  </div>
+                  {searchParams.get('template') && (
+                    <div className="flex items-center space-x-2 px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-lg">
+                      <FileText className="w-4 h-4 text-purple-400" />
+                      <span className="text-sm text-purple-300 font-medium capitalize">
+                        {searchParams.get('template')?.replace(/-/g, ' ')} Template
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
               
