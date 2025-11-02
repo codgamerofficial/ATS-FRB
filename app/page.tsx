@@ -107,27 +107,29 @@ export default function Page() {
             {/* Desktop Navigation with Holographic Effects */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {[
-                { href: '/templates', label: 'Templates', icon: '📋' },
-                { href: '/portfolio', label: 'Portfolio', icon: '💼' },
+                { href: '/templates', label: 'Templates', icon: '📋', glow: 'cyan' },
+                { href: '/portfolio', label: 'Portfolio', icon: '💼', glow: 'purple' },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
-                  <div className="relative group px-4 py-2 rounded-lg transition-all duration-300 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-400/30">
-                    <span className="text-cyan-300 group-hover:text-cyan-100 transition-colors duration-300 text-sm font-medium">
+                  <div className="relative group px-4 py-2 rounded-xl transition-all duration-500 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-purple-500/10 border border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5">
+                    <span className="text-cyan-300 group-hover:text-white transition-all duration-300 text-sm font-semibold tracking-wide">
                       {item.icon} {item.label}
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl blur-sm"></div>
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-500 rounded-full"></div>
+                    <div className="absolute inset-0 border border-transparent group-hover:border-gradient-to-r group-hover:from-cyan-400/50 group-hover:to-purple-400/50 rounded-xl transition-all duration-300"></div>
                   </div>
                 </Link>
               ))}
               
               {/* Special India's Best Button */}
               <Link href="/colleges">
-                <div className="relative group px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 rounded-lg transition-all duration-300 border border-orange-400/50 hover:border-orange-300">
-                  <span className="text-white font-medium text-sm flex items-center">
+                <div className="relative group px-4 py-2 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 rounded-xl transition-all duration-500 border border-orange-400/50 hover:border-orange-300 hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-1 hover:scale-105">
+                  <span className="text-white font-bold text-sm flex items-center tracking-wide">
                     🇮🇳 India's Best
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                 </div>
               </Link>
               
@@ -136,11 +138,12 @@ export default function Page() {
                 href="https://github.com/codgamerofficial/ATS-FRB" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="relative group flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-600/30 hover:border-cyan-400/50 transition-all duration-300 hover:bg-cyan-500/10"
+                className="relative group flex items-center space-x-2 px-4 py-2 rounded-xl border border-gray-600/30 hover:border-gray-400/70 transition-all duration-500 hover:bg-gradient-to-r hover:from-gray-800/50 hover:to-gray-700/50 hover:shadow-lg hover:shadow-gray-500/20 hover:-translate-y-0.5"
               >
-                <Github className="h-4 w-4 text-gray-400 group-hover:text-cyan-300 transition-colors duration-300" />
-                <span className="hidden xl:inline text-sm text-gray-400 group-hover:text-cyan-300 transition-colors duration-300">GitHub</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <Github className="h-4 w-4 text-gray-400 group-hover:text-white transition-all duration-300 group-hover:rotate-12" />
+                <span className="hidden xl:inline text-sm text-gray-400 group-hover:text-white transition-colors duration-300 font-medium">GitHub</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-500/0 via-gray-400/10 to-gray-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-600 to-gray-400 rounded-xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
               </a>
               
               {/* Dark Mode Toggle with Glow */}
@@ -159,19 +162,21 @@ export default function Page() {
                 ) : (
                   <div className="flex items-center space-x-2">
                     <Link href="/auth">
-                      <div className="relative group px-4 py-2 border border-cyan-400/50 hover:border-cyan-300 rounded-lg transition-all duration-300 hover:bg-cyan-500/10">
-                        <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 text-sm font-medium">
-                          Sign In
+                      <div className="relative group px-4 py-2 border border-cyan-400/50 hover:border-cyan-300 rounded-xl transition-all duration-500 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5">
+                        <span className="text-cyan-400 group-hover:text-white transition-colors duration-300 text-sm font-semibold tracking-wide">
+                          ⚡ Sign In
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl blur-sm"></div>
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                       </div>
                     </Link>
                     <Link href="/builder">
-                      <div className="relative group px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 rounded-lg transition-all duration-300 border border-cyan-400/50">
-                        <span className="text-white font-medium text-sm">
+                      <div className="relative group px-4 py-2 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 hover:from-cyan-600 hover:via-purple-600 hover:to-pink-600 rounded-xl transition-all duration-500 border border-cyan-400/50 hover:shadow-xl hover:shadow-purple-500/30 hover:-translate-y-1 hover:scale-105">
+                        <span className="text-white font-bold text-sm tracking-wide">
                           🚀 Get Started
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-xl blur opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
                       </div>
                     </Link>
                   </div>
@@ -553,12 +558,14 @@ export default function Page() {
                         <div className="text-cyan-400 text-xs sm:text-sm font-medium mb-1">Premium Template</div>
                         <div className="text-white text-sm sm:text-base font-bold">Free with Pro</div>
                       </div>
-                      <Button 
-                        size="sm" 
-                        className={`bg-gradient-to-r ${template.color} hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-500 neon-glow text-xs sm:text-sm w-full sm:w-auto`}
-                      >
-                        ✨ Use Template
-                      </Button>
+                      <Link href={`/builder?template=${template.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <Button 
+                          size="sm" 
+                          className={`bg-gradient-to-r ${template.color} hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-500 neon-glow text-xs sm:text-sm w-full sm:w-auto hover:-translate-y-1 hover:scale-105 font-bold tracking-wide`}
+                        >
+                          ✨ Use Template
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </SciFiCard>
