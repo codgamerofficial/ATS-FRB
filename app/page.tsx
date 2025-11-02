@@ -13,6 +13,7 @@ import Logo from '@/components/ui/Logo';
 import RealtimeWidget from '@/components/realtime/RealtimeWidget';
 import NewsWidget from '@/components/realtime/NewsWidget';
 import LocationMap from '@/components/realtime/LocationMap';
+import PartnershipsSection from '@/components/partnerships/PartnershipsSection';
 import { useAuth } from '@/hooks/useAuth';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import Link from 'next/link';
@@ -108,8 +109,9 @@ export default function Page() {
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {[
                 { href: '/templates', label: 'Templates', icon: '📋', glow: 'cyan' },
-                { href: '/portfolio', label: 'Portfolio', icon: '💼', glow: 'purple' },
-                { href: '/news', label: 'Live News', icon: '📰', glow: 'green' },
+                { href: '/ats-analyzer', label: 'ATS Analyzer', icon: '🎯', glow: 'green' },
+                { href: '/cover-letter', label: 'Cover Letter', icon: '✍️', glow: 'purple' },
+                { href: '/news', label: 'Live News', icon: '📰', glow: 'blue' },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
                   <div className="relative group px-4 py-2 rounded-xl transition-all duration-500 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-purple-500/10 border border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5">
@@ -207,7 +209,9 @@ export default function Page() {
             <div className="flex flex-wrap gap-2 justify-center">
               {[
                 { href: '/templates', label: 'Templates', icon: '📋' },
-                { href: '/news', label: 'Live News', icon: '📰' },
+                { href: '/ats-analyzer', label: 'ATS Analyzer', icon: '🎯' },
+                { href: '/cover-letter', label: 'Cover Letter', icon: '✍️' },
+                { href: '/news', label: 'News', icon: '📰' },
                 { href: '/colleges', label: 'Colleges', icon: '🇮🇳', special: true },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
@@ -608,6 +612,21 @@ export default function Page() {
         
         {/* Holographic overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent opacity-50 holographic"></div>
+      </section>
+
+      {/* Partnerships Section */}
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+              🤝 Career Growth Partners
+            </h2>
+            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-2xl mx-auto px-4">
+              Accelerate your career with our trusted partners - from job boards to skill development
+            </p>
+          </div>
+          <PartnershipsSection />
+        </div>
       </section>
 
       <section className="py-20 relative z-10">
