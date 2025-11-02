@@ -79,86 +79,169 @@ export default function Page() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <SciFiBackground isDark={isDark} />
-      <nav className="bg-gray-900/20 backdrop-blur-md border-b border-cyan-500/30 sticky top-0 z-40 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center h-14 sm:h-16">
-            <div className="flex items-center">
-              <Logo size={24} className="sm:w-8 sm:h-8" />
-              <span className="ml-2 text-lg sm:text-xl font-bold text-cyan-400">ATSFRB</span>
+      {/* Futuristic Navigation Bar */}
+      <nav className="relative bg-black/40 backdrop-blur-xl border-b border-cyan-400/50 sticky top-0 z-50 transition-all duration-500 hover:bg-black/60">
+        {/* Holographic Grid Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5 opacity-50"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_24%,rgba(6,182,212,0.1)_25%,rgba(6,182,212,0.1)_26%,transparent_27%,transparent_74%,rgba(6,182,212,0.1)_75%,rgba(6,182,212,0.1)_76%,transparent_77%,transparent)] bg-[length:20px_20px]"></div>
+        
+        {/* Scanning Line Animation */}
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60 animate-pulse"></div>
+        
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 relative z-10">
+          <div className="flex justify-between items-center h-16 sm:h-18">
+            {/* Logo Section with Glow */}
+            <div className="flex items-center group">
+              <div className="relative">
+                <Logo size={28} className="sm:w-8 sm:h-8 transition-all duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <span className="ml-3 text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
+                ATSFRB
+              </span>
+              <div className="ml-2 px-2 py-1 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-xs text-cyan-300 hidden sm:block">
+                AI
+              </div>
             </div>
             
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
-              <Link href="/templates">
-                <Button variant="ghost" size="sm">Templates</Button>
-              </Link>
-              <Link href="/portfolio">
-                <Button variant="ghost" size="sm">Portfolio</Button>
-              </Link>
+            {/* Desktop Navigation with Holographic Effects */}
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+              {[
+                { href: '/templates', label: 'Templates', icon: '📋' },
+                { href: '/portfolio', label: 'Portfolio', icon: '💼' },
+              ].map((item, index) => (
+                <Link key={index} href={item.href}>
+                  <div className="relative group px-4 py-2 rounded-lg transition-all duration-300 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-400/30">
+                    <span className="text-cyan-300 group-hover:text-cyan-100 transition-colors duration-300 text-sm font-medium">
+                      {item.icon} {item.label}
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                  </div>
+                </Link>
+              ))}
+              
+              {/* Special India's Best Button */}
               <Link href="/colleges">
-                <Button size="sm" className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
-                  🇮🇳 India's Best
-                </Button>
+                <div className="relative group px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 rounded-lg transition-all duration-300 border border-orange-400/50 hover:border-orange-300">
+                  <span className="text-white font-medium text-sm flex items-center">
+                    🇮🇳 India's Best
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                </div>
               </Link>
+              
+              {/* GitHub Link with Animation */}
               <a 
                 href="https://github.com/codgamerofficial/ATS-FRB" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-2 py-1 rounded-lg text-cyan-300 hover:text-cyan-100 hover:bg-cyan-500/10 transition-colors duration-200"
+                className="relative group flex items-center space-x-2 px-4 py-2 rounded-lg border border-gray-600/30 hover:border-cyan-400/50 transition-all duration-300 hover:bg-cyan-500/10"
               >
-                <Github className="h-4 w-4" />
-                <span className="hidden xl:inline text-sm">GitHub</span>
+                <Github className="h-4 w-4 text-gray-400 group-hover:text-cyan-300 transition-colors duration-300" />
+                <span className="hidden xl:inline text-sm text-gray-400 group-hover:text-cyan-300 transition-colors duration-300">GitHub</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
               </a>
-              <DarkModeToggle />
+              
+              {/* Dark Mode Toggle with Glow */}
+              <div className="relative">
+                <DarkModeToggle />
+                <div className="absolute inset-0 bg-cyan-400/10 rounded-full blur-md opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </div>
+              
+              {/* Auth Buttons */}
               {!loading && (
                 user ? (
-                  <UserMenu />
+                  <div className="relative">
+                    <UserMenu />
+                    <div className="absolute inset-0 bg-purple-400/10 rounded-full blur-md opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                  </div>
                 ) : (
-                  <>
+                  <div className="flex items-center space-x-2">
                     <Link href="/auth">
-                      <Button variant="outline" size="sm">Sign In</Button>
+                      <div className="relative group px-4 py-2 border border-cyan-400/50 hover:border-cyan-300 rounded-lg transition-all duration-300 hover:bg-cyan-500/10">
+                        <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 text-sm font-medium">
+                          Sign In
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      </div>
                     </Link>
                     <Link href="/builder">
-                      <Button size="sm">Get Started</Button>
+                      <div className="relative group px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 rounded-lg transition-all duration-300 border border-cyan-400/50">
+                        <span className="text-white font-medium text-sm">
+                          🚀 Get Started
+                        </span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      </div>
                     </Link>
-                  </>
+                  </div>
                 )
               )}
             </div>
             
             {/* Mobile Navigation */}
             <div className="flex lg:hidden items-center space-x-2">
-              <DarkModeToggle />
+              <div className="relative">
+                <DarkModeToggle />
+                <div className="absolute inset-0 bg-cyan-400/10 rounded-full blur-md opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              </div>
               <Link href="/builder">
-                <Button size="sm" className="px-3 py-1 text-xs">
-                  {user ? "Build" : "Start"}
-                </Button>
+                <div className="relative group px-3 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 rounded-lg transition-all duration-300">
+                  <span className="text-white font-medium text-xs">
+                    {user ? "🔧 Build" : "🚀 Start"}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                </div>
               </Link>
             </div>
           </div>
           
-          {/* Mobile Menu */}
-          <div className="lg:hidden border-t border-cyan-500/20 py-2">
+          {/* Enhanced Mobile Menu */}
+          <div className="lg:hidden border-t border-cyan-500/30 py-3 bg-black/20 backdrop-blur-sm">
             <div className="flex flex-wrap gap-2 justify-center">
-              <Link href="/templates">
-                <Button variant="ghost" size="sm" className="text-xs px-2 py-1">Templates</Button>
-              </Link>
-              <Link href="/colleges">
-                <Button size="sm" className="text-xs px-2 py-1 bg-gradient-to-r from-orange-500 to-red-500">🇮🇳 Colleges</Button>
-              </Link>
+              {[
+                { href: '/templates', label: 'Templates', icon: '📋' },
+                { href: '/colleges', label: 'Colleges', icon: '🇮🇳', special: true },
+              ].map((item, index) => (
+                <Link key={index} href={item.href}>
+                  <div className={`relative group px-3 py-1.5 rounded-lg transition-all duration-300 border ${
+                    item.special 
+                      ? 'bg-gradient-to-r from-orange-500 to-red-500 border-orange-400/50 text-white' 
+                      : 'border-cyan-400/30 hover:border-cyan-300 hover:bg-cyan-500/10 text-cyan-300 hover:text-cyan-100'
+                  }`}>
+                    <span className="text-xs font-medium">
+                      {item.icon} {item.label}
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  </div>
+                </Link>
+              ))}
+              
               <a href="https://github.com/codgamerofficial/ATS-FRB" target="_blank" rel="noopener noreferrer">
-                <Button variant="ghost" size="sm" className="text-xs px-2 py-1">
-                  <Github className="h-3 w-3 mr-1" />GitHub
-                </Button>
+                <div className="relative group px-3 py-1.5 border border-gray-600/30 hover:border-cyan-400/50 rounded-lg transition-all duration-300 hover:bg-cyan-500/10">
+                  <span className="text-xs font-medium text-gray-400 group-hover:text-cyan-300 transition-colors duration-300 flex items-center">
+                    <Github className="h-3 w-3 mr-1" />GitHub
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                </div>
               </a>
+              
               {!loading && !user && (
                 <Link href="/auth">
-                  <Button variant="outline" size="sm" className="text-xs px-2 py-1">Sign In</Button>
+                  <div className="relative group px-3 py-1.5 border border-cyan-400/50 hover:border-cyan-300 rounded-lg transition-all duration-300 hover:bg-cyan-500/10">
+                    <span className="text-xs font-medium text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300">
+                      Sign In
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                  </div>
                 </Link>
               )}
             </div>
           </div>
         </div>
+        
+        {/* Bottom Glow Effect */}
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60"></div>
       </nav>
 
       <section className="relative overflow-hidden py-8 sm:py-16 lg:py-24">
