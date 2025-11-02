@@ -38,8 +38,8 @@ export function useCollaboration(resumeId: string, currentUser: any) {
   });
   
   const channelRef = useRef<any>(null);
-  const heartbeatRef = useRef<NodeJS.Timeout>();
-  const cursorTimeoutRef = useRef<NodeJS.Timeout>();
+  const heartbeatRef = useRef<NodeJS.Timeout | null>(null);
+  const cursorTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const broadcastChange = useCallback((change: Omit<ResumeChange, 'id' | 'timestamp'>) => {
     if (!channelRef.current || !currentUser) return;

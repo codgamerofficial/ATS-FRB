@@ -190,7 +190,9 @@ function analyzeReadability(resume: ResumeData, suggestions: ATSSuggestion[], pa
   // Check experience descriptions
   if (resume.experience) {
     const hasQuantifiableResults = resume.experience.some(exp => 
-      exp.description && /\d+/.test(exp.description)
+      exp.description && Array.isArray(exp.description) 
+        ? exp.description.some(desc => /\d+/.test(desc))
+        : typeof exp.description === 'string' && /\d+/.test(exp.description)
     );
     
     if (!hasQuantifiableResults) {

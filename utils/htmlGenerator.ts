@@ -21,7 +21,7 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${resume.personalInfo.firstName} ${resume.personalInfo.lastName} - Resume</title>
+    <title>${resume.personalInfo.fullName} - Resume</title>
     <style>
         * {
             margin: 0;
@@ -226,7 +226,7 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
 </head>
 <body>
     <header class="header">
-        <h1 class="name">${resume.personalInfo.firstName} ${resume.personalInfo.lastName}</h1>
+        <h1 class="name">${resume.personalInfo.fullName}</h1>
         <div class="contact-info">
             ${resume.personalInfo.email ? `<span>📧 ${resume.personalInfo.email}</span>` : ''}
             ${resume.personalInfo.phone ? `<span>📞 ${resume.personalInfo.phone}</span>` : ''}
@@ -272,7 +272,7 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
                     <div class="item-title">${edu.degree}</div>
                     <div class="item-company">${edu.institution}</div>
                 </div>
-                <div class="item-date">${edu.graduationDate}</div>
+                <div class="item-date">${edu.endDate}</div>
             </div>
             ${edu.gpa ? `<div class="item-description">GPA: ${edu.gpa}</div>` : ''}
         </div>
@@ -284,18 +284,11 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
     <section class="section">
         <h2 class="section-title">Skills</h2>
         <div class="skills-grid">
-            ${Object.entries(
-              resume.skills.reduce((acc: Record<string, string[]>, skill) => {
-                const category = skill.category || 'General';
-                if (!acc[category]) acc[category] = [];
-                acc[category].push(skill.name);
-                return acc;
-              }, {})
-            ).map(([category, skills]) => `
+            ${resume.skills.map(skillGroup => `
             <div class="skill-category">
-                <div class="skill-category-title">${category}</div>
+                <div class="skill-category-title">${skillGroup.category}</div>
                 <div class="skill-list">
-                    ${skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    ${skillGroup.items.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
                 </div>
             </div>
             `).join('')}
@@ -311,9 +304,9 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
             <div class="item-header">
                 <div>
                     <div class="item-title">${project.name}</div>
-                    ${project.url ? `<div class="item-company"><a href="${project.url}" target="_blank">${project.url}</a></div>` : ''}
+                    ${project.link ? `<div class="item-company"><a href="${project.link}" target="_blank">${project.link}</a></div>` : ''}
                 </div>
-                <div class="item-date">${project.startDate} - ${project.endDate || 'Present'}</div>
+                <div class="item-date">Project</div>
             </div>
             ${project.description ? `<div class="item-description">${project.description}</div>` : ''}
             ${project.technologies && project.technologies.length > 0 ? `
@@ -345,7 +338,7 @@ export function generateHTML(resume: ResumeData, template?: TemplateStyle): stri
             <div class="additional-section">
                 <div class="additional-title">Languages</div>
                 <ul class="additional-list">
-                    ${resume.languages.map(lang => `<li>${lang.name} - ${lang.proficiency}</li>`).join('')}
+                    ${resume.languages.map(lang => `<li>${lang}</li>`).join('')}
                 </ul>
             </div>
             ` : ''}
@@ -372,7 +365,7 @@ export function downloadHTML(resume: ResumeData, template?: TemplateStyle, filen
   
   const link = document.createElement('a');
   link.href = url;
-  link.download = filename || `${resume.personalInfo.firstName}_${resume.personalInfo.lastName}_Resume.html`;
+  link.download = filename || `${resume.personalInfo.fullName.replace(' ', '_')}_Resume.html`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

@@ -12,8 +12,8 @@ import {
   Clock
 } from 'lucide-react';
 import { useCollaboration } from '@/hooks/useCollaboration';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 interface CollaborationPanelProps {
   resumeId: string;
@@ -98,11 +98,8 @@ export default function CollaborationPanel({
 
         <div className="space-y-2">
           {collaboration.users.map((user) => (
-            <motion.div
+            <div
               key={user.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="flex items-center space-x-3 p-2 rounded-lg bg-gray-800/50"
             >
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${getRandomColor(user.id)}`}>
@@ -137,7 +134,7 @@ export default function CollaborationPanel({
                 )}
                 <Eye className="w-4 h-4 text-gray-400" />
               </div>
-            </motion.div>
+            </div>
           ))}
 
           {collaboration.users.length === 0 && (
@@ -169,17 +166,11 @@ export default function CollaborationPanel({
 
       <AnimatePresence>
         {showInviteModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <div
             className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
             onClick={() => setShowInviteModal(false)}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+            <div
               className="bg-gray-800 border border-gray-700 rounded-lg p-6 w-full max-w-md mx-4"
               onClick={(e) => e.stopPropagation()}
             >
@@ -210,8 +201,8 @@ export default function CollaborationPanel({
                   </Button>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>

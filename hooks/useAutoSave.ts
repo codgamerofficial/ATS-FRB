@@ -21,7 +21,7 @@ export function useAutoSave(
     enabled = true
   } = options;
 
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastSavedRef = useRef<string>('');
   const isSavingRef = useRef(false);
 

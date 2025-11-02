@@ -53,7 +53,7 @@ export async function generateResumeQR(
     const vCard = [
       'BEGIN:VCARD',
       'VERSION:3.0',
-      `FN:${resume.personalInfo.firstName} ${resume.personalInfo.lastName}`,
+      `FN:${resume.personalInfo.fullName}`,
       includeContact && resume.personalInfo.email ? `EMAIL:${resume.personalInfo.email}` : '',
       includeContact && resume.personalInfo.phone ? `TEL:${resume.personalInfo.phone}` : '',
       resume.personalInfo.location ? `ADR:;;${resume.personalInfo.location};;;` : '',
@@ -76,7 +76,7 @@ export async function generatePortfolioQR(url: string, size: number = 200): Prom
 
 export async function generateContactQR(resume: ResumeData, size: number = 200): Promise<string> {
   const contactInfo = [
-    `Name: ${resume.personalInfo.firstName} ${resume.personalInfo.lastName}`,
+    `Name: ${resume.personalInfo.fullName}`,
     resume.personalInfo.email ? `Email: ${resume.personalInfo.email}` : '',
     resume.personalInfo.phone ? `Phone: ${resume.personalInfo.phone}` : '',
     resume.personalInfo.location ? `Location: ${resume.personalInfo.location}` : ''

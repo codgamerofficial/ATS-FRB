@@ -52,7 +52,7 @@ export default function FeatureTestSuite() {
           break;
 
         case 'PDF Export':
-          await generatePDF(testResumeData, undefined, 'test-resume.pdf');
+          await generatePDF(testResumeData);
           updateTest(testName, { 
             status: 'passed', 
             message: 'PDF generated',
@@ -147,11 +147,8 @@ export default function FeatureTestSuite() {
 
       <div className="grid gap-4">
         {tests.map((test, index) => (
-          <motion.div
+          <div
             key={test.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
             className={`border rounded-lg p-4 ${
               test.status === 'passed' ? 'border-green-500/50 bg-green-500/10' :
               test.status === 'failed' ? 'border-red-500/50 bg-red-500/10' :
@@ -174,7 +171,7 @@ export default function FeatureTestSuite() {
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 

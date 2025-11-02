@@ -40,12 +40,12 @@ export default function DragDropSections({
         <p className="text-sm text-gray-400">Drag to reorder • Click eye to toggle visibility</p>
       </div>
 
-      <Reorder.Group
-        axis="y"
-        values={sections}
-        onReorder={handleReorder}
-        className="space-y-2"
-      >
+      <div className="space-y-2">
+        <Reorder.Group
+          axis="y"
+          values={sections}
+          onReorder={handleReorder}
+        >
         {sections.map((section) => (
           <Reorder.Item
             key={section.id}
@@ -54,21 +54,13 @@ export default function DragDropSections({
             onDragEnd={() => setDraggedItem(null)}
             className="group"
           >
-            <motion.div
-              layout
+            <div
               className={`
                 bg-gray-800/50 border border-gray-700 rounded-lg p-4 cursor-grab active:cursor-grabbing
                 transition-all duration-200 hover:border-cyan-500/50
                 ${draggedItem === section.id ? 'shadow-lg shadow-cyan-500/20 border-cyan-500' : ''}
                 ${!section.isVisible ? 'opacity-60' : ''}
               `}
-              whileHover={{ scale: 1.01 }}
-              whileDrag={{ 
-                scale: 1.05,
-                rotate: 1,
-                zIndex: 10,
-                boxShadow: '0 10px 30px rgba(6, 182, 212, 0.3)'
-              }}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -110,19 +102,15 @@ export default function DragDropSections({
               </div>
 
               {section.isVisible && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 pt-4 border-t border-gray-700"
-                >
+                <div className="mt-4 pt-4 border-t border-gray-700">
                   {section.component}
-                </motion.div>
+                </div>
               )}
-            </motion.div>
+            </div>
           </Reorder.Item>
         ))}
-      </Reorder.Group>
+        </Reorder.Group>
+      </div>
     </div>
   );
 }

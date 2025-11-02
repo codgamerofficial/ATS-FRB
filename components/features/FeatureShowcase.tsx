@@ -175,11 +175,8 @@ export default function FeatureShowcase() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredFeatures.map((feature, index) => (
-          <motion.div
+          <div
             key={feature.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
             className={`
               ${feature.bgColor} border border-gray-700 rounded-lg p-6
               hover:border-cyan-500/50 transition-all duration-200 hover:scale-105
@@ -211,7 +208,7 @@ export default function FeatureShowcase() {
                 </span>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
