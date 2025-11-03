@@ -18,6 +18,8 @@ import AIInsights from '@/components/ai/AIInsights';
 import AIJobMatcher from '@/components/ai/AIJobMatcher';
 import AISkillsPredictor from '@/components/ai/AISkillsPredictor';
 import AICareerPath from '@/components/ai/AICareerPath';
+import AdvancedAI from '@/components/ai/AdvancedAI';
+import MobileOptimization from '@/components/mobile/MobileOptimization';
 // Scroll animations temporarily disabled for deployment
 const ScrollProgress = () => null;
 const ScrollReveal = ({ children }: { children: React.ReactNode }) => <>{children}</>;
@@ -717,9 +719,13 @@ export default function Page() {
             <AIJobMatcher />
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <AISkillsPredictor />
             <AICareerPath />
+          </div>
+          
+          <div className="col-span-full">
+            <AdvancedAI />
           </div>
         </div>
       </section>
@@ -757,6 +763,8 @@ export default function Page() {
         </div>
       </section>
 
+      <MobileOptimization />
+      
       <footer className="bg-gray-900/50 backdrop-blur-md border-t border-cyan-500/30 text-white py-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

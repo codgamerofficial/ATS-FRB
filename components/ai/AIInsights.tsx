@@ -76,8 +76,19 @@ export default function AIInsights() {
 
   useEffect(() => {
     fetchInsights();
-    const interval = setInterval(fetchInsights, 3 * 60 * 1000);
+    const interval = setInterval(fetchInsights, 30 * 1000); // Update every 30 seconds for demo
     return () => clearInterval(interval);
+  }, []);
+
+  // Advanced AI processing simulation
+  useEffect(() => {
+    const aiProcessor = setInterval(() => {
+      setInsights(prev => prev.map(insight => ({
+        ...insight,
+        confidence: Math.max(70, Math.min(98, insight.confidence + (Math.random() - 0.5) * 3))
+      })));
+    }, 5000);
+    return () => clearInterval(aiProcessor);
   }, []);
 
   const getCategoryIcon = (category: string) => {
