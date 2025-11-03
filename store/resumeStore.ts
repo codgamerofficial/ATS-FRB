@@ -11,6 +11,7 @@ interface ResumeStore {
   
   // Actions
   saveResume: (title?: string) => Promise<void>;
+  loadResume: () => Promise<void>;
   updatePersonalInfo: (info: Partial<PersonalInfo>) => void;
   updateSummary: (summary: string) => void;
   addEducation: (education: Education) => void;
@@ -73,33 +74,103 @@ export const useResumeStore = create<ResumeStore>((set, get) => ({
       }
 
       const { resumeData } = get();
-      console.log('Saving resume for user:', user.id);
-      console.log('Resume data:', resumeData);
       
-      const { data, error } = await supabase
+      // Get default template ID
+      const { data: templates } = await supabase
+        .from('templates')
+        .select('id')
+        .eq('name', 'Modern Professional')
+        .single();
+      
+      const templateId = templates?.id;
+      
+      if (!templateId) {
+        toast.error('Template not found. Please contact support.');
+        set({ isSaving: false });
+        return;
+      }
+      
+      // Check if resume already exists
+      const { data: existingResume } = await supabase
         .from('resumes')
-        .upsert({
-          user_id: user.id,
-          title,
-          content: resumeData,
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
-        })
-        .select();
-
-      if (error) {
-        console.error('Database error:', error);
-        toast.error('Database error: ' + error.message + '. Please check if tables exist.');
+        .select('id')
+        .eq('user_id', user.id)
+        .single();
+      
+      let result;
+      
+      if (existingResume) {
+        // Update existing resume
+        result = await supabase
+          .from('resumes')
+          .update({
+            title,
+            content: resumeData,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', existingResume.id)
+          .select();
       } else {
-        console.log('Save successful:', data);
+        // Insert new resume
+        result = await supabase
+          .from('resumes')
+          .insert({
+            user_id: user.id,
+            title,
+            content: resumeData,
+            template_id: templateId,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          })
+          .select();
+      }
+
+      if (result.error) {
+        console.error('Database error:', result.error);
+        toast.error('Failed to save resume: ' + result.error.message);
+      } else {
+        console.log('Save successful:', result.data);
         toast.success('Resume saved successfully!');
       }
     } catch (error) {
       console.error('Unexpected error:', error);
-      toast.error('Unexpected error: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      toast.error('Failed to save resume. Please try again.');
     } finally {
       set({ isSaving: false });
+    }
+  },
+
+  loadResume: async () => {
+    set({ isLoading: true });
+    try {
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError || !user) {
+        console.error('Auth error:', authError);
+        set({ isLoading: false });
+        return;
+      }
+
+      const { data: resume, error } = await supabase
+        .from('resumes')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error) {
+        if (error.code !== 'PGRST116') { // Not found error
+          console.error('Database error:', error);
+          toast.error('Failed to load resume: ' + error.message);
+        }
+      } else if (resume) {
+        set({ resumeData: resume.content });
+        toast.success('Resume loaded successfully!');
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('Failed to load resume. Please try again.');
+    } finally {
+      set({ isLoading: false });
     }
   },
 

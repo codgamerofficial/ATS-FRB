@@ -19,7 +19,7 @@ import Logo from '@/components/ui/Logo';
 import CollaborationPanel from '@/components/collaboration/CollaborationPanel';
 import ResumeAnalytics from '@/components/analytics/ResumeAnalytics';
 import ExportOptions from '@/components/export/ExportOptions';
-import { FileText, Sparkles, Zap, Target, Eye, EyeOff } from 'lucide-react';
+import { FileText, Sparkles, Zap, Target, Eye, EyeOff, Save } from 'lucide-react';
 import Link from 'next/link';
 
 const steps = [
@@ -35,15 +35,18 @@ const steps = [
 function BuilderPageContent() {
   const searchParams = useSearchParams();
   const { user } = useAuth();
-  const { currentStep, loadResumeData, resumeData } = useResumeStore();
+  const { currentStep, loadResumeData, resumeData, loadResume } = useResumeStore();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   
+  const { saveResume } = useResumeStore();
+  
   useAutoSave(resumeData, {
     onSave: async (data) => {
-      // Auto-save to Supabase
-      console.log('Auto-saving resume data:', data);
+      if (user) {
+        await saveResume('Auto-saved Resume');
+      }
     },
     enabled: !!user
   });
@@ -54,15 +57,21 @@ function BuilderPageContent() {
     
     if (sample === 'saswata') {
       loadResumeData(saswataResumeData);
+      setIsLoading(false);
     } else if (template) {
       // Load template-specific data
       const templateData = getTemplateData(template);
       if (templateData) {
         loadResumeData(templateData);
       }
+      setIsLoading(false);
+    } else if (user) {
+      // Load existing resume for authenticated user
+      loadResume().finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  }, [searchParams, loadResumeData]);
+  }, [searchParams, loadResumeData, loadResume, user]);
 
   const getTemplateData = (templateId: string) => {
     const templates: Record<string, any> = {
@@ -252,6 +261,16 @@ function BuilderPageContent() {
               
               <div className="flex items-center space-x-4">
                 <DarkModeToggle />
+                <button
+                  onClick={() => saveResume('My Resume')}
+                  disabled={useResumeStore.getState().isSaving}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 text-green-400 transition-all duration-300 disabled:opacity-50"
+                >
+                  <Save className="w-4 h-4" />
+                  <span className="text-sm font-medium">
+                    {useResumeStore.getState().isSaving ? 'Saving...' : 'Save'}
+                  </span>
+                </button>
                 <button
                   onClick={() => setPreviewMode(!previewMode)}
                   className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 transition-all duration-300"
