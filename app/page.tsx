@@ -136,8 +136,10 @@ export default function Page() {
               {[
                 { href: '/templates', label: 'Templates', icon: '📋', glow: 'cyan' },
                 { href: '/ats-analyzer', label: 'ATS Analyzer', icon: '🎯', glow: 'green' },
-                { href: '/cover-letter', label: 'Cover Letter', icon: '✍️', glow: 'purple' },
-                { href: '/news', label: 'Live News', icon: '📰', glow: 'blue' },
+                { href: '/video-resume', label: 'Video Resume', icon: '🎥', glow: 'purple' },
+                { href: '/interview-prep', label: 'Interview Prep', icon: '🧠', glow: 'blue' },
+                { href: '/salary-tools', label: 'Salary Tools', icon: '💰', glow: 'yellow' },
+                { href: '/portfolio', label: 'Portfolio', icon: '💼', glow: 'orange' },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
                   <div className="relative group px-4 py-2 rounded-xl transition-all duration-500 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-purple-500/10 border border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5">
@@ -229,8 +231,10 @@ export default function Page() {
               {[
                 { href: '/templates', label: 'Templates', icon: '📋' },
                 { href: '/ats-analyzer', label: 'ATS Analyzer', icon: '🎯' },
-                { href: '/cover-letter', label: 'Cover Letter', icon: '✍️' },
-                { href: '/news', label: 'News', icon: '📰' },
+                { href: '/video-resume', label: 'Video', icon: '🎥' },
+                { href: '/interview-prep', label: 'Interview', icon: '🧠' },
+                { href: '/salary-tools', label: 'Salary', icon: '💰' },
+                { href: '/portfolio', label: 'Portfolio', icon: '💼' },
                 { href: '/colleges', label: 'Colleges', icon: '🇮🇳', special: true },
               ].map((item, index) => (
                 <Link key={index} href={item.href}>
@@ -634,6 +638,66 @@ export default function Page() {
         
         {/* Holographic overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent opacity-50 holographic"></div>
+      </section>
+
+      {/* Next-Gen Features Section */}
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4" style={{ textShadow: '0 0 20px rgba(0, 255, 255, 0.5)' }}>
+              🚀 Next-Gen Career Tools
+            </h2>
+            <p className="text-sm sm:text-lg lg:text-xl text-cyan-100 max-w-3xl mx-auto px-4">
+              Advanced features for modern career development and professional growth
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <SciFiCard variant="glow" className="p-6 text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-2xl">🎥</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Video Resume</h3>
+              <p className="text-gray-300 text-sm mb-4">Create compelling video introductions</p>
+              <Link href="/video-resume">
+                <Button size="sm" className="w-full bg-gradient-to-r from-red-500 to-pink-500">Create Video</Button>
+              </Link>
+            </SciFiCard>
+
+            <SciFiCard variant="glow" className="p-6 text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-2xl">🧠</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Interview Prep</h3>
+              <p className="text-gray-300 text-sm mb-4">AI-powered mock interviews</p>
+              <Link href="/interview-prep">
+                <Button size="sm" className="w-full bg-gradient-to-r from-purple-500 to-indigo-500">Start Practice</Button>
+              </Link>
+            </SciFiCard>
+
+            <SciFiCard variant="glow" className="p-6 text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-2xl">💰</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Salary Tools</h3>
+              <p className="text-gray-300 text-sm mb-4">Market-based salary insights</p>
+              <Link href="/salary-tools">
+                <Button size="sm" className="w-full bg-gradient-to-r from-green-500 to-emerald-500">Check Salary</Button>
+              </Link>
+            </SciFiCard>
+
+            <SciFiCard variant="glow" className="p-6 text-center group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-2xl">💼</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Portfolio</h3>
+              <p className="text-gray-300 text-sm mb-4">Showcase your projects</p>
+              <Link href="/portfolio">
+                <Button size="sm" className="w-full bg-gradient-to-r from-orange-500 to-yellow-500">Build Portfolio</Button>
+              </Link>
+            </SciFiCard>
+          </div>
+        </div>
       </section>
 
       {/* AI Features Section */}
