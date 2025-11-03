@@ -14,6 +14,10 @@ import RealtimeWidget from '@/components/realtime/RealtimeWidget';
 import NewsWidget from '@/components/realtime/NewsWidget';
 import LocationMap from '@/components/realtime/LocationMap';
 import PartnershipsSection from '@/components/partnerships/PartnershipsSection';
+import AIInsights from '@/components/ai/AIInsights';
+import AIJobMatcher from '@/components/ai/AIJobMatcher';
+import AISkillsPredictor from '@/components/ai/AISkillsPredictor';
+import AICareerPath from '@/components/ai/AICareerPath';
 // Scroll animations temporarily disabled for deployment
 const ScrollProgress = () => null;
 const ScrollReveal = ({ children }: { children: React.ReactNode }) => <>{children}</>;
@@ -630,6 +634,30 @@ export default function Page() {
         
         {/* Holographic overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent opacity-50 holographic"></div>
+      </section>
+
+      {/* AI Features Section */}
+      <section className="py-12 sm:py-16 lg:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4" style={{ textShadow: '0 0 20px rgba(138, 43, 226, 0.5)' }}>
+              🤖 AI-Powered Career Intelligence
+            </h2>
+            <p className="text-sm sm:text-lg lg:text-xl text-purple-100 max-w-3xl mx-auto px-4">
+              Harness the power of artificial intelligence for real-time market insights, job matching, and career planning
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <AIInsights />
+            <AIJobMatcher />
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <AISkillsPredictor />
+            <AICareerPath />
+          </div>
+        </div>
       </section>
 
       {/* Partnerships Section */}
