@@ -7,17 +7,15 @@ import TemplateRenderer from '@/components/templates/TemplateRenderer';
 import { Download, Eye, Share2, Save, FileText, Palette } from 'lucide-react';
 import { generatePDF } from '@/utils/pdfGenerator';
 import { generateDOCX } from '@/utils/docxGenerator';
-import { saveResume, updateResume } from '@/utils/resumeService';
 import { useAuth } from '@/hooks/useAuth';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
 
 export default function ResumePreview() {
-  const { resumeData } = useResumeStore();
+  const { resumeData, saveResume: saveResumeToStore, isSaving } = useResumeStore();
   const { selectedTemplate, getTemplateById } = useTemplateStore();
   const { user } = useAuth();
-  const [isSaving, setIsSaving] = useState(false);
   const [currentTemplate, setCurrentTemplate] = useState(selectedTemplate);
   const searchParams = useSearchParams();
   const { personalInfo } = resumeData;
@@ -64,16 +62,11 @@ export default function ResumePreview() {
       return;
     }
 
-    setIsSaving(true);
     try {
       const title = `${personalInfo.fullName} - Resume`;
-      await saveResume(title, resumeData);
-      toast.success('Resume saved successfully!');
+      await saveResumeToStore(title);
     } catch (error) {
       console.error('Error saving resume:', error);
-      toast.error('Failed to save resume');
-    } finally {
-      setIsSaving(false);
     }
   };
 
@@ -108,11 +101,11 @@ export default function ResumePreview() {
               size="sm" 
               variant="outline" 
               onClick={handleSaveResume}
-              isLoading={isSaving}
+              disabled={isSaving}
               className="flex items-center"
             >
               <Save className="w-4 h-4 mr-1" />
-              Save
+              {isSaving ? 'Saving...' : 'Save'}
             </Button>
           )}
           <Button size="sm" variant="outline" onClick={handleShareResume} className="flex items-center">
