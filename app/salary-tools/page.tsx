@@ -34,75 +34,75 @@ export default function SalaryToolsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Salary Negotiation Tools</h1>
-          <p className="text-cyan-300 text-lg">Market-based salary insights and negotiation strategies</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="max-w-6xl mx-auto p-4 pb-24">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 sm:mb-4">Salary Tools</h1>
+          <p className="text-cyan-300 text-sm sm:text-lg">Market insights & negotiation</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="space-y-6">
           {/* Salary Calculator */}
-          <SciFiCard variant="glow" className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <DollarSign className="w-6 h-6 text-cyan-400" />
-              Salary Calculator
+          <SciFiCard variant="glow" className="p-4 sm:p-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
+              Calculator
             </h2>
 
-            <div className="space-y-4 mb-6">
+            <div className="space-y-4 mb-4 sm:mb-6">
               <div>
-                <label className="block text-gray-300 mb-2">Job Title</label>
+                <label className="block text-gray-300 mb-2 text-sm">Job Title</label>
                 <input
                   type="text"
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
-                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white"
-                  placeholder="e.g., Software Engineer"
+                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white text-sm"
+                  placeholder="Software Engineer"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">Location</label>
+                <label className="block text-gray-300 mb-2 text-sm">Location</label>
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white"
-                  placeholder="e.g., Bangalore, India"
+                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white text-sm"
+                  placeholder="Bangalore, India"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">Experience Level</label>
+                <label className="block text-gray-300 mb-2 text-sm">Experience</label>
                 <select
                   value={experience}
                   onChange={(e) => setExperience(e.target.value)}
-                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white"
+                  className="w-full p-3 bg-slate-800 border border-cyan-500/20 rounded-lg text-white text-sm"
                 >
                   <option value="">Select Experience</option>
-                  <option value="entry">Entry Level (0-2 years)</option>
-                  <option value="mid">Mid Level (3-5 years)</option>
-                  <option value="senior">Senior Level (6-10 years)</option>
-                  <option value="lead">Lead/Principal (10+ years)</option>
+                  <option value="entry">Entry (0-2 years)</option>
+                  <option value="mid">Mid (3-5 years)</option>
+                  <option value="senior">Senior (6-10 years)</option>
+                  <option value="lead">Lead (10+ years)</option>
                 </select>
               </div>
 
-              <Button onClick={calculateSalary} className="w-full">
-                Calculate Salary Range
+              <Button onClick={calculateSalary} className="w-full py-3 text-lg font-bold">
+                Calculate Salary
               </Button>
             </div>
 
             {salaryData && (
               <div className="bg-slate-800 rounded-lg p-4 border border-cyan-500/20">
-                <h3 className="text-white font-semibold mb-3">Salary Insights</h3>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-gray-400">Median Salary</span>
-                    <p className="text-cyan-400 font-semibold">₹{salaryData.median.toLocaleString()}</p>
+                <h3 className="text-white font-semibold mb-3 text-center">💰 Results</h3>
+                <div className="space-y-3">
+                  <div className="text-center">
+                    <div className="text-gray-400 text-xs mb-1">Median Salary</div>
+                    <div className="text-cyan-400 font-bold text-xl">₹{salaryData.median.toLocaleString()}</div>
                   </div>
-                  <div>
-                    <span className="text-gray-400">Range</span>
-                    <p className="text-white">₹{Math.floor(salaryData.range.min).toLocaleString()} - ₹{Math.floor(salaryData.range.max).toLocaleString()}</p>
+                  <div className="text-center">
+                    <div className="text-gray-400 text-xs mb-1">Salary Range</div>
+                    <div className="text-white text-sm">₹{Math.floor(salaryData.range.min).toLocaleString()} - ₹{Math.floor(salaryData.range.max).toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -110,42 +110,34 @@ export default function SalaryToolsPage() {
           </SciFiCard>
 
           {/* Market Trends */}
-          <SciFiCard className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-cyan-400" />
-              Market Trends
+          <SciFiCard className="p-4 sm:p-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
+              Trends
             </h2>
 
-            <div className="space-y-4">
-              <div className="bg-slate-800 rounded-lg p-4 border border-cyan-500/20">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-white font-semibold">Tech Industry</span>
-                  <span className="text-green-400 text-sm">+12% YoY</span>
+            <div className="space-y-3">
+              {[
+                { name: 'Tech Industry', growth: '+12%', icon: '💻', progress: 75 },
+                { name: 'Remote Work', growth: '+8%', icon: '🏠', progress: 65 },
+                { name: 'AI/ML Skills', growth: '+25%', icon: '🤖', progress: 85 }
+              ].map((trend, index) => (
+                <div key={index} className="bg-slate-800 rounded-lg p-3 border border-cyan-500/20">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{trend.icon}</span>
+                      <span className="text-white font-medium text-sm">{trend.name}</span>
+                    </div>
+                    <span className="text-green-400 text-xs font-bold">{trend.growth}</span>
+                  </div>
+                  <div className="w-full bg-slate-700 rounded-full h-1.5">
+                    <div 
+                      className="bg-gradient-to-r from-green-500 to-cyan-500 h-1.5 rounded-full transition-all duration-500" 
+                      style={{ width: `${trend.progress}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full bg-slate-700 rounded-full h-2">
-                  <div className="bg-gradient-to-r from-green-500 to-cyan-500 h-2 rounded-full w-3/4" />
-                </div>
-              </div>
-
-              <div className="bg-slate-800 rounded-lg p-4 border border-cyan-500/20">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-white font-semibold">Remote Work</span>
-                  <span className="text-cyan-400 text-sm">+8% Premium</span>
-                </div>
-                <div className="w-full bg-slate-700 rounded-full h-2">
-                  <div className="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full w-2/3" />
-                </div>
-              </div>
-
-              <div className="bg-slate-800 rounded-lg p-4 border border-cyan-500/20">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-white font-semibold">AI/ML Skills</span>
-                  <span className="text-purple-400 text-sm">+25% Demand</span>
-                </div>
-                <div className="w-full bg-slate-700 rounded-full h-2">
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full w-5/6" />
-                </div>
-              </div>
+              ))}
             </div>
           </SciFiCard>
         </div>

@@ -280,69 +280,68 @@ export default function Page() {
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60"></div>
       </nav>
 
-      <section className="relative overflow-hidden py-8 sm:py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden py-6 sm:py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-            <div className="text-left">
-              <div className="mb-6">
+            <div className="text-center lg:text-left">
+              <div className="mb-4 sm:mb-6">
                 <ScrollReveal>
-                  <span className="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 text-sm font-medium rounded-full border border-cyan-500/30 mb-4">
-                    🚀 AI-Powered Resume Builder
+                  <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-500/20 text-cyan-400 text-xs sm:text-sm font-medium rounded-full border border-cyan-500/30 mb-3 sm:mb-4">
+                    🚀 AI Resume Builder
                   </span>
                 </ScrollReveal>
                 <ScrollSlide direction="left" delay={0.2}>
-                  <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 0 30px rgba(0, 255, 255, 0.3)' }}>
                     Craft Your
                     <span className="block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
                       Dream Career
                     </span>
-                    in Minutes
+                    <span className="text-lg sm:text-xl lg:text-2xl block mt-2 text-cyan-300">in Minutes</span>
                   </h1>
                 </ScrollSlide>
               </div>
               
               <ScrollSlide direction="left" delay={0.4}>
-                <div className="text-sm sm:text-base lg:text-lg text-cyan-100 mb-6 sm:mb-8 leading-relaxed">
+                <div className="text-sm sm:text-base lg:text-lg text-cyan-100 mb-4 sm:mb-8 leading-relaxed px-2 sm:px-0">
                   <p>
-                    Transform your career with our advanced AI resume builder. Create stunning, 
-                    ATS-optimized resumes that land interviews at top companies worldwide.
+                    AI-powered resume builder for landing dream jobs at top companies.
                   </p>
                 </div>
               </ScrollSlide>
 
               <ScrollScale delay={0.6}>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="flex flex-col gap-3 mb-4 sm:mb-8 px-4 sm:px-0">
                   <Link href={user ? "/builder" : "/auth"}>
-                    <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600">
-                      {user ? "Continue Building" : "🎯 Start Building Free"}
+                    <Button size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 py-4 text-lg font-bold">
+                      {user ? "🚀 Continue Building" : "🎯 Start Free"}
                     </Button>
                   </Link>
                   <Link href="/templates">
-                    <Button variant="outline" size="lg" className="w-full sm:w-auto border-cyan-400 text-cyan-400 hover:bg-cyan-400/10">
-                      📋 Browse Templates
+                    <Button variant="outline" size="lg" className="w-full border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 py-3">
+                      📋 Templates
                     </Button>
                   </Link>
                 </div>
               </ScrollScale>
 
               <ScrollStagger staggerDelay={0.2}>
-                <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-cyan-200">
+                <div className="grid grid-cols-1 gap-2 text-xs text-cyan-200 px-4 sm:px-0">
                   <ScrollItem>
-                    <div className="flex items-center">
-                      <Users className="h-4 w-4 mr-2 text-cyan-400" />
-                      50,000+ Happy Users
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <Users className="h-3 w-3 mr-2 text-cyan-400" />
+                      50,000+ Users
                     </div>
                   </ScrollItem>
                   <ScrollItem>
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 mr-2 text-yellow-400" />
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <Star className="h-3 w-3 mr-2 text-yellow-400" />
                       4.9★ Rating
                     </div>
                   </ScrollItem>
                   <ScrollItem>
-                    <div className="flex items-center">
-                      <Shield className="h-4 w-4 mr-2 text-green-400" />
-                      Bank-Level Security
+                    <div className="flex items-center justify-center lg:justify-start">
+                      <Shield className="h-3 w-3 mr-2 text-green-400" />
+                      Secure
                     </div>
                   </ScrollItem>
                 </div>
