@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Play, Pause, RotateCcw, Brain, Target } from 'lucide-react';
-import { SciFiCard } from '@/components/ui/SciFiCard';
-import { Button } from '@/components/ui/Button';
+import SciFiCard from '@/components/ui/SciFiCard';
+import Button from '@/components/ui/Button';
 
 export default function InterviewPrepPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);

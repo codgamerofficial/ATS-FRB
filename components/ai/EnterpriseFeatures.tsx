@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Users, Shield, BarChart3, Settings, Crown, Zap } from 'lucide-react';
-import { SciFiCard } from '@/components/ui/SciFiCard';
-import { Button } from '@/components/ui/Button';
+import SciFiCard from '@/components/ui/SciFiCard';
+import Button from '@/components/ui/Button';
 
 export default function EnterpriseFeatures() {
   const [activeTab, setActiveTab] = useState('team');

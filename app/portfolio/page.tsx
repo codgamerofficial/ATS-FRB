@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Plus, ExternalLink, Github, Eye, Edit } from 'lucide-react';
-import { SciFiCard } from '@/components/ui/SciFiCard';
-import { Button } from '@/components/ui/Button';
+import SciFiCard from '@/components/ui/SciFiCard';
+import Button from '@/components/ui/Button';
 
 export default function PortfolioPage() {
   const [projects, setProjects] = useState([

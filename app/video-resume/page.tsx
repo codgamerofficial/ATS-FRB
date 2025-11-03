@@ -2,8 +2,8 @@
 
 import { useState, useRef } from 'react';
 import { Camera, Square, Download } from 'lucide-react';
-import { SciFiCard } from '@/components/ui/SciFiCard';
-import { Button } from '@/components/ui/Button';
+import SciFiCard from '@/components/ui/SciFiCard';
+import Button from '@/components/ui/Button';
 
 export default function VideoResumePage() {
   const [isRecording, setIsRecording] = useState(false);

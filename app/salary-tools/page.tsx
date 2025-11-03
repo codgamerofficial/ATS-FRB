@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { DollarSign, TrendingUp, MapPin, Briefcase } from 'lucide-react';
-import { SciFiCard } from '@/components/ui/SciFiCard';
-import { Button } from '@/components/ui/Button';
+import SciFiCard from '@/components/ui/SciFiCard';
+import Button from '@/components/ui/Button';
 
 export default function SalaryToolsPage() {
   const [jobTitle, setJobTitle] = useState('');
