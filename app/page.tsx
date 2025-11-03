@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { FileText, Zap, Download, Shield, Star, Users, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import UserMenu from '@/components/ui/UserMenu';
-import DarkModeToggle from '@/components/ui/DarkModeToggle';
+
 import SplashScreen from '@/components/3d/SplashScreen';
 import SciFiBackground from '@/components/ui/SciFiBackground';
 import SciFiCard from '@/components/ui/SciFiCard';
@@ -709,23 +709,7 @@ export default function Page() {
         </div>
       </footer>
 
-      {/* Floating Dark Mode Toggle */}
-      <div className="fixed top-20 right-6 z-50">
-        <div className="relative group">
-          <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full blur opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
-          <div className="relative bg-gray-900/80 backdrop-blur-xl border border-cyan-400/30 rounded-full p-3 hover:bg-gray-800/90 transition-all duration-300 hover:scale-110 hover:border-cyan-300/50">
-            <DarkModeToggle />
-          </div>
-          
-          {/* Tooltip */}
-          <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <div className="bg-gray-900/95 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg border border-cyan-400/30 whitespace-nowrap">
-              {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
-              <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-900/95"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 }
