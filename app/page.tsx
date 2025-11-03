@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Zap, Download, Shield, Star, Users, Github } from 'lucide-react';
 import Button from '@/components/ui/Button';
@@ -76,12 +76,22 @@ const testimonials = [
 
 
 export default function Page() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   const { user, loading } = useAuth();
   const { isDark } = useDarkMode();
 
+  useEffect(() => {
+    // Check if splash screen has been shown before
+    const hasSeenSplash = localStorage.getItem('hasSeenSplash');
+    if (!hasSeenSplash) {
+      setShowSplash(true);
+    }
+  }, []);
+
   const handleSplashComplete = () => {
     setShowSplash(false);
+    // Mark splash as seen
+    localStorage.setItem('hasSeenSplash', 'true');
   };
 
   if (showSplash) {
