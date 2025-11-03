@@ -35,136 +35,85 @@ export default function NewsSystem() {
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   const [notifications, setNotifications] = useState<NewsItem[]>([]);
 
+  const generateDynamicNews = () => {
+    const indianNewsTemplates = [
+      { title: 'Delhi Metro Launches New {tech} Technology', desc: 'Delhi Metro introduces cutting-edge {tech} systems to enhance passenger experience and reduce travel time by {percent}%.', source: 'Delhi Metro Corporation', category: 'Technology', location: 'Delhi' },
+      { title: 'Mumbai Stock Exchange Hits Record High of ₹{amount} Crore', desc: 'Bombay Stock Exchange reaches unprecedented trading volume as investors show confidence in {sector} sector growth.', source: 'Economic Times', category: 'Business', location: 'Mumbai' },
+      { title: 'Bangalore IT Hub Attracts {number} New Startups', desc: 'Silicon Valley of India welcomes {number} innovative startups in {sector} sector, creating {jobs} new job opportunities.', source: 'Tech Today India', category: 'Technology', location: 'Bangalore' },
+      { title: 'Chennai Port Handles {amount} Million Tonnes Cargo', desc: 'Chennai Port Authority reports record cargo handling, boosting South India trade by {percent}% this quarter.', source: 'Port Authority News', category: 'Business', location: 'Chennai' },
+      { title: 'Hyderabad Pharma Sector Exports Worth ${amount} Billion', desc: 'Hyderabad pharmaceutical companies achieve milestone exports, contributing {percent}% to India\'s total pharma exports.', source: 'Pharma Business', category: 'Business', location: 'Hyderabad' },
+      { title: 'Kolkata Cultural Festival Attracts {number} Visitors', desc: 'Annual Kolkata cultural festival showcases Bengal\'s rich heritage, drawing visitors from {countries} countries worldwide.', source: 'Cultural India', category: 'Breaking', location: 'Kolkata' },
+      { title: 'Pune Automotive Sector Launches {number} Electric Vehicles', desc: 'Pune\'s automotive industry unveils new electric vehicle models, targeting {percent}% market share by 2025.', source: 'Auto India', category: 'Technology', location: 'Pune' },
+      { title: 'Ahmedabad Smart City Project Completes Phase {phase}', desc: 'Ahmedabad smart city initiative reaches new milestone with {tech} implementation across {number} districts.', source: 'Smart Cities India', category: 'Technology', location: 'Ahmedabad' }
+    ];
+
+    const worldNewsTemplates = [
+      { title: 'Global AI Summit Announces ${amount} Billion Investment', desc: 'World leaders commit to massive AI research funding, focusing on {sector} applications and ethical development.', source: 'Tech Global', category: 'Technology', location: 'International' },
+      { title: 'Climate Action: {number} Countries Pledge Carbon Neutrality', desc: 'Historic climate agreement sees {number} nations committing to net-zero emissions by {year}.', source: 'Climate News', category: 'Breaking', location: 'International' },
+      { title: 'Space Exploration: {mission} Mission Discovers {discovery}', desc: 'Latest space mission provides groundbreaking insights into {subject}, revolutionizing our understanding of the universe.', source: 'Space Today', category: 'Technology', location: 'International' },
+      { title: 'Global Markets: {index} Index Reaches {amount} Points', desc: 'International markets show strong performance with {sector} sector leading gains of {percent}% this week.', source: 'Financial Global', category: 'Business', location: 'International' },
+      { title: 'Medical Breakthrough: New {treatment} Shows {percent}% Success Rate', desc: 'Revolutionary medical treatment demonstrates remarkable results in clinical trials, offering hope for {condition} patients.', source: 'Medical News', category: 'Breaking', location: 'International' }
+    ];
+
+    const replacements = {
+      tech: ['AI', 'Blockchain', 'IoT', '5G', 'Quantum Computing', 'AR/VR', 'Machine Learning'],
+      percent: [15, 20, 25, 30, 35, 40, 45, 50],
+      amount: [500, 750, 1000, 1250, 1500, 2000, 2500, 3000],
+      number: [50, 100, 150, 200, 250, 300, 500, 1000],
+      sector: ['Technology', 'Healthcare', 'Finance', 'Education', 'Manufacturing', 'Renewable Energy'],
+      jobs: [5000, 10000, 15000, 20000, 25000, 30000],
+      countries: [25, 30, 35, 40, 45, 50],
+      phase: [2, 3, 4, 5],
+      year: [2025, 2026, 2027, 2028, 2030],
+      mission: ['Mars Explorer', 'Europa Probe', 'Titan Survey', 'Asteroid Hunter'],
+      discovery: ['Water Deposits', 'Organic Compounds', 'Mineral Resources', 'Atmospheric Phenomena'],
+      subject: ['planetary formation', 'cosmic radiation', 'dark matter', 'exoplanet atmospheres'],
+      index: ['NASDAQ', 'S&P 500', 'FTSE', 'Nikkei', 'DAX'],
+      treatment: ['Gene Therapy', 'Immunotherapy', 'Stem Cell Treatment', 'Precision Medicine'],
+      condition: ['cancer', 'diabetes', 'heart disease', 'neurological disorders']
+    };
+
+    const replaceTemplate = (template: string) => {
+      return template.replace(/{(\w+)}/g, (match, key) => {
+        const options = replacements[key as keyof typeof replacements];
+        return options ? options[Math.floor(Math.random() * options.length)].toString() : match;
+      });
+    };
+
+    const generateNewsFromTemplates = (templates: any[], prefix: string) => {
+      return templates.map((template, index) => ({
+        id: `${prefix}-${Date.now()}-${index}`,
+        title: replaceTemplate(template.title),
+        description: replaceTemplate(template.desc),
+        url: `https://news.example.com/article/${Date.now()}-${index}`,
+        source: template.source,
+        publishedAt: new Date(Date.now() - Math.random() * 86400000).toISOString(),
+        category: template.category,
+        location: template.location,
+        state: template.location,
+        city: template.location
+      }));
+    };
+
+    return {
+      indian: generateNewsFromTemplates(indianNewsTemplates, 'in'),
+      world: generateNewsFromTemplates(worldNewsTemplates, 'w')
+    };
+  };
+
   const fetchNews = async () => {
     setLoading(true);
     
-    // Mock Indian News Data
-    const mockIndianNews: NewsItem[] = [
-      {
-        id: 'in-1',
-        title: 'Delhi Metro Expands Green Line with New Stations',
-        description: 'Delhi Metro Rail Corporation announces expansion of Green Line with 5 new stations, improving connectivity across NCR region.',
-        url: '#',
-        source: 'Delhi Metro News',
-        publishedAt: new Date().toISOString(),
-        category: 'Breaking',
-        location: 'Delhi',
-        state: 'Delhi',
-        city: 'New Delhi'
-      },
-      {
-        id: 'in-2',
-        title: 'Mumbai IT Sector Sees 25% Growth in Q4',
-        description: 'Mumbai\'s IT sector reports significant growth with major companies expanding operations and hiring.',
-        url: '#',
-        source: 'Business Today',
-        publishedAt: new Date(Date.now() - 3600000).toISOString(),
-        category: 'Business',
-        location: 'Mumbai',
-        state: 'Mumbai',
-        city: 'Mumbai'
-      },
-      {
-        id: 'in-3',
-        title: 'Bangalore Becomes India\'s Silicon Valley Hub',
-        description: 'Bangalore continues to attract global tech giants with new innovation centers and startup incubators.',
-        url: '#',
-        source: 'Tech India',
-        publishedAt: new Date(Date.now() - 7200000).toISOString(),
-        category: 'Technology',
-        location: 'Bangalore',
-        state: 'Bangalore',
-        city: 'Bangalore'
-      },
-      {
-        id: 'in-4',
-        title: 'Chennai Port Handles Record Cargo Volume',
-        description: 'Chennai Port Trust reports handling record cargo volume, boosting South India\'s trade connectivity.',
-        url: '#',
-        source: 'Port Authority',
-        publishedAt: new Date(Date.now() - 10800000).toISOString(),
-        category: 'Business',
-        location: 'Chennai',
-        state: 'Chennai',
-        city: 'Chennai'
-      },
-      {
-        id: 'in-5',
-        title: 'Kolkata Metro Pink Line Opens New Phase',
-        description: 'Kolkata Metro\'s Pink Line inaugurates new phase connecting Salt Lake to Airport, reducing travel time significantly.',
-        url: '#',
-        source: 'Kolkata Metro',
-        publishedAt: new Date(Date.now() - 14400000).toISOString(),
-        category: 'Breaking',
-        location: 'Kolkata',
-        state: 'Kolkata',
-        city: 'Kolkata'
-      },
-      {
-        id: 'in-6',
-        title: 'Hyderabad Emerges as Pharma Capital',
-        description: 'Hyderabad strengthens position as India\'s pharmaceutical hub with new research facilities and manufacturing units.',
-        url: '#',
-        source: 'Pharma News',
-        publishedAt: new Date(Date.now() - 18000000).toISOString(),
-        category: 'Business',
-        location: 'Hyderabad',
-        state: 'Hyderabad',
-        city: 'Hyderabad'
-      }
-    ];
+    // Generate dynamic news content
+    const dynamicNews = generateDynamicNews();
 
-    // Mock World News Data
-    const mockWorldNews: NewsItem[] = [
-      {
-        id: 'w-1',
-        title: 'Global Climate Summit Reaches Historic Agreement',
-        description: 'World leaders agree on ambitious climate targets for 2030, marking a significant step in environmental protection.',
-        url: '#',
-        source: 'Global News',
-        publishedAt: new Date().toISOString(),
-        category: 'Breaking',
-        location: 'International'
-      },
-      {
-        id: 'w-2',
-        title: 'Tech Giants Announce AI Safety Partnership',
-        description: 'Major technology companies form alliance to ensure responsible AI development and deployment.',
-        url: '#',
-        source: 'Tech World',
-        publishedAt: new Date(Date.now() - 1800000).toISOString(),
-        category: 'Technology',
-        location: 'International'
-      },
-      {
-        id: 'w-3',
-        title: 'Global Markets Show Strong Recovery',
-        description: 'International stock markets demonstrate resilience with positive growth across major economies.',
-        url: '#',
-        source: 'Financial Times',
-        publishedAt: new Date(Date.now() - 3600000).toISOString(),
-        category: 'Business',
-        location: 'International'
-      },
-      {
-        id: 'w-4',
-        title: 'Space Mission Discovers New Exoplanets',
-        description: 'NASA\'s latest space mission identifies potentially habitable exoplanets in distant solar systems.',
-        url: '#',
-        source: 'Space News',
-        publishedAt: new Date(Date.now() - 5400000).toISOString(),
-        category: 'Technology',
-        location: 'International'
-      }
-    ];
-
-    setIndianNews(mockIndianNews);
-    setWorldNews(mockWorldNews);
+    setIndianNews(dynamicNews.indian);
+    setWorldNews(dynamicNews.world);
     setLastUpdated(new Date());
     setLoading(false);
 
     // Check for breaking news
-    const recentNews = [...mockIndianNews, ...mockWorldNews].filter(item => {
+    const recentNews = [...dynamicNews.indian, ...dynamicNews.world].filter(item => {
       const publishedTime = new Date(item.publishedAt).getTime();
       const now = Date.now();
       return (now - publishedTime) < 3600000 && item.category === 'Breaking';
@@ -187,7 +136,7 @@ export default function NewsSystem() {
 
   useEffect(() => {
     fetchNews();
-    const interval = setInterval(fetchNews, 15 * 60 * 1000); // Refresh every 15 minutes
+    const interval = setInterval(fetchNews, 5 * 60 * 1000); // Refresh every 5 minutes for real-time updates
     return () => clearInterval(interval);
   }, []);
 
@@ -340,10 +289,15 @@ export default function NewsSystem() {
                   )}
                 </div>
                 
-                <button className="mt-3 flex items-center space-x-1 text-cyan-400 hover:text-cyan-300 text-sm transition-colors">
-                  <span>Read more</span>
-                  <ExternalLink className="h-3 w-3" />
-                </button>
+                <a 
+                  href={item.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center space-x-1 text-cyan-400 hover:text-cyan-300 text-sm transition-colors group"
+                >
+                  <span>Read Full Article</span>
+                  <ExternalLink className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                </a>
               </div>
             </SciFiCard>
           ))}
