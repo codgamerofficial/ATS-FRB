@@ -80,12 +80,36 @@ export default function NewsSystem() {
       });
     };
 
+    const realNewsUrls = {
+      indian: [
+        'https://timesofindia.indiatimes.com/',
+        'https://www.hindustantimes.com/',
+        'https://indianexpress.com/',
+        'https://www.ndtv.com/',
+        'https://www.thehindu.com/',
+        'https://economictimes.indiatimes.com/',
+        'https://www.business-standard.com/',
+        'https://www.livemint.com/'
+      ],
+      world: [
+        'https://www.bbc.com/news',
+        'https://www.reuters.com/',
+        'https://www.cnn.com/',
+        'https://www.theguardian.com/',
+        'https://www.washingtonpost.com/',
+        'https://www.nytimes.com/',
+        'https://www.wsj.com/',
+        'https://www.bloomberg.com/'
+      ]
+    };
+
     const generateNewsFromTemplates = (templates: any[], prefix: string) => {
+      const urls = prefix === 'in' ? realNewsUrls.indian : realNewsUrls.world;
       return templates.map((template, index) => ({
         id: `${prefix}-${Date.now()}-${index}`,
         title: replaceTemplate(template.title),
         description: replaceTemplate(template.desc),
-        url: `https://news.example.com/article/${Date.now()}-${index}`,
+        url: urls[index % urls.length],
         source: template.source,
         publishedAt: new Date(Date.now() - Math.random() * 86400000).toISOString(),
         category: template.category,

@@ -52,10 +52,19 @@ export default function NewsWidget() {
       });
     };
 
+    const realNewsUrls = [
+      'https://www.bbc.com/news/technology',
+      'https://www.reuters.com/technology/',
+      'https://techcrunch.com/',
+      'https://www.bloomberg.com/technology',
+      'https://www.cnbc.com/technology/',
+      'https://www.theverge.com/'
+    ];
+
     return newsTemplates.map((template, index) => ({
       title: replaceTemplate(template.title),
       description: replaceTemplate(template.desc),
-      url: `https://news.example.com/article/${Date.now()}-${index}`,
+      url: realNewsUrls[index % realNewsUrls.length],
       urlToImage: template.image,
       publishedAt: new Date(Date.now() - Math.random() * 86400000).toISOString(),
       source: { name: template.source }
