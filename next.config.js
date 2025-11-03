@@ -10,8 +10,7 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  assetPrefix: './',
+  }
 }
 
 module.exports = nextConfig
