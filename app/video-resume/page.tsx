@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Camera, Square, Download } from 'lucide-react';
 import SciFiCard from '@/components/ui/SciFiCard';
 import Button from '@/components/ui/Button';
