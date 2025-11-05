@@ -1,0 +1,60 @@
+# Mobile App Strategy - CONFLICT RESOLVED
+
+## ✅ CURRENT MOBILE STRATEGY
+
+**RECOMMENDED APPROACH: Capacitor + Next.js Web App**
+
+### Why Capacitor?
+- ✅ Single codebase (Next.js)
+- ✅ Web technologies (React, TypeScript)
+- ✅ Native performance
+- ✅ Easy deployment
+- ✅ Already configured
+
+### ❌ REMOVED CONFLICTS
+- **ATS-Resume-Mobile/**: Removed duplicate Expo app
+- **mobile/**: Expo Go app causing conflicts
+- **Conflicting packages**: expo, espo removed
+
+## 📱 CURRENT MOBILE SETUP
+
+### Primary Mobile App (CAPACITOR)
+```
+├── Capacitor config: capacitor.config.ts
+├── Next.js build: out/ directory
+├── Commands:
+│   ├── npm run android    # Run on Android device
+│   ├── npm run ios        # Run on iOS device  
+│   └── npm run mobile:sync  # Sync updates
+```
+
+### Build Process
+1. **Web Build**: `npm run build` → generates `out/` directory
+2. **Mobile Sync**: `npm run mobile:sync` → copies web assets to mobile
+3. **Device Run**: `npm run android` or `npm run ios`
+
+## 🎯 DEPLOYMENT STRATEGY
+
+### Development
+```bash
+# Web development
+npm run dev
+
+# Mobile testing
+npm run mobile:sync && npm run android
+```
+
+### Production
+```bash
+# Build and deploy
+npm run build
+npm run mobile:sync
+# Deploy out/ directory to web hosting
+```
+
+## ✅ BENEFITS OF THIS CLEANUP
+- Single source of truth
+- No package conflicts  
+- Simplified build process
+- Better performance
+- Easier maintenance

@@ -43,7 +43,7 @@ CREATE POLICY "Users can view analytics for their resumes" ON resume_analytics
     EXISTS (
       SELECT 1 FROM resumes 
       WHERE resumes.id = resume_analytics.resume_id 
-      AND (resumes.user_id = auth.uid() OR COALESCE(resumes.is_public, false) = true)
+      AND (resumes.user_id = auth.uid() OR resumes.is_public = true)
     )
   );
 
