@@ -8,17 +8,39 @@
     "resolveJsonModule": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
-      "@/components/*": ["components/*"],
-      "@/screens/*": ["screens/*"],
-      "@/navigation/*": ["navigation/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/store/*": ["store/*"],
-      "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"],
-      "@/utils/*": ["utils/*"],
-      "@/constants/*": ["constants/*"],
-      "@/styles/*": ["styles/*"]
+      "@/*": [
+        "*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/screens/*": [
+        "screens/*"
+      ],
+      "@/navigation/*": [
+        "navigation/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/store/*": [
+        "store/*"
+      ],
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/types/*": [
+        "types/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/constants/*": [
+        "constants/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ]
     }
   },
   "include": [
@@ -27,5 +49,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }
