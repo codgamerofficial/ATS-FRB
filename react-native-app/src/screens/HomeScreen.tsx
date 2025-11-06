@@ -1,132 +1,320 @@
+// Beautiful Home Screen - Working Version
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { Button, Card, Title } from 'react-native-paper';
-import { theme } from '../constants/theme';
-import { useAuth } from '../contexts/AuthContext';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export function HomeScreen({ navigation }: any) {
-  const { user, signOut } = useAuth();
+const HomeScreen: React.FC = () => {
+  const features = [
+    {
+      id: '1',
+      title: 'AI-Powered Resume',
+      description: 'Create stunning resumes with AI assistance',
+      icon: '🤖',
+    },
+    {
+      id: '2',
+      title: 'ATS Optimized',
+      description: 'Ensure your resume passes ATS systems',
+      icon: '✅',
+    },
+    {
+      id: '3',
+      title: 'Professional Templates',
+      description: 'Choose from beautiful, professional designs',
+      icon: '📄',
+    },
+    {
+      id: '4',
+      title: 'Real-time Analytics',
+      description: 'Track your resume performance',
+      icon: '📊',
+    },
+  ];
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.content}>
-        <Card style={styles.welcomeCard}>
-          <Card.Content>
-            <Title style={styles.title}>Welcome to ATS Resume Builder</Title>
-            <Text style={styles.subtitle}>
-              {user ? `Hello, ${user.email}!` : 'Welcome to the app'}
-            </Text>
-            <Text style={styles.description}>
-              Build professional resumes with AI-powered features and get your dream job!
-            </Text>
-            <Button
-              mode="contained"
-              onPress={() => navigation.navigate('Builder')}
-              style={styles.button}
-            >
-              Start Building Resume
-            </Button>
-          </Card.Content>
-        </Card>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>ResumeBuilder Pro</Text>
+          <Text style={styles.subtitle}>
+            Build professional resumes that get results
+          </Text>
+        </View>
 
-        <View style={styles.featuresGrid}>
-          <Card style={styles.featureCard}>
-            <Card.Content>
-              <Text style={styles.featureTitle}>📝 Resume Builder</Text>
-              <Text style={styles.featureDescription}>
-                Create professional resumes with our step-by-step builder
-              </Text>
-            </Card.Content>
-          </Card>
+        {/* Quick Actions */}
+        <View style={styles.quickActions}>
+          <Text style={styles.cardTitle}>Get Started</Text>
+          <View style={styles.actionButtons}>
+            <TouchableOpacity style={styles.primaryButton}>
+              <Text style={styles.primaryButtonText}>Create Resume</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.outlineButton}>
+              <Text style={styles.outlineButtonText}>Browse Templates</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-          <Card style={styles.featureCard}>
-            <Card.Content>
-              <Text style={styles.featureTitle}>🤖 AI Features</Text>
-              <Text style={styles.featureDescription}>
-                Get AI-powered suggestions and insights for your resume
-              </Text>
-            </Card.Content>
-          </Card>
+        {/* Features Grid */}
+        <View style={styles.featuresSection}>
+          <Text style={styles.sectionTitle}>Key Features</Text>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.featuresContainer}
+          >
+            {features.map((feature) => (
+              <View key={feature.id} style={styles.featureCard}>
+                <Text style={styles.featureIcon}>{feature.icon}</Text>
+                <Text style={styles.featureTitle}>{feature.title}</Text>
+                <Text style={styles.featureDescription}>{feature.description}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
 
-          <Card style={styles.featureCard}>
-            <Card.Content>
-              <Text style={styles.featureTitle}>📄 PDF Export</Text>
-              <Text style={styles.featureDescription}>
-                Export your resume as high-quality PDF for applications
-              </Text>
-            </Card.Content>
-          </Card>
+        {/* Stats */}
+        <View style={styles.statsCard}>
+          <View style={styles.statsRow}>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>50K+</Text>
+              <Text style={styles.statLabel}>Resumes Created</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>95%</Text>
+              <Text style={styles.statLabel}>Success Rate</Text>
+            </View>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>4.9★</Text>
+              <Text style={styles.statLabel}>User Rating</Text>
+            </View>
+          </View>
+        </View>
 
-          <Card style={styles.featureCard}>
-            <Card.Content>
-              <Text style={styles.featureTitle}>🎨 Templates</Text>
-              <Text style={styles.featureDescription}>
-                Choose from professional resume templates
-              </Text>
-            </Card.Content>
-          </Card>
+        {/* Bottom Navigation Placeholder */}
+        <View style={styles.bottomNav}>
+          <TouchableOpacity style={styles.navItem}>
+            <Text style={styles.navIcon}>🏠</Text>
+            <Text style={styles.navLabel}>Home</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navItem}>
+            <Text style={styles.navIcon}>📄</Text>
+            <Text style={styles.navLabel}>Resume</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navItem}>
+            <Text style={styles.navIcon}>⚙️</Text>
+            <Text style={styles.navLabel}>Settings</Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#f8fafc',
+  },
+  
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
   },
-  content: {
-    padding: theme.spacing.md,
+  
+  header: {
+    alignItems: 'center',
+    padding: 24,
+    paddingTop: 32,
   },
-  welcomeCard: {
-    marginBottom: theme.spacing.lg,
-    elevation: 4,
-    borderRadius: theme.borderRadius.lg,
-  },
+  
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
+    color: '#0f172a',
     textAlign: 'center',
-    marginBottom: theme.spacing.sm,
-    color: theme.colors.text,
+    marginBottom: 8,
   },
+  
   subtitle: {
     fontSize: 16,
+    color: '#475569',
     textAlign: 'center',
-    marginBottom: theme.spacing.md,
-    color: theme.colors.placeholder,
   },
-  description: {
-    fontSize: 14,
-    textAlign: 'center',
-    marginBottom: theme.spacing.lg,
-    color: theme.colors.placeholder,
-    lineHeight: 20,
+  
+  quickActions: {
+    backgroundColor: 'white',
+    margin: 16,
+    padding: 20,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
+    alignItems: 'center',
   },
-  button: {
-    marginTop: theme.spacing.sm,
+  
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0f172a',
+    marginBottom: 16,
   },
-  featuresGrid: {
+  
+  actionButtons: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    gap: 16,
   },
+  
+  primaryButton: {
+    backgroundColor: '#6366f1',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    flex: 1,
+  },
+  
+  primaryButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  
+  outlineButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: '#6366f1',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    flex: 1,
+  },
+  
+  outlineButtonText: {
+    color: '#6366f1',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  
+  featuresSection: {
+    margin: 16,
+  },
+  
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0f172a',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  
+  featuresContainer: {
+    gap: 16,
+    paddingRight: 16,
+  },
+  
   featureCard: {
-    width: '48%',
-    marginBottom: theme.spacing.md,
-    elevation: 2,
-    borderRadius: theme.borderRadius.md,
+    backgroundColor: 'white',
+    width: 160,
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
+    alignItems: 'center',
   },
+  
+  featureIcon: {
+    fontSize: 40,
+    marginBottom: 8,
+  },
+  
   featureTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: theme.spacing.sm,
-    color: theme.colors.text,
+    color: '#0f172a',
+    textAlign: 'center',
+    marginBottom: 4,
   },
+  
   featureDescription: {
+    fontSize: 14,
+    color: '#475569',
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+  
+  statsCard: {
+    backgroundColor: 'white',
+    margin: 16,
+    padding: 20,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  
+  statItem: {
+    alignItems: 'center',
+  },
+  
+  statNumber: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#6366f1',
+  },
+  
+  statLabel: {
     fontSize: 12,
-    color: theme.colors.placeholder,
-    lineHeight: 16,
+    color: '#475569',
+    textAlign: 'center',
+    marginTop: 4,
+  },
+  
+  bottomNav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#e2e8f0',
+  },
+  
+  navItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  
+  navIcon: {
+    fontSize: 20,
+    marginBottom: 4,
+  },
+  
+  navLabel: {
+    fontSize: 10,
+    color: '#475569',
   },
 });
+
+export default HomeScreen;

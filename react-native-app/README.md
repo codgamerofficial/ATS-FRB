@@ -1,251 +1,245 @@
-# ATS Resume Builder - React Native + Expo
+# React Native + Expo Mobile App Setup
 
-A comprehensive React Native mobile application for building professional resumes, converted from the Next.js web application to provide a seamless mobile experience.
+## 📱 Beautiful Resume Builder App
 
-## 📱 Features
+This is a beautiful, modern React Native + Expo app for building professional resumes. The app has been optimized to remove Capacitor dependencies and provide a seamless mobile experience.
 
-### ✅ Completed Features
-- **Authentication System**: Sign up, sign in, password reset with Supabase
-- **Multi-step Resume Builder**: Step-by-step form with progress tracking
-- **Template System**: Browse and select from resume templates
-- **State Management**: Zustand stores with AsyncStorage persistence
-- **Navigation**: Drawer + Bottom Tab navigation structure
-- **Theme System**: Light/dark mode with React Native Paper
-- **Error Handling**: Comprehensive error boundaries
+## ✨ Features
 
-### 🚧 Planned Features
-- AI-powered resume insights and suggestions
-- PDF generation and export
-- Resume analytics and ATS scoring
-- Template customization
-- Multi-language support
+- **Beautiful Modern UI** - Clean, gradient-based design with smooth animations
+- **React Native + Expo** - Fast development and hot reloading
+- **Supabase Integration** - Authentication and database
+- **Custom Components** - Reusable Button, Input, and Card components
+- **Responsive Design** - Optimized for all screen sizes
+- **Dark/Light Theme Support** - Beautiful color schemes
 
-## 🏗 Architecture
-
-### Project Structure
-```
-react-native-app/
-├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── common/         # ErrorBoundary, Loading states
-│   │   └── navigation/     # DrawerContent, Navigation components
-│   ├── contexts/           # React Context providers
-│   │   ├── AuthContext.tsx # Authentication state
-│   │   └── ThemeContext.tsx # Theme management
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # External services
-│   │   └── supabase.ts     # Supabase client configuration
-│   ├── navigation/         # Navigation configuration
-│   │   └── RootNavigator.tsx
-│   ├── screens/            # Screen components
-│   │   ├── auth/           # Authentication screens
-│   │   ├── HomeScreen.tsx
-│   │   ├── DashboardScreen.tsx
-│   │   ├── TemplatesScreen.tsx
-│   │   ├── ProfileScreen.tsx
-│   │   ├── SettingsScreen.tsx
-│   │   └── BuilderScreen.tsx
-│   ├── store/              # Zustand stores
-│   │   └── resumeStore.ts
-│   ├── types/              # TypeScript type definitions
-│   ├── constants/          # App constants
-│   │   └── theme.ts        # React Native Paper theme
-│   └── App.tsx             # Root component
-├── package.json
-├── app.json                # Expo configuration
-├── tsconfig.json           # TypeScript configuration
-└── .env.example            # Environment variables template
-```
-
-### Navigation Structure
-```
-RootNavigator
-├── AuthStack (if not authenticated)
-│   ├── LoginScreen
-│   ├── RegisterScreen
-│   └── ForgotPasswordScreen
-└── MainDrawerNavigator (if authenticated)
-    ├── MainTabNavigator
-    │   ├── HomeScreen
-    │   ├── TemplatesScreen
-    │   ├── DashboardScreen
-    │   └── ProfileScreen
-    ├── BuilderScreen
-    └── SettingsScreen
-```
-
-## 🛠 Technology Stack
-
-- **Framework**: React Native with Expo
-- **Navigation**: React Navigation v6
-- **UI Library**: React Native Paper
-- **State Management**: Zustand with AsyncStorage persistence
-- **Database**: Supabase
-- **Authentication**: Supabase Auth
-- **Forms**: React Hook Form + Yup validation
-- **Icons**: React Native Vector Icons
-- **Storage**: AsyncStorage for offline persistence
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 16+
-- Expo CLI (`npm install -g @expo/cli`)
+- Node.js 16+ installed
+- Expo CLI installed globally: `npm install -g @expo/cli`
 - Expo Go app on your phone (for testing)
 
 ### Installation
 
-1. **Install dependencies**:
+1. **Navigate to the React Native app directory:**
    ```bash
    cd react-native-app
+   ```
+
+2. **Install dependencies:**
+   ```bash
    npm install
    ```
 
-2. **Set up environment variables**:
-   ```bash
-   cp .env.example .env
-   # Edit .env with your Supabase credentials
-   ```
-
-3. **Configure Supabase**:
-   - Create a new Supabase project
-   - Copy your project URL and anon key to `.env`
-   - Run the database schema (see `/lib/supabase` folder)
-
-4. **Start the development server**:
+3. **Start the development server:**
    ```bash
    npm start
    ```
 
-5. **Run on device/emulator**:
-   ```bash
-   # Android
-   npm run android
-   
-   # iOS  
-   npm run ios
-   
-   # Expo Go (scan QR code)
-   npm start
-   ```
+4. **Run on your device:**
+   - **iOS:** Scan QR code with Expo Go app or press `i` in the terminal
+   - **Android:** Scan QR code with Expo Go app or press `a` in the terminal
+   - **Web:** Press `w` in the terminal to open in browser
 
-## 📋 Migration Summary
+## 📦 Project Structure
 
-### What's Changed
-- **Styling**: Tailwind CSS → React Native Paper components
-- **Navigation**: Next.js pages → React Navigation stack/drawer/tabs
-- **Storage**: Browser localStorage → React Native AsyncStorage
-- **Icons**: Lucide React → React Native Vector Icons
-- **Forms**: React Hook Form with React Native TextInput components
-
-### Preserved Features
-- ✅ All authentication functionality
-- ✅ Resume data structure and state management
-- ✅ Supabase integration
-- ✅ Theme switching (light/dark mode)
-- ✅ Error handling and loading states
-- ✅ Mobile-responsive design patterns
-
-### Key Differences
-- **Mobile-first**: All components optimized for touch interactions
-- **Offline Support**: AsyncStorage for local data persistence
-- **Native Navigation**: Drawer and bottom tab navigation
-- **Paper Design**: Material Design 3 with React Native Paper
-
-## 🔧 Development
-
-### Adding New Features
-1. Create screen in `src/screens/`
-2. Add navigation routes in `src/navigation/RootNavigator.tsx`
-3. Update types in `src/types/index.ts`
-4. Add state management to `src/store/`
-5. Use React Native Paper components for consistency
-
-### Code Style
-- Use TypeScript for all new files
-- Follow React Native Paper component patterns
-- Use React Hook Form for form handling
-- Implement proper error boundaries
-- Add loading states for async operations
-
-## 📱 Testing
-
-### Manual Testing
-1. Test authentication flow (signup, signin, signout)
-2. Test resume builder step progression
-3. Test template selection
-4. Test theme switching
-5. Test offline functionality
-
-### Automated Testing (Planned)
-- Unit tests with Jest
-- Component testing with React Native Testing Library
-- E2E testing with Detox
-
-## 🚀 Deployment
-
-### Android
-```bash
-npm run build:android
+```
+react-native-app/
+├── src/
+│   ├── components/
+│   │   └── ui/              # Reusable UI components
+│   │       ├── Button.tsx   # Beautiful button component
+│   │       ├── Card.tsx     # Card component with variants
+│   │       └── Input.tsx    # Input component with validation
+│   ├── screens/
+│   │   ├── auth/            # Authentication screens
+│   │   │   ├── LoginScreen.tsx
+│   │   │   ├── RegisterScreen.tsx
+│   │   │   └── ForgotPasswordScreen.tsx
+│   │   ├── HomeScreen.tsx   # Beautiful home screen
+│   │   ├── DashboardScreen.tsx
+│   │   ├── BuilderScreen.tsx
+│   │   ├── TemplatesScreen.tsx
+│   │   └── ProfileScreen.tsx
+│   ├── theme/
+│   │   └── Theme.ts         # Centralized theme and styling
+│   ├── contexts/
+│   │   ├── AuthContext.tsx  # Authentication state management
+│   │   └── ThemeContext.tsx # Theme management
+│   ├── navigation/
+│   │   └── RootNavigator.tsx # Navigation setup
+│   ├── lib/
+│   │   └── supabase.ts      # Supabase client configuration
+│   └── App.tsx              # Main app component
+├── package.json
+├── app.json                 # Expo configuration
+├── babel.config.js
+├── tsconfig.json
+└── README.md
 ```
 
-### iOS
+## 🎨 Design System
+
+### Colors
+- **Primary:** `#6366f1` (Modern Indigo)
+- **Secondary:** `#06b6d4` (Cyan)
+- **Accent:** `#f59e0b` (Amber)
+- **Background:** `#f8fafc` (Light Gray)
+- **Surface:** `#ffffff` (White)
+
+### Components
+- **Button:** Multiple variants (primary, secondary, outline, gradient)
+- **Input:** With validation, icons, and different styles
+- **Card:** Various styles (default, elevated, gradient, outlined)
+
+## 🏗️ Available Scripts
+
 ```bash
+# Start development server
+npm start
+
+# Run on specific platforms
+npm run ios          # iOS simulator
+npm run android      # Android emulator
+npm run web          # Web browser
+
+# Build for production
 npm run build:ios
+npm run build:android
+
+# Code quality
+npm run lint         # ESLint
+npm run type-check   # TypeScript
 ```
 
-### Expo Application Services (EAS)
+## 🔧 Configuration
+
+### Expo Configuration (`app.json`)
+```json
+{
+  "expo": {
+    "name": "ATS Resume Builder",
+    "slug": "ats-resume-builder",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6366f1"
+    }
+  }
+}
+```
+
+### Environment Variables
+Create a `.env` file in the root directory:
+```env
+EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## 🔐 Authentication Setup
+
+The app uses Supabase for authentication:
+
+1. **Install Supabase:**
+   ```bash
+   npm install @supabase/supabase-js
+   ```
+
+2. **Configure Supabase client:**
+   ```typescript
+   // src/lib/supabase.ts
+   import { createClient } from '@supabase/supabase-js';
+   
+   const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
+   const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
+   
+   export const supabase = createClient(supabaseUrl, supabaseKey);
+   ```
+
+## 📱 Deployment
+
+### Development Build
 ```bash
-eas build --platform android
-eas build --platform ios
+# iOS
+expo build:ios
+
+# Android
+expo build:android
 ```
 
-## 📝 Configuration Files
+### EAS Build (Recommended)
+1. Install EAS CLI: `npm install -g @expo/eas-cli`
+2. Login: `eas login`
+3. Configure: `eas build:configure`
+4. Build: `eas build --platform ios` or `eas build --platform android`
 
-### app.json
-- App metadata and configuration
-- Platform-specific settings
-- Expo plugins and assets
+## 🎯 Key Features Implemented
 
-### package.json
-- Dependencies for React Native + Expo
-- Development scripts
-- Expo version compatibility
+### ✨ Beautiful UI Components
+- **Modern Gradient Design** - Eye-catching gradients and colors
+- **Consistent Spacing** - Unified spacing system
+- **Smooth Animations** - Beautiful transitions and effects
+- **Responsive Layout** - Works on all device sizes
 
-### tsconfig.json
-- TypeScript configuration
-- Path aliases for clean imports
+### 🔧 Custom Components
+- **Button Component** - Multiple variants and states
+- **Input Component** - With validation and error states
+- **Card Component** - Various card styles
+- **Theme System** - Centralized styling system
 
-## 🔍 Troubleshooting
+### 📱 Navigation
+- **React Navigation** - Stack and tab navigation
+- **Deep Linking** - Handle app URL schemes
+- **Navigation State** - Persist navigation state
+
+### 🔐 Authentication
+- **Supabase Auth** - Email/password authentication
+- **Protected Routes** - Guarded navigation
+- **User State** - Global user state management
+
+## 🐛 Troubleshooting
 
 ### Common Issues
-1. **Metro bundler issues**: Clear cache with `npx react-native start --reset-cache`
-2. **iOS build errors**: Run `pod install` in `ios/` directory
-3. **Android build errors**: Check Gradle version compatibility
-4. **TypeScript errors**: Ensure proper type definitions
 
-### Debugging
-- Use Expo Developer Tools for debugging
-- Check Metro logs for bundling issues
-- Use React Native debugger for Redux DevTools
-- Check device logs with `adb logcat` (Android) or Console.app (iOS)
+1. **Metro bundler issues:**
+   ```bash
+   npx expo start --clear
+   ```
+
+2. **iOS simulator issues:**
+   ```bash
+   npx expo install --fix
+   ```
+
+3. **Android emulator issues:**
+   ```bash
+   adb reverse tcp:8081 tcp:8081
+   ```
+
+### Development Tips
+
+1. **Enable Fast Refresh** - Keep it enabled for better development experience
+2. **Use Expo Doctor** - `expo doctor` to check for issues
+3. **Clear Cache** - `expo start -c` for clean start
 
 ## 📚 Resources
 
-- [React Native Documentation](https://reactnative.dev/)
 - [Expo Documentation](https://docs.expo.dev/)
-- [React Navigation v6](https://reactnavigation.org/)
-- [React Native Paper](https://reactnativepaper.com/)
-- [Supabase React Native](https://supabase.com/docs/guides/getting-started/quickstarts/react-native)
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [React Navigation](https://reactnavigation.org/)
+- [Supabase Documentation](https://supabase.com/docs)
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+1. Follow the existing code style
+2. Use TypeScript for all new files
+3. Add proper documentation
+4. Test on multiple devices
 
 ## 📄 License
 
-This project is part of the ATS Resume Builder application.
+This project is licensed under the MIT License.

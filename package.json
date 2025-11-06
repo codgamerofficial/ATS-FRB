@@ -6,22 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "build:mobile": "node scripts/build-mobile.js",
-    "android": "npx cap run android",
-    "ios": "npx cap run ios",
-    "mobile:sync": "npx cap sync"
+    "lint": "next lint"
+    
   },
   "dependencies": {
-    "@capacitor/android": "^7.4.4",
-    "@capacitor/camera": "^7.0.2",
-    "@capacitor/cli": "^7.4.4",
-    "@capacitor/core": "^7.4.4",
-    "@capacitor/filesystem": "^7.1.4",
-    "@capacitor/ios": "^7.4.4",
-    "@capacitor/share": "^7.0.2",
-    "@capacitor/splash-screen": "^7.0.3",
-    "@capacitor/status-bar": "^7.0.3",
+    
     
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
