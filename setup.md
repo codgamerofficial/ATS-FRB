@@ -1,98 +1,138 @@
-# Setup Instructions
+# Supabase Setup Guide
 
-## Quick Setup Guide
+## 🔧 Quick Start Setup
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+### 1. Create a Supabase Account
+1. Go to [https://supabase.com](https://supabase.com)
+2. Sign up with GitHub, Google, or email
+3. Create a new project
 
-### 2. Set up Supabase
-
-1. Go to [supabase.com](https://supabase.com) and create a new project
-2. Wait for the project to be ready (usually 2-3 minutes)
-3. Go to Settings > API in your Supabase dashboard
-4. Copy your Project URL and anon/public key
+### 2. Get Your Credentials
+1. Go to your project dashboard
+2. Click on **Settings** → **API**
+3. Copy your:
+   - **Project URL** (starts with `https://`)
+   - **anon/public key** (starts with `eyJ`)
 
 ### 3. Configure Environment Variables
 
-Update the `.env.local` file with your Supabase credentials:
+#### For Next.js (Web App)
+1. Copy `.env.example` to `.env.local` in the root directory
+2. Replace the placeholder values:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   ```
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+#### For React Native (Mobile App)
+1. Copy `react-native-app/.env.example` to `react-native-app/.env`
+2. Replace the placeholder values:
+   ```env
+   EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+   EXPO_PUBLIC_APP_NAME=ATS Resume Builder
+   EXPO_PUBLIC_APP_VERSION=1.0.0
+   ```
 
-### 4. Set up Database Schema
+### 4. Database Setup
 
-1. Go to your Supabase dashboard
-2. Navigate to SQL Editor
-3. Copy and paste the contents of `lib/supabase/schema.sql`
-4. Run the SQL script
+#### Option A: Use Pre-built Schemas
+1. Go to **SQL Editor** in your Supabase dashboard
+2. Run the SQL commands in this order:
+   - `lib/supabase/schema.sql` (main schema)
+   - `lib/supabase/collaboration-schema.sql` (collaboration features)
 
-### 5. Start Development Server
+#### Option B: Quick Start (Minimal Setup)
+1. Run `lib/supabase/minimal-schema.sql` for basic functionality
 
-```bash
-npm run dev
-```
+### 5. Enable Authentication
+1. Go to **Authentication** → **Settings**
+2. Configure your site URL: `http://localhost:3000` (for development)
+3. Enable email authentication (if not already enabled)
 
-### 6. Open Application
+### 6. Test the Setup
+1. Start your development server: `npm run dev`
+2. Try to sign up/sign in to test the connection
+3. Check browser console for any errors
 
-Navigate to [http://localhost:3000](http://localhost:3000)
+## 🛡️ Security Best Practices
 
-## Features to Test
+### Environment Variables
+- ✅ **Safe to commit**: `.env.example` files with placeholder values
+- ❌ **Never commit**: `.env`, `.env.local`, or files with real credentials
+- ✅ **Add to .gitignore**: All environment files except examples
 
-1. **3D Splash Screen** - Should load with animated 3D elements
-2. **Sample Resume** - Click "View Saswata's Resume Example" to see pre-loaded data
-3. **Resume Builder** - Navigate through all 7 steps of the form
-4. **PDF Export** - Download functionality (requires form data)
-5. **Responsive Design** - Test on different screen sizes
+### Database Policies
+- All tables have Row Level Security (RLS) enabled
+- Policies ensure users can only access their own data
+- Public templates are readable by everyone
 
-## Troubleshooting
+### API Keys
+- **anon/public key**: Safe to use in client-side code
+- **service_role key**: Never expose in client-side code
+- **project URL**: Safe to share
+
+## 🏗️ Database Schema
+
+### Core Tables
+- **profiles**: User profiles and information
+- **templates**: Resume templates (public)
+- **resumes**: User-created resumes
+
+### Additional Features (when using collaboration schema)
+- **resume_analytics**: Resume view/download tracking
+- **resume_versions**: Version control for resumes
+
+## 🚀 Deployment
+
+### Vercel (Web App)
+1. Add environment variables in Vercel dashboard
+2. Go to **Settings** → **Environment Variables**
+3. Add:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+### Expo EAS Build (Mobile App)
+1. Set environment variables in EAS
+2. Or use `eas secrets:set` for secure storage
+
+## 🔍 Troubleshooting
 
 ### Common Issues
+1. **"supabaseUrl is required"**:
+   - Check if environment variables are set
+   - Restart your development server
 
-1. **Supabase Connection Error**
-   - Verify your environment variables are correct
-   - Check that your Supabase project is active
-   - Ensure the database schema has been applied
+2. **Authentication not working**:
+   - Verify site URL in Supabase settings
+   - Check if email confirmation is required
 
-2. **3D Elements Not Loading**
-   - Check browser console for WebGL errors
-   - Ensure your browser supports WebGL
-   - Try refreshing the page
+3. **Database connection errors**:
+   - Confirm project is active (not paused)
+   - Check if you're within rate limits
 
-3. **PDF Download Not Working**
-   - Ensure you have filled out at least the personal information
-   - Check browser console for JavaScript errors
-   - Try a different browser
+### Debug Mode
+The apps include fallback handling for missing credentials:
+- They'll run with placeholder data
+- Console will show helpful error messages
+- No crashes due to missing environment variables
 
-4. **Build Errors**
-   - Run `npm install` again
-   - Clear node_modules and reinstall: `rm -rf node_modules package-lock.json && npm install`
-   - Check Node.js version (requires 18+)
-
-### Getting Help
+## 📞 Support
 
 If you encounter issues:
 1. Check the browser console for error messages
-2. Verify all environment variables are set correctly
-3. Ensure Supabase project is properly configured
-4. Try the application in an incognito/private browser window
+2. Verify your Supabase project is active
+3. Ensure environment variables are correctly set
+4. Check Supabase dashboard for any service issues
 
-## Next Steps
+## 🔄 Updating Schemas
 
-After setup:
-1. Customize the templates in `components/resume/`
-2. Add your own branding and colors in `tailwind.config.js`
-3. Deploy to Vercel or your preferred platform
-4. Set up custom domain (optional)
+When updating database schemas:
+1. Use the `DROP POLICY IF EXISTS` statements in the schema files
+2. Run migrations in the correct order
+3. Test thoroughly before deploying to production
 
-## Production Deployment
+---
 
-For production deployment:
-1. Update `NEXT_PUBLIC_APP_URL` to your production domain
-2. Configure Supabase authentication settings
-3. Set up proper CORS policies in Supabase
-4. Enable RLS policies for security
+**Note**: The apps are designed to work gracefully even without Supabase configured, showing helpful error messages to guide setup.
